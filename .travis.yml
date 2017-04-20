@@ -9,6 +9,7 @@ env:
     - APP_DB_HOST=localhost
     - APP_DB_PORT=5432
     - APP_DB_USER=postgres
+    - COVERAGE=true
 
 bundler_args: --without production
 

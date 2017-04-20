@@ -1,0 +1,18 @@
+# This is the configuration used to check the rubocop source code.
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.3
+
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+    - 'config/puma.rb'
+    - 'db/**/*'
+
+Documentation:
+  Enabled: false
+
+Rails:
+  Enabled: true
