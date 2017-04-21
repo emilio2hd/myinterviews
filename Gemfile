@@ -20,7 +20,7 @@ group :development, :test do
   gem 'dotenv-rails', '2.2.0'
   gem 'rspec-rails', '3.5.2'
   gem 'rubocop', '0.42.0', require: false
-  gem 'rubycritic', '3.2.0', :require => false
+  gem 'rubycritic', '3.2.0', require: false
 end
 
 group :development do
