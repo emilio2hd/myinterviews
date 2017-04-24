@@ -1,0 +1,6 @@
+<% unless alert.nil? %>
+    <%= render 'shared/alert_message', type: 'warning', message: alert %>
+<% end %>
+<% unless notice.nil? %>
+    <%= render 'shared/alert_message', type: 'success', message: notice %>
+<% end %>

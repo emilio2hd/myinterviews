@@ -28,11 +28,11 @@
     <!-- Site wrapper -->
     <div class="wrapper">
 
-      <%= render :partial => 'shared/head' %>
+      <%= render partial: 'shared/head' %>
 
       <!-- =============================================== -->
 
-      <%= render :partial => 'shared/left_side' %>
+      <%= render partial: 'shared/left_side' %>
 
       <!-- =============================================== -->
 
@@ -40,26 +40,20 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>Blank page <small>it all starts here</small></h1>
+          <%= yield(:content_header) %>
         </section>
 
         <!-- Main content -->
         <section class="content">
-
+          <%= render 'shared/messages' %>
           <%= yield %>
-
         </section>
         <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
 
-      <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.8
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-      </footer>
+      <!-- Main Footer -->
+      <%= render partial: 'shared/footer' %>
     </div>
     <!-- ./wrapper -->
     <%= javascript_include_tag 'application-footer' %>

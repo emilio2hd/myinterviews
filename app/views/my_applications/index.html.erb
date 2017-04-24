@@ -1,0 +1,48 @@
+<% content_header t 'my_applications.head_title' %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">&nbsp;</h3>
+        <div class="box-tools">
+          <%= link_to t('button.new', item: t('my_applications.item')), new_my_application_path, class: 'btn btn-default btn-sm' %>
+        </div>
+      </div> <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table table-striped table-hover">
+          <tbody>
+          <tr>
+            <th><%= t('activerecord.attributes.my_application.position') %></th>
+            <th><%= t('activerecord.attributes.my_application.company') %></th>
+            <th><%= t('activerecord.attributes.my_application.location') %></th>
+            <th><%= t('activerecord.attributes.my_application.began_at') %></th>
+            <th class="text-center" width="80"><%= t('activerecord.attributes.my_application.status') %></th>
+            <th class="text-center" width="100"></th>
+          </tr>
+          <% @my_applications.each do |my_application| %>
+              <tr>
+                <td><%= link_to my_application.position, my_application %></td>
+                <td><%= my_application.company %></td>
+                <td><%= my_application.location %></td>
+                <td><%= localize(my_application.began_at) %></td>
+                <td class="text-center"><%= translate_enum(my_application, :status) %></td>
+                <td class="text-center">
+                  <%= link_to edit_my_application_path(my_application), title: t('button.edit'), class: 'btn btn-sm btn-default',
+                              data: {container: 'body', toggle: 'tooltip'} do %>
+                      <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= link_to my_application, method: :delete, title: t('button.delete'), class: 'btn btn-sm btn-danger',
+                              data: { container: 'body', toggle: 'tooltip', confirm: t('messages.are_you_sure') } do %>
+                      <i class="fa fa-trash"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

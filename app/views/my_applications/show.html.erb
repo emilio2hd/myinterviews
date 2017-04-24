@@ -1,0 +1,57 @@
+<% content_header t('my_applications.head_title'), @my_application.position %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title"><%= @my_application.position %> - <%= @my_application.company %></h3>
+        <div class="box-tools">
+          <%= link_to t('button.back'), my_applications_path, class: 'btn btn-default btn-sm' %>
+          <%= link_to t('button.edit'), edit_my_application_path(@my_application), class: 'btn btn-warning btn-sm' %>
+          <%= link_to t('button.delete'), @my_application, method: :delete, class: 'btn btn-danger btn-sm',
+                      data: { confirm: t('messages.are_you_sure') } %>
+          <%= link_to t('button.new', item: t('my_applications.item')), new_my_application_path, class: 'btn btn-default btn-sm' %>
+        </div>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <dl class="dl-horizontal">
+          <dt><%= t('activerecord.attributes.my_application.location') %></dt>
+          <dd><%= @my_application.location %></dd>
+          <dt><%= t('activerecord.attributes.my_application.began_at') %></dt>
+          <dd><%= localize(@my_application.began_at) %></dd>
+          <dt><%= t('activerecord.attributes.my_application.status') %></dt>
+          <dd><%= translate_enum(@my_application, :status) %></dd>
+          <dt><%= t('activerecord.attributes.my_application.cv_url') %></dt>
+          <dd><a href="<%= @my_application.cv_url %>" target="_blank"><%= @my_application.cv_url %></a></dd>
+          <dt><%= t('activerecord.attributes.my_application.tech_stack_list') %></dt>
+          <dd>
+            <% @my_application.tech_stack_list.each do |tech| %>
+                <span class="label label-primary"><%= tech %></span>
+            <% end %>
+          </dd>
+        </dl>
+
+        <div class="nav-tabs-custom">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#job_description" data-toggle="tab">Job Description</a></li>
+            <li><a href="#cover_letter" data-toggle="tab">Cover Letter</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="active tab-pane" id="job_description">
+              <%= raw(@my_application.job_description) %>
+            </div>
+            <!-- /.tab-pane -->
+            <div class="tab-pane" id="cover_letter">
+              <%= raw(@my_application.cover_letter) %>
+            </div>
+            <!-- /.tab-pane -->
+          </div>
+          <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+      </div>
+      <!-- /.box-footer -->
+    </div>
+  </div>
+</div>
+

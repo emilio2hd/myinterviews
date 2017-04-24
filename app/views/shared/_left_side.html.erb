@@ -16,10 +16,14 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
       <li class="header"><%= t 'menu.main' %></li>
-      <li>
+      <li class="<%= active_if_current_page(root_path, true) %>">
         <%= link_to root_path do %>
-          <i class="fa fa-dashboard"></i>
           <span><%= t 'menu.dashboard' %></span>
+        <% end %>
+      </li>
+      <li class="<%= active_if_current_page(my_applications_path) %>">
+        <%= link_to my_applications_path do %>
+          <span><%= t 'menu.my_applications' %></span>
         <% end %>
       </li>
     </ul>
