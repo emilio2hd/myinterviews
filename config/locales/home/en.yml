@@ -1,0 +1,9 @@
+en:
+  home:
+    head_title: "Dashboard"
+    last_applications:
+      box_head: "Last 5 Applications"
+      view_all: "View All Applications"
+    last_interviews:
+      box_head: "Last 5 Interviews"
+      view_all: "View All Interviews"

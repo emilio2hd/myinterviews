@@ -4,6 +4,10 @@ RSpec.describe MyApplicationsController, type: :controller do
   let(:valid_attributes) { attributes_for(:application_sent) }
   let(:invalid_attributes) { attributes_for(:application_sent).merge(position: nil) }
 
+  it do
+    is_expected.to rescue_from(ActiveRecord::StaleObjectError).with(:handle_stale_object)
+  end
+
   describe 'GET #index' do
     it 'assigns all my_applications as @my_applications' do
       my_application = MyApplication.create! valid_attributes

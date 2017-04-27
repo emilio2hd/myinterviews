@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :my_applications
+  resources :interviews
 end

@@ -1,0 +1,12 @@
+---
+
+### Generic smell configuration
+
+# You can disable smells completely
+IrresponsibleModule:
+  enabled: false
+
+UncommunicativeVariableName:
+  accept:
+    - 't'
+    - '_'

@@ -12,7 +12,7 @@ module ApplicationHelper
     return '' unless errors.present?
 
     label_collection = errors.collect do |error|
-      content_tag :label, class: 'control-label' do
+      content_tag :span, class: 'help-block margin-bottom-none' do
         concat(content_tag(:i, nil, class: 'fa fa-warning'))
         concat(' ')
         concat(error)

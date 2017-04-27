@@ -2,10 +2,12 @@ class MyApplicationsController < ApplicationController
   before_action :set_my_application, only: [:show, :edit, :update, :destroy]
 
   def index
-    @my_applications = MyApplication.all
+    @my_applications = MyApplication.ordered_by_last.all
   end
 
   def show
+    @interviews = Interview.where(my_application_id: @my_application.id)
+                           .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
   end
 
   def new

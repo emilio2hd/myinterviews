@@ -17,7 +17,7 @@
             <th><%= t('activerecord.attributes.my_application.company') %></th>
             <th><%= t('activerecord.attributes.my_application.location') %></th>
             <th><%= t('activerecord.attributes.my_application.began_at') %></th>
-            <th class="text-center" width="80"><%= t('activerecord.attributes.my_application.status') %></th>
+            <th width="80"><%= t('activerecord.attributes.my_application.status') %></th>
             <th class="text-center" width="100"></th>
           </tr>
           <% @my_applications.each do |my_application| %>
@@ -26,7 +26,7 @@
                 <td><%= my_application.company %></td>
                 <td><%= my_application.location %></td>
                 <td><%= localize(my_application.began_at) %></td>
-                <td class="text-center"><%= translate_enum(my_application, :status) %></td>
+                <td><%= status_label(my_application.status) %></td>
                 <td class="text-center">
                   <%= link_to edit_my_application_path(my_application), title: t('button.edit'), class: 'btn btn-sm btn-default',
                               data: {container: 'body', toggle: 'tooltip'} do %>

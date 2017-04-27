@@ -1,0 +1,21 @@
+en:
+  interviews:
+    head_title: "Interviews"
+    item: "Interview"
+    box_title: "Interview info"
+    tabs:
+      notes: "Notes"
+      feedback: "Feedback"
+  activerecord:
+    attributes:
+      interview:
+        my_application: "Application"
+        interviewer_name: "Interviewer Name"
+        interviewer_email: "Interviewer Email"
+        at: "At"
+        notes: "Notes"
+        feedback: "Feedback"
+        type_of: "Type of"
+        type_ofs:
+          talk: "Talk"
+          technical: "Technical"

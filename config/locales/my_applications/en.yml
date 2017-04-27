@@ -1,0 +1,32 @@
+en:
+  my_applications:
+    head_title: "My Applications"
+    item: "Application"
+    box_title: "Application info"
+    tabs:
+      interviews: "Interviews"
+      job_description: "Job Description"
+      cover_letter: "Cover Letter"
+    messages:
+      no_job_description: "There is no job description"
+      no_cover_letter: "There is no cover letter"
+      no_interviews: "There are no interviews"
+  activerecord:
+    attributes:
+      my_application:
+       position: "Position"
+       company: "Company"
+       location: "Location"
+       cv_url: "Resume URL"
+       job_description: "Job Description"
+       cover_letter: "Cover Letter"
+       tech_stack_list: "Technologies"
+       began_at: "Began At"
+       status: "Status"
+       statuses:
+         sent: "Sent"
+         no_answer: "No Answer"
+         ongoing: "Ongoing"
+         canceled: "Canceled"
+         accepted: "Accepted"
+         refused: "Refused"

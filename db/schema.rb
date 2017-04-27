@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421014119) do
+ActiveRecord::Schema.define(version: 20170424235314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "interviews", force: :cascade do |t|
+    t.datetime "at",                                        null: false
+    t.string   "interviewer_name",  limit: 255
+    t.string   "interviewer_email", limit: 255
+    t.integer  "type_of",                       default: 0, null: false
+    t.integer  "my_application_id",                         null: false
+    t.text     "notes"
+    t.text     "feedback"
+    t.integer  "lock_version",                  default: 0, null: false
+    t.index ["my_application_id"], name: "index_interviews_on_my_application_id", using: :btree
+  end
 
   create_table "my_applications", force: :cascade do |t|
     t.string   "position",        limit: 255,             null: false
@@ -54,4 +66,5 @@ ActiveRecord::Schema.define(version: 20170421014119) do
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
 
+  add_foreign_key "interviews", "my_applications"
 end

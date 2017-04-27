@@ -1,0 +1,13 @@
+<ul class="timeline timeline-inverse">
+  <% @interviews.each do |date, interviews| %>
+      <!-- timeline time label -->
+      <li class="time-label">
+        <span class="bg-red"><%= date %></span>
+      </li>
+      <!-- /.timeline-label -->
+      <%= render partial: 'interview', collection: interviews %>
+  <% end %>
+  <li>
+    <i class="fa fa-clock-o bg-gray"></i>
+  </li>
+</ul>

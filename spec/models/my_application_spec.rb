@@ -37,4 +37,13 @@ RSpec.describe MyApplication, type: :model do
       expect { @ob2.update(position: 'Other Position') }.to raise_error(ActiveRecord::StaleObjectError)
     end
   end
+
+  describe '#destroy' do
+    let(:application) { create(:application_with_interviews) }
+
+    it 'should remove all interviews' do
+      interview_count = Interview.all_from_application(application).count
+      expect { application.destroy }.to change(Interview, :count).by((interview_count * -1))
+    end
+  end
 end

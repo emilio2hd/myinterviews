@@ -7,5 +7,13 @@ FactoryGirl.define do
     tech_stack_list 'ruby,rails,rspec,test'
     status 'sent'
     began_at { FFaker::Time.date }
+
+    factory :application_with_interviews, class: MyApplication do
+      transient { interviews_count 3 }
+
+      after(:create) do |application, evaluator|
+        create_list(:talk_interview, evaluator.interviews_count, my_application: application)
+      end
+    end
   end
 end
