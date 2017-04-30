@@ -78,14 +78,14 @@
   <div class="form-group <%= 'has-error' unless @my_application.errors[:job_description].blank? %>">
     <%= form.label :job_description, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.cktext_area :job_description, rows: 10 %>
+      <%= form.text_area :job_description, class: 'textarea-editor' %>
       <%= show_validation_errors(@my_application.errors[:job_description]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @my_application.errors[:cover_letter].blank? %>">
     <%= form.label :cover_letter, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.cktext_area :cover_letter, rows: 10 %>
+      <%= form.text_area :cover_letter, class: 'textarea-editor' %>
       <%= show_validation_errors(@my_application.errors[:cover_letter]) %>
     </div>
   </div>
@@ -93,23 +93,14 @@
 <!-- /.box-body -->
 <script type="text/javascript">
   $(function () {
+    $(".textarea-editor").wysihtml5();
+
     $(".select2").select2({
       tags: true
     });
 
     $('.datepicker').datetimepicker({
-      format: 'YYYY-MM-DD',
-      icons: {
-        time: 'fa fa-clock-o',
-        date: 'fa  fa-calendar',
-        up: 'fa fa-chevron-up',
-        down: 'fa fa-chevron-down',
-        previous: 'fa fa-chevron-left',
-        next: 'fa fa-chevron-right',
-        today: 'fa fa-crosshairs',
-        clear: 'fa fa-trash',
-        close: 'fa fa-remove'
-      }
+      format: 'YYYY-MM-DD'
     });
   });
 </script>
