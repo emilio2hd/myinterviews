@@ -1,7 +1,7 @@
 <% content_header t('my_applications.head_title'), @my_application.position %>
 
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-md-12">
     <div class="box box-info">
       <div class="box-header with-border">
         <h3 class="box-title"><%= @my_application.position %> - <%= @my_application.company %></h3>
@@ -16,47 +16,55 @@
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <dl class="dl-horizontal">
-          <dt><%= t('activerecord.attributes.my_application.location') %></dt>
-          <dd><%= @my_application.location %></dd>
-          <dt><%= t('activerecord.attributes.my_application.began_at') %></dt>
-          <dd><%= localize(@my_application.began_at) %></dd>
-          <dt><%= t('activerecord.attributes.my_application.status') %></dt>
-          <dd><%= status_label(@my_application.status) %></dd>
-          <dt><%= t('activerecord.attributes.my_application.cv_url') %></dt>
-          <dd><a href="<%= @my_application.cv_url %>" target="_blank"><%= @my_application.cv_url %></a></dd>
-          <dt><%= t('activerecord.attributes.my_application.tech_stack_list') %></dt>
-          <dd>
-            <% @my_application.tech_stack_list.each do |tech| %>
-                <span class="label label-primary"><%= tech %></span>
-            <% end %>
-          </dd>
-        </dl>
+        <div class="row">
+          <div class="col-md-7">
+            <dl class="dl-horizontal">
+              <dt><%= t('activerecord.attributes.my_application.location') %></dt>
+              <dd><%= @my_application.location %></dd>
+              <dt><%= t('activerecord.attributes.my_application.began_at') %></dt>
+              <dd><%= localize(@my_application.began_at) %></dd>
+              <dt><%= t('activerecord.attributes.my_application.status') %></dt>
+              <dd><%= status_label(@my_application.status) %></dd>
+              <dt><%= t('activerecord.attributes.my_application.cv_url') %></dt>
+              <dd><a href="<%= @my_application.cv_url %>" target="_blank"><%= @my_application.cv_url %></a></dd>
+              <dt><%= t('activerecord.attributes.my_application.tech_stack_list') %></dt>
+              <dd>
+                <% @my_application.tech_stack_list.each do |tech| %>
+                    <span class="label label-primary"><%= tech %></span>
+                <% end %>
+              </dd>
+            </dl>
 
-        <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#job_description" data-toggle="tab"><%= t('my_applications.tabs.job_description') %></a></li>
-            <li><a href="#cover_letter" data-toggle="tab"><%= t('my_applications.tabs.cover_letter') %></a></li>
-            <li><a href="#interviews" data-toggle="tab"><%= t('my_applications.tabs.interviews') %></a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="active tab-pane" id="job_description">
-              <%= @my_application.job_description.empty? ? t('my_applications.messages.no_job_description') :
-                      raw(@my_application.job_description) %>
+            <div class="nav-tabs-custom">
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#overall_feedback" data-toggle="tab"><%= t('my_applications.tabs.overall_feedback') %></a></li>
+                <li><a href="#job_description" data-toggle="tab"><%= t('my_applications.tabs.job_description') %></a></li>
+                <li><a href="#cover_letter" data-toggle="tab"><%= t('my_applications.tabs.cover_letter') %></a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="active tab-pane" id="overall_feedback">
+                  <%= @my_application.overall_feedback.empty? ? t('my_applications.messages.no_overall_feedback') :
+                          raw(@my_application.overall_feedback) %>
+                </div>
+                <div class="tab-pane" id="job_description">
+                  <%= @my_application.job_description.empty? ? t('my_applications.messages.no_job_description') :
+                          raw(@my_application.job_description) %>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="cover_letter">
+                  <%= @my_application.cover_letter.empty? ? t('my_applications.messages.no_cover_letter') :
+                          raw(@my_application.cover_letter) %>
+                </div>
+                <!-- /.tab-pane -->
+              </div>
+              <!-- /.tab-content -->
             </div>
-            <!-- /.tab-pane -->
-            <div class="tab-pane" id="cover_letter">
-              <%= @my_application.cover_letter.empty? ? t('my_applications.messages.no_cover_letter') :
-                      raw(@my_application.cover_letter) %>
-            </div>
-            <div class="tab-pane" id="interviews">
-              <%= @interviews.empty? ? t('my_applications.messages.no_interviews') : render('interviews') %>
-            </div>
-            <!-- /.tab-pane -->
+            <!-- /.nav-tabs-custom -->
           </div>
-          <!-- /.tab-content -->
+          <div class="col-md-5">
+            <%= @interviews.empty? ? t('my_applications.messages.no_interviews') : render('interviews') %>
+          </div>
         </div>
-        <!-- /.nav-tabs-custom -->
       </div>
       <!-- /.box-footer -->
     </div>

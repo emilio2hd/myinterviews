@@ -2,8 +2,8 @@ en:
   home:
     head_title: "Dashboard"
     last_applications:
-      box_head: "Last 5 Applications"
+      box_head: "Last 10 Applications"
       view_all: "View All Applications"
     last_interviews:
-      box_head: "Last 5 Interviews"
+      box_head: "Last 10 Interviews"
       view_all: "View All Interviews"

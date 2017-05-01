@@ -10,6 +10,8 @@
           <%= link_to t('button.edit'), edit_interview_path(@interview), class: 'btn btn-warning btn-sm' %>
           <%= link_to t('button.delete'), @interview, method: :delete, class: 'btn btn-danger btn-sm',
                       data: { confirm: t('messages.are_you_sure') } %>
+          <%= link_to t('button.new', item: t('interviews.item')), new_interview_path(my_application_id: @interview.my_application_id),
+                      class: 'btn btn-default btn-sm' %>
         </div>
       </div><!-- /.box-header -->
       <div class="box-body">

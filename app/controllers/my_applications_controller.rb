@@ -54,6 +54,7 @@ class MyApplicationsController < ApplicationController
 
   def my_application_params
     params.fetch(:my_application, {}).permit(:position, :company, :began_at, :location, :cv_url, :status,
-                                             :job_description, :cover_letter, :lock_version, tech_stack_list: [])
+                                             :job_description, :cover_letter, :lock_version, :overall_feedback,
+                                             tech_stack_list: [])
   end
 end

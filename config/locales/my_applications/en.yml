@@ -4,10 +4,11 @@ en:
     item: "Application"
     box_title: "Application info"
     tabs:
-      interviews: "Interviews"
+      overall_feedback: "Overall Feedback"
       job_description: "Job Description"
       cover_letter: "Cover Letter"
     messages:
+      no_overall_feedback: "There is no overall feedback"
       no_job_description: "There is no job description"
       no_cover_letter: "There is no cover letter"
       no_interviews: "There are no interviews"
@@ -20,6 +21,7 @@ en:
        cv_url: "Resume URL"
        job_description: "Job Description"
        cover_letter: "Cover Letter"
+       overall_feedback: "Overall Feedback"
        tech_stack_list: "Technologies"
        began_at: "Began At"
        status: "Status"

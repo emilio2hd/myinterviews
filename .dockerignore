@@ -1,0 +1,10 @@
+# Folders
+coverage
+tmp/**/*
+docs
+
+# Git
+.git
+
+# Files
+log/*.log

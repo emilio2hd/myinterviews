@@ -5,9 +5,10 @@ RSpec.describe MyApplication, type: :model do
   it { is_expected.to validate_presence_of(:company) }
   it { is_expected.to validate_presence_of(:began_at) }
   it { is_expected.to validate_presence_of(:location) }
-  it { is_expected.to validate_presence_of(:cv_url) }
+  it { is_expected.to_not validate_presence_of(:cv_url) }
   it { is_expected.to_not validate_presence_of(:job_description) }
   it { is_expected.to_not validate_presence_of(:cover_letter) }
+  it { is_expected.to_not validate_presence_of(:overall_feedback) }
   it { is_expected.to validate_length_of(:position).is_at_most(255) }
   it { is_expected.to validate_length_of(:company).is_at_most(255) }
   it { is_expected.to validate_length_of(:location).is_at_most(255) }

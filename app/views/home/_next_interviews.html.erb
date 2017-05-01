@@ -10,7 +10,6 @@
         <tr>
           <th width="130"><%= t('activerecord.attributes.interview.at') %></th>
           <th><%= t('activerecord.attributes.interview.my_application') %></th>
-          <th><%= t('activerecord.attributes.interview.interviewer_name') %></th>
         </tr>
         </thead>
         <tbody>
@@ -18,7 +17,6 @@
           <tr>
             <td class="text-center"><%= link_to localize(interview.at, format: :resumed), interview %></td>
             <td><%= interview.application %></td>
-            <td><%= interview.interviewer %></td>
           </tr>
         <% end %>
         </tbody>
