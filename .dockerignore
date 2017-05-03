@@ -2,9 +2,11 @@
 coverage
 tmp/**/*
 docs
+.vagrant
 
 # Git
 .git
 
 # Files
 log/*.log
+Vagrantfile

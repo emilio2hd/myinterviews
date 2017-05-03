@@ -36,6 +36,7 @@ Here is an example of a docker-compose.yml file:
 db:
   image: postgres:9.4
   container_name: myinterviews-db
+  restart: always
   ports:
     - "5432:5432"
   environment:
@@ -44,6 +45,7 @@ db:
     - POSTGRES_DB=myinterviews
 web:
   container_name: myinterviews-web
+  restart: always
   build: .
   ports:
     - "3000:3000"
@@ -57,5 +59,24 @@ web:
     - db
 ```
 
+# Vagrant
+If you know nothing of docker or it's not willing to install it, you can use VirtualBox + Vagrant.  
+Runs `vagrant up` and go get a cup of coffee or watch something, because it's gonna take a while.
+
+After finishing, you will se something like:
+```shell
+~~~ LOG ~~~
+...
+==> default: Creating myinterviews-db
+==> default: Creating myinterviews-web
+```
+Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should)  
+In case of something wrong, execute:
+```
+vagrant ssh
+cd /opt/myinterviews
+docker-compose logs
+```
+
 # Contributions
-If you want contribute, send me a pull request. ;)
+If you want to contribute, open a issue or send me a pull request. ;)

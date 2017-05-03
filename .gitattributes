@@ -1,0 +1,2 @@
+# detect all text files and automatically normalize them (convert CRLF to LF)
+*.sh    text eol=lf
