@@ -1,0 +1,27 @@
+{
+  "name": "My Interviews",
+  "description": "Application to manage job applications, interviews and feedbacks",
+  "repository": "https://github.com/emilio2hd/myinterviews",
+  "keywords": ["ruby", "rails", "docker", "management-system", "job application", "interviews", "feedbacks"],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "env": {
+    "SECRET_KEY_BASE": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "RAILS_SERVE_STATIC_FILES": {
+      "description": "Inform rails to serve static files from the '/public' folder",
+      "value": "true"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.4"
+      }
+    }
+  ]
+}

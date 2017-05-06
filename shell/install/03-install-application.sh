@@ -6,15 +6,6 @@ printf "Download application dependencies...\n"
 sudo apt-get update -qq;
 sudo apt-get install -y git
 
-printf "Download application source...\n"
-APP_DIR=/opt/myinterviews
-
-sudo rm -rf $APP_DIR
-sudo mkdir -p $APP_DIR
-sudo git clone https://github.com/emilio2hd/myinterviews $APP_DIR
-
-cd $APP_DIR
-
 sudo cat > /tmp/docker-compose.yml << "EOF"
 db:
   image: postgres:9.4
@@ -44,6 +35,8 @@ web:
 EOF
 
 sudo mv -f /tmp/docker-compose.yml $APP_DIR/docker-compose.yml
+
+cd $APP_DIR
 
 # It was causing a weird error (ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket),
 # even after execute "sudo usermod -aG docker $USER"

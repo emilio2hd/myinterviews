@@ -11,3 +11,5 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'ad
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 Rails.application.config.assets.precompile += %w(application-footer.js)
 Rails.application.config.assets.precompile += %w(*.svg *.eot *.woff *.woff2 *.ttf)
+
+Rails.application.config.tinymce.install = :copy
