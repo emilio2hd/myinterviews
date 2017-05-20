@@ -1,7 +1,7 @@
 class Interview < ApplicationRecord
   enum type_of: [ :talk, :technical ]
 
-  validates :at, :type_of, presence: true
+  validates :at, :type_of, :my_application, presence: true
   validates :interviewer_name, :interviewer_email, length: { maximum: 255 }
 
   belongs_to :my_application

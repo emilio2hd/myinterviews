@@ -6,15 +6,13 @@ class InterviewsController < ApplicationController
     @interviews = Interview.includes(:my_application).ordered_by_last.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @interview = Interview.new(my_application_id: params[:my_application_id])
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @interview = Interview.new(interview_params)

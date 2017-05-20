@@ -1,0 +1,24 @@
+en:
+  cover_letters:
+    head_title: "Cover Letters"
+    send_cover_letter_title: "Send Cover Letter"
+    item: "Cover Letter"
+    box_title: "Cover Letter"
+    messages:
+      no_email_settings: "You don\'t have the email settings configured"
+      email_sent: "The email was successfully sent."
+      email_wasnt_sent: "An error has occurred. The email was not sent"
+      email_wasnt_sent_no_email_settings: "The email was not sent. You don\'t have the email settings configured"
+  activerecord:
+    attributes:
+      cover_letter:
+        title: "Title"
+        content: "Content"
+        created_at: "Created At"
+        email_to: "To"
+        subject: "Subject"
+        message: "Message"
+  helpers:
+    label:
+      cover_letter_email_form:
+        attachment: "Attachment"

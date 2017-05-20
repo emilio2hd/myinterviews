@@ -1,0 +1,24 @@
+<% content_header t('cover_letters.head_title'), 'New Email' %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <i class="fa fa-envelope"></i>
+        <h3 class="box-title"><%= t('cover_letters.send_cover_letter_title') %></h3>
+      </div><!-- /.box-header -->
+
+      <!-- form start -->
+      <%= form_for(@cover_letter_email_form, url: send_email_cover_letter_path(@cover_letter),
+                   html: { class: 'form-horizontal', multipart: true }) do |form| %>
+        <%= render 'form_email', form: form %>
+        <div class="box-footer">
+          <%= form.submit t('button.send'), class: 'btn btn-primary' %>
+          <%= link_to t('button.cancel'), @cover_letter, class: 'btn btn-default' %>
+        </div>
+        <!-- /.box-footer -->
+      <% end %>
+      <!-- /.form -->
+    </div>
+  </div>
+</div>

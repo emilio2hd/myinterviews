@@ -1,0 +1,52 @@
+<% content_header t 'cover_letters.head_title' %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">&nbsp;</h3>
+        <div class="box-tools">
+          <%= link_to t('button.new', item: t('cover_letters.item')), new_cover_letter_path, class: 'btn btn-default btn-sm' %>
+        </div>
+      </div> <!-- /.box-header -->
+      <div class="box-body">
+        <table class="table table-striped table-hover">
+          <tbody>
+          <tr>
+            <th><%= t('activerecord.attributes.cover_letter.title') %></th>
+            <th width="150"><%= t('activerecord.attributes.cover_letter.created_at') %></th>
+            <th class="text-center" width="160"></th>
+          </tr>
+          <% @cover_letters.each do |cover_letter| %>
+              <tr>
+                <td><%= link_to cover_letter.title, cover_letter %></td>
+                <td><%= localize(cover_letter.created_at, format: :resumed) %></td>
+                <td class="text-center">
+                  <%= link_to edit_cover_letter_path(cover_letter), title: t('button.edit'), class: 'btn btn-sm btn-default',
+                              data: {container: 'body', toggle: 'tooltip'} do %>
+                      <i class="fa fa-pencil"></i>
+                  <% end %>
+                  <%= link_to duplicate_cover_letter_path(cover_letter),
+                              title: t('button.duplicate', item: t('cover_letters.item')),
+                              class: 'btn btn-sm btn-default', data: {container: 'body', toggle: 'tooltip'} do %>
+                      <i class="fa fa-clone"></i>
+                  <% end %>
+                  <%= link_to new_email_cover_letter_path(cover_letter),
+                              title: t('button.send'),
+                              class: 'btn btn-sm btn-default', data: {container: 'body', toggle: 'tooltip'} do %>
+                      <i class="fa fa-envelope"></i>
+                  <% end %>
+                  <%= link_to cover_letter, method: :delete, title: t('button.delete'), class: 'btn btn-sm btn-danger',
+                              data: { container: 'body', toggle: 'tooltip', confirm: t('messages.are_you_sure') } do %>
+                      <i class="fa fa-trash"></i>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

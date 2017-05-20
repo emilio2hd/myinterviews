@@ -3,6 +3,7 @@ coverage
 tmp/**/*
 docs
 .vagrant
+shell
 
 # Git
 .git

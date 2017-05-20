@@ -14,8 +14,7 @@ class MyApplicationsController < ApplicationController
     @my_application = MyApplication.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @my_application = MyApplication.new(my_application_params)

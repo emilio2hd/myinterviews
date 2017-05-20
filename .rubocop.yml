@@ -16,3 +16,10 @@ Documentation:
 
 Rails:
   Enabled: true
+
+Style/RedundantSelf:
+  Exclude:
+    - 'app/models/setting.rb'
+
+Bundler/OrderedGems:
+  Enabled: false

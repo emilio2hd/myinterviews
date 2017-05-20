@@ -4,7 +4,7 @@ myinterviews
 [![Build Status](https://travis-ci.org/emilio2hd/myinterviews.svg?branch=master)](https://travis-ci.org/emilio2hd/myinterviews)
 [![codebeat badge](https://codebeat.co/badges/ef8d86f7-cf6c-4726-bd2d-4bac89cc62c1)](https://codebeat.co/projects/github-com-emilio2hd-myinterviews-master)
 
-The goal of this app is to manage applications, interviews, and feedbacks.
+The goal of this app is to manage applications, interviews, cover letters and feedbacks.
  
 ![Template](./docs/images/interviews.png)
 Do you wanna see the demo? [Click here!](https://myinterviews.herokuapp.com/)
@@ -72,7 +72,21 @@ After finishing, you will se something like:
 ==> default: Creating myinterviews-db
 ==> default: Creating myinterviews-web
 ```
-Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should)  
+Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should)
+
+**Warning**: The shell script creates a docker-compose.yml at /opt/myinterviews/docker-compose.yml with
+a `SECRET_KEY_BASE` default, so please, do generate another key and replace at docker-compose.yml and restart the web containers.  
+You can generate another key executing:
+```
+vagrant ssh
+cd /opt/myinterviews/
+docker exec -it myinterviews-web bash -lc "rake secret"
+# Copy the generated secret
+vi docker-compose.yml
+# Replace the SECRET_KEY_BASE value and save
+docker-compose restart web
+```
+ 
 In case of something wrong, execute:
 ```
 vagrant ssh
@@ -86,6 +100,11 @@ To update your application execute:
 ```
 vagrant provision --provision-with update_app
 ```
+
+# Email Configuration
+My Interviews has support to send email only by smtp.  
+:warning: Note: As of July 15, 2014, Google increased [its security measures](https://support.google.com/accounts/answer/6010255) 
+and now blocks attempts from apps it deems less secure.
 
 # Contributions
 If you want to contribute, open a issue or send me a pull request. ;)
