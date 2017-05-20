@@ -11,11 +11,16 @@ en:
     dashboard: "Dashboard"
     my_applications: "My Applications"
     interviews: "Interviews"
+    cover_letters: "Cover Letters"
+    settings: "Settings"
   button:
     back: "Back"
     cancel: "Cancel"
     save: "Save"
+    send: "Send"
+    send_email: "Send Email"
     new: "New %{item}"
+    duplicate: "Duplicate %{item}"
     edit: "Edit"
     delete: "Delete"
     view_more: "View More"
@@ -27,6 +32,7 @@ en:
     not_found: "%{entity} not found."
     are_you_sure: "Are you sure?"
     object_has_been_changed: "Another user has made a change to that record since you accessed the edit form."
+    copy: "Copy"
   time:
     formats:
       resumed: '%Y-%m-%d %H:%M'

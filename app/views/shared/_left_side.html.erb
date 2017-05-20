@@ -31,6 +31,16 @@
             <span><%= t 'menu.interviews' %></span>
         <% end %>
       </li>
+      <li class="<%= active_if_current_page(cover_letters_path) %>">
+        <%= link_to cover_letters_path do %>
+            <span><%= t 'menu.cover_letters' %></span>
+        <% end %>
+      </li>
+      <li class="<%= active_if_current_page(settings_path) %>">
+        <%= link_to settings_path do %>
+            <span><%= t 'menu.settings' %></span>
+        <% end %>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

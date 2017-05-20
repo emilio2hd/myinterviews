@@ -17,12 +17,13 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 
 gem 'acts-as-taggable-on', '4.0.0'
+gem 'rails-settings-cached', '0.6.5'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'dotenv-rails', '2.2.0'
   gem 'rspec-rails', '3.5.2'
-  gem 'rubocop', '0.42.0', require: false
+  gem 'rubocop', '0.46.0', require: false
   gem 'rubycritic', '3.2.0', require: false
   gem 'bullet', '5.4.2'
 end

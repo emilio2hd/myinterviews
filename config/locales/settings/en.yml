@@ -1,0 +1,19 @@
+en:
+  settings:
+    head_title: "Settings"
+    hints:
+      leave_password_blank_to_not_change: "leave the field blank if you don't want to change password"
+    tabs:
+      email: "Email"
+  helpers:
+    label:
+      "setting[email]":
+        from: "From"
+        reply_to: "Reply To"
+        user_name: "Username"
+        password: "Password"
+        domain: "Domain"
+        address: "Address"
+        port: "Port"
+        authentication: "Authentication"
+        enable_starttls_auto: "Enable STARTTLS Auto"

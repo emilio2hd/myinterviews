@@ -1,0 +1,33 @@
+<% content_header t 'settings.head_title' %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href="#email" data-toggle="tab" aria-expanded="true">
+            <%= t('settings.tabs.email') %>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <%= form_for(:setting, url: update_all_settings_path, method: 'patch',
+                     html: { class: 'form-horizontal' }) do |form| %>
+        <div class="tab-pane active" id="email">
+          <%= form.fields_for :email, @setting_email_form do |email_form| %>
+          <%= render 'form_email', email_form: email_form %>
+          <% end %>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <%= form.submit t('button.save'), class: 'btn btn-primary' %>
+            </div>
+          </div>
+        <% end %>
+        </div>
+        <!-- /.tab-pane -->
+      </div>
+      <!-- /.tab-content -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
