@@ -4,7 +4,7 @@ myinterviews
 [![Build Status](https://travis-ci.org/emilio2hd/myinterviews.svg?branch=master)](https://travis-ci.org/emilio2hd/myinterviews)
 [![codebeat badge](https://codebeat.co/badges/ef8d86f7-cf6c-4726-bd2d-4bac89cc62c1)](https://codebeat.co/projects/github-com-emilio2hd-myinterviews-master)
 
-The goal of this app is to manage applications, interviews, cover letters and feedbacks.
+The goal of this app is to manage job applications, interviews, cover letters and feedbacks.
  
 ![Template](./docs/images/interviews.png)
 Do you wanna see the demo? [Click here!](https://myinterviews.herokuapp.com/)
@@ -14,7 +14,7 @@ You can run the application using Docker.
 
 The container has the port **3000** exposed.
 
-The application does not contains a database, so you must inform the data base info by environment variables
+The application does not contain a database, so you must inform the database info via environment variables.
 
 ### Build container
 
@@ -25,10 +25,10 @@ docker build -t myinterviews .
 
 ### Environment Variables
 
-* **APP_DB_HOST** - The database host address
-* **APP_DB_PORT** - The database port
-* **APP_DB_USER** - The database username
-* **APP_DB_PASSWORD** - The database password
+* **APP_DB_HOST** - The database's host address
+* **APP_DB_PORT** - The database's port
+* **APP_DB_USER** - The database's username
+* **APP_DB_PASSWORD** - The database's password
 * **SECRET_KEY_BASE** - The secret key is required to run in production mode
 
 ### Docker-compose
@@ -62,21 +62,22 @@ web:
 ```
 
 # Vagrant
-If you know nothing of docker or it's not willing to install it, you can use VirtualBox + Vagrant.  
-Runs `vagrant up` and go get a cup of coffee or watch something, because it's gonna take a while.
+If you know nothing about docker or you're not willing to install it, you can use VirtualBox + Vagrant.  
+Run: `vagrant up`
+You might wanna go get a cup of coffee or watch something, because it's gonna take a while to complete.
 
-After finishing, you will se something like:
+After it's finished, you will see something like:
 ```shell
 ~~~ LOG ~~~
 ...
 ==> default: Creating myinterviews-db
 ==> default: Creating myinterviews-web
 ```
-Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should)
+Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should).
 
 **Warning**: The shell script creates a docker-compose.yml at /opt/myinterviews/docker-compose.yml with
-a `SECRET_KEY_BASE` default, so please, do generate another key and replace at docker-compose.yml and restart the web containers.  
-You can generate another key executing:
+a default `SECRET_KEY_BASE`, so please, do generate another key, replace it at docker-compose.yml and restart the web containers.  
+You can generate another key by executing:
 ```
 vagrant ssh
 cd /opt/myinterviews/
@@ -87,7 +88,7 @@ vi docker-compose.yml
 docker-compose restart web
 ```
  
-In case of something wrong, execute:
+In case something goes wrong, execute:
 ```
 vagrant ssh
 cd /opt/myinterviews
@@ -102,7 +103,7 @@ vagrant provision --provision-with update_app
 ```
 
 # Email Configuration
-My Interviews has support to send email only by smtp.  
+My Interviews has support to send emails by smtp only.  
 :warning: Note: As of July 15, 2014, Google increased [its security measures](https://support.google.com/accounts/answer/6010255) 
 and now blocks attempts from apps it deems less secure.
 
