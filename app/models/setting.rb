@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: settings
+#
+#  id         :integer          not null, primary key
+#  thing_type :string(30)
+#  value      :text
+#  var        :string           not null
+#  created_at :datetime
+#  updated_at :datetime
+#  thing_id   :integer
+#
+# Indexes
+#
+#  index_settings_on_thing_type_and_thing_id_and_var  (thing_type,thing_id,var) UNIQUE
+#
+
 # RailsSettings Model
 require 'cryptography'
 
