@@ -1,5 +1,5 @@
 class MyApplication < ApplicationRecord
-  enum status: [ :sent, :no_answer, :ongoing, :canceled, :accepted, :refused ]
+  enum status: [:sent, :no_answer, :ongoing, :canceled, :accepted, :refused]
 
   validates :position, :company, :began_at, :location, presence: true
   validates :position, :company, :location, :cv_url, length: { maximum: 255 }

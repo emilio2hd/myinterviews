@@ -7,14 +7,15 @@ class MyApplicationsController < ApplicationController
 
   def show
     @interviews = Interview.where(my_application_id: @my_application.id)
-                           .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
+                    .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
   end
 
   def new
     @my_application = MyApplication.new
   end
 
-  def edit; end
+  def edit;
+  end
 
   def create
     @my_application = MyApplication.new(my_application_params)
