@@ -5,10 +5,10 @@ en:
     item: "Cover Letter"
     box_title: "Cover Letter"
     messages:
-      no_email_settings: "You don\'t have the email settings configured"
+      no_email_settings: "You don't have the email settings configured"
       email_sent: "The email was successfully sent."
       email_wasnt_sent: "An error has occurred. The email was not sent"
-      email_wasnt_sent_no_email_settings: "The email was not sent. You don\'t have the email settings configured"
+      email_wasnt_sent_no_email_settings: "The email was not sent. You don't have the email settings configured"
   activerecord:
     attributes:
       cover_letter:
