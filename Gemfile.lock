@@ -108,7 +108,6 @@ GEM
     json (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.17)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -175,7 +174,6 @@ GEM
       codeclimate-engine-rb (~> 0.4.0)
       parser (>= 2.3.1.2, < 2.5)
       rainbow (~> 2.0)
-    ref (2.0.0)
     rspec-core (3.5.3)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -238,9 +236,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
@@ -295,11 +290,10 @@ DEPENDENCIES
   simplecov (= 0.12.0)
   spring
   spring-watcher-listen (~> 2.0.0)
-  therubyracer
   tinymce-rails
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.12.4
+   1.17.2
