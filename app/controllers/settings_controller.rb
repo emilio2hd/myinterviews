@@ -4,7 +4,7 @@ require 'cryptography'
 
 class SettingsController < ApplicationController
   def index
-    email_settings = Setting.email || {}
+    email_settings      = Setting.email || {}
     @setting_email_form = SettingEmailForm.new(email_settings.symbolize_keys.except(:password))
   end
 

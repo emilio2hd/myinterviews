@@ -7,21 +7,22 @@ class CoverLettersController < ApplicationController
     @cover_letters = CoverLetter.all
   end
 
-  def show; end
+  def show;
+  end
 
   def new
     @cover_letter = CoverLetter.new
   end
 
   def duplicate
-    @cover_letter = CoverLetter.new @cover_letter.attributes
+    @cover_letter       = CoverLetter.new @cover_letter.attributes
     @cover_letter.title = "#{@cover_letter.title} [#{t('messages.copy')}]"
     render :new
   end
 
   def new_email
-    flash[:alert] = t('cover_letters.messages.no_email_settings') if Setting.email.nil?
-    @cover_letter_email_form = CoverLetterEmailForm.new
+    flash[:alert]                    = t('cover_letters.messages.no_email_settings') if Setting.email.nil?
+    @cover_letter_email_form         = CoverLetterEmailForm.new
     @cover_letter_email_form.message = @cover_letter.content
   end
 
@@ -46,7 +47,8 @@ class CoverLettersController < ApplicationController
     render :new_email
   end
 
-  def edit; end
+  def edit;
+  end
 
   def create
     @cover_letter = CoverLetter.new(cover_letter_params)

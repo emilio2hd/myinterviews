@@ -36,7 +36,7 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', '0.12.0', require: false
+  gem 'simplecov', require: false
   gem 'database_cleaner', '1.5.3'
   gem 'ffaker', '2.2.0'
   gem 'shoulda-matchers', '3.1.1'
