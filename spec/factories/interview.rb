@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :talk_interview, class: Interview do
     association :my_application, factory: :application_sent
     interviewer_name { FFaker::Name.name }

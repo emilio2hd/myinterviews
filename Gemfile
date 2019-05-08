@@ -15,36 +15,36 @@ gem 'tinymce-rails'
 
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
-
+gem 'annotate'
 gem 'acts-as-taggable-on', '4.0.0'
 gem 'rails-settings-cached', '0.6.5'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'dotenv-rails', '2.2.0'
-  gem 'rspec-rails', '3.5.2'
-  gem 'rubocop', '0.46.0', require: false
-  gem 'rubycritic', '3.2.0', require: false
-  gem 'bullet', '5.4.2'
+  gem 'dotenv-rails'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'rubycritic', require: false
+  gem 'bullet'
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '~> 3.0.5'
+  gem 'web-console'
+  gem 'listen'
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
   gem 'simplecov', require: false
-  gem 'database_cleaner', '1.5.3'
-  gem 'ffaker', '2.2.0'
-  gem 'shoulda-matchers', '3.1.1'
-  gem 'factory_girl_rails', '4.7.0'
+  gem 'database_cleaner'
+  gem 'ffaker'
+  gem 'shoulda-matchers'
+  gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rails-controller-testing', '1.0.1'
+  gem 'rspec-its'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'execjs'
-#gem 'therubyracer', platforms: :ruby

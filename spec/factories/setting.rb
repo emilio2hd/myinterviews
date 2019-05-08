@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :local_email_setting, class: Setting do
     var :email
     value do

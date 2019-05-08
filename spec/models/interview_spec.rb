@@ -6,7 +6,7 @@ RSpec.describe Interview, type: :model do
   it { is_expected.to belong_to(:my_application) }
   it { is_expected.to validate_length_of(:interviewer_name).is_at_most(255) }
   it { is_expected.to validate_length_of(:interviewer_email).is_at_most(255) }
-  it { is_expected.to define_enum_for(:type_of).with([:talk, :technical]) }
+  it { is_expected.to define_enum_for(:type_of).with_values([:talk, :technical]) }
 
   context 'with valid data' do
     let(:application) { create(:application_sent) }

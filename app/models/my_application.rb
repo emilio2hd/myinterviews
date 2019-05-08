@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: my_applications
+#
+#  id               :integer          not null, primary key
+#  began_at         :date             not null
+#  company          :string(255)      not null
+#  cover_letter     :text
+#  cv_url           :string(255)
+#  job_description  :text
+#  location         :string(255)      not null
+#  lock_version     :integer          default(0), not null
+#  overall_feedback :text             default("")
+#  position         :string(255)      not null
+#  status           :integer          default("sent")
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
 class MyApplication < ApplicationRecord
   enum status: [:sent, :no_answer, :ongoing, :canceled, :accepted, :refused]
 
