@@ -130,7 +130,7 @@ GEM
     minitest (5.11.3)
     multi_json (1.13.1)
     nio4r (2.3.1)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     parallel (1.17.0)
     parser (2.6.3.0)
@@ -298,6 +298,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen
+  nokogiri (>= 1.10.4)
   pg (~> 0.21)
   puma (~> 3)
   rails (~> 5.0.7.2)
