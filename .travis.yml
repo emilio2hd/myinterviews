@@ -1,6 +1,6 @@
 language: ruby
 dist: trusty
-rvm: 2.6.2
+rvm: 2.6.4
 services:
   - postgresql
 
