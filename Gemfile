@@ -19,6 +19,7 @@ gem 'annotate'
 gem 'acts-as-taggable-on', '4.0.0'
 gem 'rails-settings-cached', '0.6.5'
 gem "nokogiri", ">= 1.10.4"
+gem 'kaminari', '1.0.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri

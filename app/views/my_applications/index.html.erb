@@ -4,7 +4,9 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title">&nbsp;</h3>
+        <h3 class="box-title">
+          <%= page_entries_info @my_applications, entry_name: t('views.pagination.entry_name') %>
+        </h3>
         <div class="box-tools">
           <%= link_to t('button.new', item: t('my_applications.item')), new_my_application_path, class: 'btn btn-default btn-sm' %>
         </div>
@@ -41,6 +43,9 @@
           <% end %>
           </tbody>
         </table>
+      </div>
+      <div class="box-footer">
+        <%= paginate @my_applications %>
       </div>
     </div>
     <!-- /.box -->

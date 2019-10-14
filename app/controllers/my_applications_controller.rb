@@ -2,7 +2,7 @@ class MyApplicationsController < ApplicationController
   before_action :set_my_application, only: [:show, :edit, :update, :destroy]
 
   def index
-    @my_applications = MyApplication.ordered_by_last.all
+    @my_applications = MyApplication.ordered_by_last.page(params[:page])
   end
 
   def show
