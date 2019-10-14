@@ -3,7 +3,7 @@ class InterviewsController < ApplicationController
   before_action :load_applications, only: [:new, :edit]
 
   def index
-    @interviews = Interview.includes(:my_application).ordered_by_last.all
+    @interviews = Interview.includes(:my_application).ordered_by_last.page(params[:page])
   end
 
   def show
