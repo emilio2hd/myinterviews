@@ -26,7 +26,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.68', require: false
-  gem 'rubocop-rails' '~> 2.3'
+  gem 'rubocop-rails', '~> 2.3'
   gem 'rubycritic', '~> 4.0', require: false
   gem 'bullet'
 end
