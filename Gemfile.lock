@@ -88,7 +88,7 @@ GEM
       factory_bot (~> 4.10.0)
       railties (>= 3.0.0)
     ffaker (2.2.0)
-    ffi (1.9.18)
+    ffi (1.11.2)
     flay (2.12.1)
       erubis (~> 2.7.0)
       path_expander (~> 1.0)
@@ -305,6 +305,7 @@ DEPENDENCIES
   execjs
   factory_bot_rails (~> 4.10.0)
   ffaker
+  ffi (>= 1.9.24)
   jbuilder (~> 2.5)
   jquery-rails
   kaminari (= 1.0.1)

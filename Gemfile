@@ -21,6 +21,8 @@ gem 'rails-settings-cached', '0.6.5'
 gem 'nokogiri', '~> 1.10'
 gem 'kaminari', '1.0.1'
 
+gem 'ffi', '>= 1.9.24'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'dotenv-rails'
