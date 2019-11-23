@@ -1,4 +1,6 @@
 # This is the configuration used to check the rubocop source code.
+require: rubocop-rails
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:

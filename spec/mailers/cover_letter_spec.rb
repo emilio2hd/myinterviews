@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CoverLetterMailer, type: :mailer do
   describe 'presentation_email' do
     let(:cover_letter) { create(:cover_letter) }
-    let(:attachment) { Rack::Test::UploadedFile.new(Rails.root.join('public/robots.txt')) }
+    let(:attachment) { Rack::Test::UploadedFile.new(Rails.root.join('public', 'robots.txt')) }
     let(:cover_letter_email_params) do
       { subject: 'New Job Position', message: cover_letter.content, email_to: 'hr@supercoolcompany.com' }
     end

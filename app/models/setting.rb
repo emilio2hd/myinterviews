@@ -35,6 +35,6 @@ class Setting < RailsSettings::Base
   end
 
   def cryptography_do(method_name)
-    self.value = value.merge(password: Cryptography.public_send(method_name, value[:password])) unless value[:password].blank?
+    self.value = value.merge(password: Cryptography.public_send(method_name, value[:password])) if value[:password].present?
   end
 end

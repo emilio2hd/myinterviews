@@ -116,7 +116,7 @@ RSpec.describe CoverLettersController, type: :controller do
     let(:cover_letter) { create(:cover_letter) }
     let(:valid_email_attributes) do
       { subject: 'New job position', message: cover_letter.content, email_to: 'hr@supercoolcompany.com',
-        attachment: fixture_file_upload(Rails.root.join('public/robots.txt')) }
+        attachment: fixture_file_upload(Rails.root.join('public', 'robots.txt')) }
     end
     let(:invalid_email_attributes) { valid_email_attributes.merge(email_to: nil) }
     let(:email_params) { { id: cover_letter.to_param, cover_letter_email_form: valid_email_attributes } }

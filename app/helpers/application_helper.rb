@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def show_validation_errors(errors)
-    return '' unless errors.present?
+    return '' if errors.blank?
 
     label_collection = errors.collect do |error|
       content_tag :span, class: 'help-block margin-bottom-none' do
