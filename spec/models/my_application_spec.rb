@@ -13,7 +13,7 @@ RSpec.describe MyApplication, type: :model do
   it { is_expected.to validate_length_of(:company).is_at_most(255) }
   it { is_expected.to validate_length_of(:location).is_at_most(255) }
   it { is_expected.to validate_length_of(:cv_url).is_at_most(255) }
-  it { is_expected.to define_enum_for(:status).with_values([:sent, :no_answer, :ongoing, :canceled, :accepted, :refused]) }
+  it { is_expected.to define_enum_for(:status).with_values(%i[sent no_answer ongoing canceled accepted refused]) }
 
   context 'with valid data' do
     let(:application_attributes) { attributes_for(:application_sent) }

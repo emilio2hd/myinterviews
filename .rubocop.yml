@@ -5,18 +5,17 @@ AllCops:
 
   Exclude:
     - 'bin/**/*'
-    - 'vendor/**/*'
-    - 'shell/**/*'
-    - 'log/**/*'
-    - 'tmp/**/*'
     - 'config/puma.rb'
+    - 'config/environments/*'
+    - 'config/spring.rb'
     - 'db/**/*'
-
-Documentation:
-  Enabled: false
-
-Rails:
-  Enabled: true
+    - 'lib/tasks/annotate_models.rake'
+    - 'log/**/*'
+    - 'shell/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/support/database_cleaner.rb'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
 
 Bundler/OrderedGems:
   Enabled: false

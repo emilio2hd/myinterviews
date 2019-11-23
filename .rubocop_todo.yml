@@ -7,6 +7,43 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Cop supports --auto-correct.
+Layout/EmptyLines:
+  Enabled: false
+
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Layout/EmptyLinesAroundBlockBody:
+  Enabled: false
+
+# Cop supports --auto-correct.
+Layout/EmptyLinesAroundMethodBody:
+  Enabled: false
+
+# Cop supports --auto-correct.
+# Configuration parameters: Width.
+Layout/IndentationWidth:
+  Enabled: false
+
+# Cop supports --auto-correct.
+Layout/LeadingCommentSpace:
+  Enabled: false
+
+# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
+# SupportedStyles: aligned, indented
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+# SupportedStyles: space, no_space
+Layout/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, SupportedStyles.
+Layout/TrailingBlankLines:
+  Enabled: false
+
+# Cop supports --auto-correct.
 Lint/UnusedMethodArgument:
   Enabled: false
 
@@ -15,6 +52,9 @@ Lint/HandleExceptions:
 
 Metrics/AbcSize:
   Max: 36
+
+Metrics/BlockLength:
+  Enabled: false
 
 # Configuration parameters: CountComments.
 Metrics/ClassLength:
@@ -38,41 +78,16 @@ Metrics/PerceivedComplexity:
 Style/Documentation:
   Enabled: false
 
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
 # SupportedStyles: ruby19, ruby19_no_mixed_keys, hash_rockets
 Style/HashSyntax:
   Enabled: false
 
-# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
-# SupportedStyles: aligned, indented
-Style/MultilineOperationIndentation:
-  Enabled: false
-
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Enabled: false
-
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: space, no_space
-Style/SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
 Style/ClassAndModuleChildren:
-  Enabled: false
-
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Enabled: false
-
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundBlockBody:
-  Enabled: false
-
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundMethodBody:
   Enabled: false
 
 # Cop supports --auto-correct.
@@ -84,25 +99,12 @@ Style/GuardClause:
   Enabled: false
 
 # Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Enabled: false
-
-# Cop supports --auto-correct.
 Style/NumericLiterals:
   MinDigits: 15
 
 # Cop supports --auto-correct.
-Style/SpaceInsideBrackets:
-  Enabled: false
-
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/StringLiterals:
-  Enabled: false
-
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
   Enabled: false
 
 Style/BlockComments:

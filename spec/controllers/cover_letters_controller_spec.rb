@@ -129,7 +129,7 @@ RSpec.describe CoverLettersController, type: :controller do
       before { Setting.destroy(:email) }
 
       it 'should not send the email' do
-        expect { post :send_email, params: email_params }.not_to change { ActionMailer::Base.deliveries.count }
+        expect { post :send_email, params: email_params }.not_to change(ActionMailer::Base.deliveries, :count)
       end
 
       it "re-renders the 'new_email' template" do
@@ -145,7 +145,7 @@ RSpec.describe CoverLettersController, type: :controller do
 
     context 'with valid params' do
       it 'should send the email' do
-        expect { post :send_email, params: email_params }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect { post :send_email, params: email_params }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
 
       it 'redirects to cover_letter' do
@@ -158,7 +158,7 @@ RSpec.describe CoverLettersController, type: :controller do
       let(:email_params) { { id: cover_letter.to_param, cover_letter_email_form: invalid_email_attributes } }
 
       it 'should not send the email' do
-        expect { post :send_email, params: email_params }.not_to change { ActionMailer::Base.deliveries.count }
+        expect { post :send_email, params: email_params }.not_to change(ActionMailer::Base.deliveries, :count)
       end
 
       it 'assigns a newly created but unsaved cover_letter_email_form as @cover_letter_email_form' do

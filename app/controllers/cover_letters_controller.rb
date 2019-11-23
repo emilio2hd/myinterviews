@@ -1,13 +1,13 @@
 require 'cryptography'
 
 class CoverLettersController < ApplicationController
-  before_action :set_cover_letter, only: [:show, :edit, :update, :destroy, :duplicate, :new_email, :send_email]
+  before_action :set_cover_letter, only: %i[show edit update destroy duplicate new_email send_email]
 
   def index
     @cover_letters = CoverLetter.all
   end
 
-  def show;
+  def show
   end
 
   def new
@@ -38,8 +38,8 @@ class CoverLettersController < ApplicationController
       begin
         CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
         return redirect_to @cover_letter, notice: t('cover_letters.messages.email_sent')
-      rescue
-        logger.error $ERROR_INFO
+      rescue StandardError => e
+        logger.error e
         flash[:alert] = t('cover_letters.messages.email_wasnt_sent')
       end
     end
@@ -47,7 +47,7 @@ class CoverLettersController < ApplicationController
     render :new_email
   end
 
-  def edit;
+  def edit
   end
 
   def create

@@ -25,7 +25,7 @@ class SettingsController < ApplicationController
   private
 
   def setting_params
-    params.fetch(:setting, {}).permit(email: [:from, :reply_to, :user_name, :password, :domain, :address,
-                                              :port, :enable_starttls_auto, :authentication])
+    params.fetch(:setting, {})
+          .permit(email: %i[from reply_to user_name password domain address port enable_starttls_auto authentication])
   end
 end

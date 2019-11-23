@@ -10,10 +10,10 @@ class CoverLetterMailer < ApplicationMailer
       attachments[email_from.attachment.original_filename] = File.read(attachment_tmp_path)
     end
 
-    mail(to:                      email_from.email_to,
-         from:                    email_config[:from],
-         reply_to:                email_config[:reply_to],
-         subject:                 email_from.subject,
+    mail(to: email_from.email_to,
+         from: email_config[:from],
+         reply_to: email_config[:reply_to],
+         subject: email_from.subject,
          delivery_method_options: delivery_method_options)
   end
 end

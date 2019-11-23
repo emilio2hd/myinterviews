@@ -1,6 +1,6 @@
 class InterviewsController < ApplicationController
-  before_action :set_interview, only: [:show, :edit, :update, :destroy]
-  before_action :load_applications, only: [:new, :edit]
+  before_action :set_interview, only: %i[show edit update destroy]
+  before_action :load_applications, only: %i[new edit]
 
   def index
     @interviews = Interview.includes(:my_application).ordered_by_last.page(params[:page])
@@ -13,7 +13,7 @@ class InterviewsController < ApplicationController
     @interview = Interview.new(my_application_id: params[:my_application_id])
   end
 
-  def edit;
+  def edit
   end
 
   def create

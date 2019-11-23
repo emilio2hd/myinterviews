@@ -13,8 +13,8 @@ class Cryptography
       cipher = cipher_instance_for(:decrypt)
       crypt  = cipher.update(Base64.urlsafe_decode64(encrypted_value))
       crypt << cipher.final
-    rescue ArgumentError => ae
-      Rails.logger.error(ae)
+    rescue ArgumentError => e
+      Rails.logger.error(e)
       encrypted_value
     end
 

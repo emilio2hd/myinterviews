@@ -1,5 +1,5 @@
 class MyApplicationsController < ApplicationController
-  before_action :set_my_application, only: [:show, :edit, :update, :destroy]
+  before_action :set_my_application, only: %i[show edit update destroy]
 
   def index
     @my_applications = MyApplication.ordered_by_last.page(params[:page])
@@ -7,14 +7,14 @@ class MyApplicationsController < ApplicationController
 
   def show
     @interviews = Interview.where(my_application_id: @my_application.id)
-                    .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
+                           .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
   end
 
   def new
     @my_application = MyApplication.new
   end
 
-  def edit;
+  def edit
   end
 
   def create
