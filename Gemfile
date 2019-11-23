@@ -18,15 +18,15 @@ gem 'jbuilder', '~> 2.5'
 gem 'annotate'
 gem 'acts-as-taggable-on', '4.0.0'
 gem 'rails-settings-cached', '0.6.5'
-gem "nokogiri", ">= 1.10.4"
+gem 'nokogiri', '~> 1.10'
 gem 'kaminari', '1.0.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'dotenv-rails'
   gem 'rspec-rails'
-  gem 'rubocop', require: false
-  gem 'rubycritic', require: false
+  gem 'rubocop', '~> 0.68', require: false
+  gem 'rubycritic', '~> 4.0', require: false
   gem 'bullet'
 end
 
@@ -38,15 +38,15 @@ group :development do
 end
 
 group :test do
-  gem 'simplecov', require: false
+  gem 'simplecov', '~> 0.17', require: false
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 4.0'
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rails-controller-testing', '1.0.1'
   gem 'rspec-its'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'execjs'

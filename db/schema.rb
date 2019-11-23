@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170512150935) do
+ActiveRecord::Schema.define(version: 20191020104918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(version: 20170512150935) do
   end
 
   create_table "interviews", force: :cascade do |t|
-    t.datetime "at",                                        null: false
+    t.datetime "at",                                                null: false
     t.string   "interviewer_name",  limit: 255
     t.string   "interviewer_email", limit: 255
-    t.integer  "type_of",                       default: 0, null: false
-    t.integer  "my_application_id",                         null: false
+    t.integer  "type_of",                       default: 0,         null: false
+    t.integer  "my_application_id",                                 null: false
     t.text     "notes"
     t.text     "feedback"
-    t.integer  "lock_version",                  default: 0, null: false
+    t.integer  "lock_version",                  default: 0,         null: false
+    t.string   "time_zone",                     default: "Etc/UTC", null: false
     t.index ["my_application_id"], name: "index_interviews_on_my_application_id", using: :btree
   end
 
