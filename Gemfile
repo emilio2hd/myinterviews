@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.7.2'
+gem 'rails', '~> 5.1.7'
 gem 'pg', '~> 0.21'
-gem 'puma', '~> 3'
+gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -16,7 +16,7 @@ gem 'tinymce-rails'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'annotate'
-gem 'acts-as-taggable-on', '4.0.0'
+gem 'acts-as-taggable-on', '5.0.0'
 gem 'rails-settings-cached', '0.6.5'
 gem 'nokogiri', '~> 1.10'
 gem 'kaminari', '1.0.1'
@@ -24,7 +24,7 @@ gem 'kaminari', '1.0.1'
 gem 'ffi', '>= 1.9.24'
 
 group :development, :test do
-  gem 'byebug', platform: :mri
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.68', require: false
@@ -34,10 +34,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
-  gem 'listen'
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
-  gem 'spring-watcher-listen'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
