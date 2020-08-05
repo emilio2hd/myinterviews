@@ -1,0 +1,136 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "myinterviews": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/myinterviews",
+      "sourceRoot": "projects/myinterviews/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/myinterviews",
+            "index": "projects/myinterviews/src/index.html",
+            "main": "projects/myinterviews/src/main.ts",
+            "polyfills": "projects/myinterviews/src/polyfills.ts",
+            "tsConfig": "projects/myinterviews/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/myinterviews/src/favicon.ico",
+              "projects/myinterviews/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
+            ],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/myinterviews/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/myinterviews/src/environments/environment.ts",
+                  "with": "projects/myinterviews/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "myinterviews:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "myinterviews:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "myinterviews:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/myinterviews/src/test.ts",
+            "polyfills": "projects/myinterviews/src/polyfills.ts",
+            "tsConfig": "projects/myinterviews/tsconfig.spec.json",
+            "karmaConfig": "projects/myinterviews/karma.conf.js",
+            "assets": [
+              "projects/myinterviews/src/favicon.ico",
+              "projects/myinterviews/src/assets"
+            ],
+            "styles": [
+              "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "projects/myinterviews/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/myinterviews/tsconfig.app.json",
+              "projects/myinterviews/tsconfig.spec.json",
+              "projects/myinterviews/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/myinterviews/e2e/protractor.conf.js",
+            "devServerTarget": "myinterviews:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "myinterviews:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "myinterviews"
+}
