@@ -1,0 +1,63 @@
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+import { CoverLetterService } from './cover-letter.service';
+import { CoverLetter } from './cover-letter';
+import { PaginatedResult } from '@lib/pagination';
+
+xdescribe('CoverLetterService', () => {
+  let service: CoverLetterService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [CoverLetterService],
+    });
+
+    service = TestBed.inject(CoverLetterService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+  it('should get all cover letters', () => {
+    const resultData: any[] = [
+      { id: 1, title: 'CL 1', description: 'description cl 1' },
+      { id: 2, title: 'CL 2', description: 'description cl 2' },
+      { id: 3, title: 'CL 3', description: 'description cl 3' },
+    ];
+
+    const httpResponseData: any = {
+      data: resultData,
+      page_size: 15,
+      current_page: 1,
+      next_page: null,
+      prev_page: null,
+      total_count: 10,
+      is_empty: false,
+    };
+
+    const parseHttpResponseData: PaginatedResult<CoverLetter> = {
+      data: resultData,
+      pageSize: 15,
+      currentPage: 1,
+      nextPage: null,
+      prevPage: null,
+      totalCount: 10,
+      isEmpty: false,
+    };
+
+    service.getAll(1).subscribe((data) => {
+      expect(data).toEqual(parseHttpResponseData);
+    });
+
+    const req = httpMock.expectOne('/api/cover_letters.json?page=1');
+    expect(req.request.method).toEqual('GET');
+
+    req.flush(httpResponseData);
+    httpMock.verify();
+  });
+});

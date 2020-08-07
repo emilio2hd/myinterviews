@@ -1,0 +1,66 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
+
+import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
+
+import { PaginatedResult } from '@lib/pagination/pagination-result';
+import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
+import { CoverLetterListComponent } from './list.component';
+import { CoverLetter, CoverLetterService } from '..';
+
+describe('ListComponent', () => {
+  const resultData: any[] = [
+    { id: 1, title: 'CL 1', description: 'description cl 1' },
+    { id: 2, title: 'CL 2', description: 'description cl 2' },
+    { id: 3, title: 'CL 3', description: 'description cl 3' },
+    { id: 4, title: 'CL 4', description: 'description cl 4' },
+  ];
+
+  const coverLetters: PaginatedResult<CoverLetter> = {
+    data: resultData,
+    pageSize: 15,
+    currentPage: 1,
+    nextPage: null,
+    prevPage: null,
+    totalCount: resultData.length,
+    isEmpty: false,
+  };
+
+  let component: CoverLetterListComponent;
+  let fixture: ComponentFixture<CoverLetterListComponent>;
+  let coverLetterServiceSpy: jasmine.SpyObj<CoverLetterService>;
+
+  beforeEach(async(() => {
+    coverLetterServiceSpy = jasmine.createSpyObj('CoverLetterService', ['getAll']);
+
+    TestBed.configureTestingModule({
+      imports: [DemoNgZorroAntdModule, RouterTestingModule.withRoutes([]), NoopAnimationsModule],
+      declarations: [CoverLetterListComponent],
+      providers: [
+        { provide: NZ_I18N, useValue: en_US },
+        { provide: CoverLetterService, useValue: coverLetterServiceSpy },
+      ],
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    coverLetterServiceSpy.getAll.and.returnValue(of(coverLetters));
+
+    fixture = TestBed.createComponent(CoverLetterListComponent);
+    component = fixture.componentInstance;
+
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should display all cover letter', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const tableRows = bannerElement.querySelectorAll('tbody .ant-table-row');
+    expect(tableRows.length).toEqual(resultData.length);
+  });
+});
