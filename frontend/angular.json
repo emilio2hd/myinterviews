@@ -72,7 +72,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "myinterviews:build"
+            "browserTarget": "myinterviews:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -93,10 +94,7 @@
             "polyfills": "projects/myinterviews/src/polyfills.ts",
             "tsConfig": "projects/myinterviews/tsconfig.spec.json",
             "karmaConfig": "projects/myinterviews/karma.conf.js",
-            "assets": [
-              "projects/myinterviews/src/favicon.ico",
-              "projects/myinterviews/src/assets"
-            ],
+            "assets": ["projects/myinterviews/src/favicon.ico", "projects/myinterviews/src/assets"],
             "styles": [
               "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
               "projects/myinterviews/src/styles.scss"
@@ -112,9 +110,7 @@
               "projects/myinterviews/tsconfig.spec.json",
               "projects/myinterviews/e2e/tsconfig.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
