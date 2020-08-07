@@ -14,7 +14,10 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@lib/*": ["projects/myinterviews/src/app/@lib/*"],
+    },
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
