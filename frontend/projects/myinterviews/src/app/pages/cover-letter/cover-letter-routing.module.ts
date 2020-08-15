@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
 import { CoverLetterListComponent } from './list/list.component';
+import { CoverLetterFormComponent } from './form/form.component';
 
 // prettier-ignore
 const routes: Routes = [
-  { path: '', component: CoverLetterListComponent }
+  { path: '', component: CoverLetterListComponent },
+  { path: 'new', component: CoverLetterFormComponent },
 ];
 
 @NgModule({

@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
     "@types/lodash": "^4.14.159",
+    "ckeditor4-angular": "^1.2.2",
     "lodash": "^4.17.19",
     "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.5.4",
