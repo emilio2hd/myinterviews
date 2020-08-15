@@ -16,6 +16,7 @@
       "dom"
     ],
     "paths": {
+      "@core/*": ["projects/myinterviews/src/app/@core/*"],
       "@lib/*": ["projects/myinterviews/src/app/@lib/*"],
     },
   },

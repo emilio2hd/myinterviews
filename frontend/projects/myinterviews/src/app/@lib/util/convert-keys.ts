@@ -5,7 +5,7 @@ type KeyConverter = (key: string) => string;
 /**
  * @description walk tree
  * @param obj - Object to be converted
- * @param KeyConverter cb - callback to convert the key
+ * @param KeyConverter keyConverter - callback to convert the key
  */
 function walk<T>(obj: T, keyConverter: KeyConverter): any {
   const x = Array.isArray(obj) ? [] : {};
@@ -23,7 +23,7 @@ function walk<T>(obj: T, keyConverter: KeyConverter): any {
  * Converts all keys to camel case
  * @param obj - Object to be converted
  */
-export function toCamelCase(obj: object): any {
+export function toCamelCase<T>(obj: object): T {
   return walk(obj, (key: string) => _.camelCase(key));
 }
 
