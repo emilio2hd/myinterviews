@@ -1,0 +1,1 @@
+json.partial! "shared/pagination", collection: @cover_letters

@@ -21,6 +21,9 @@ gem 'rails-settings-cached', '0.6.5'
 gem 'nokogiri', '~> 1.11'
 gem 'kaminari', '1.2.1'
 
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'rack-cors'
+
 gem 'ffi', '>= 1.9.24'
 
 group :development, :test do

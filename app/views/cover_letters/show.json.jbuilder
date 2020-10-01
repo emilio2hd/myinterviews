@@ -1,0 +1,1 @@
+json.extract! @cover_letter, :id, :title, :content

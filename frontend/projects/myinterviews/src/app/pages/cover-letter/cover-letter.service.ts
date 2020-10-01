@@ -29,7 +29,7 @@ export class CoverLetterService {
     const snakeCoverLetter = toSnakeCase({ coverLetter });
 
     return this.http
-      .post<any>(`/api/cover_letters/${coverLetter.id}.json`, snakeCoverLetter)
+      .put<any>(`/api/cover_letters/${coverLetter.id}.json`, snakeCoverLetter)
       .pipe(map((result) => toCamelCase<CoverLetter>(result)));
   }
 

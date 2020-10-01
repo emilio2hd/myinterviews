@@ -11,6 +11,7 @@ import { CoverLetterListComponent } from './list/list.component';
 import { CoverLetterService } from './cover-letter.service';
 import { CoverLetterFormComponent } from './form/form.component';
 import { CoverLetterDetailsComponent } from './details/details.component';
+import { CoverLetterResolver } from './cover-letter.resolver';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { CoverLetterDetailsComponent } from './details/details.component';
     DemoNgZorroAntdModule,
   ],
   declarations: [CoverLetterListComponent, CoverLetterFormComponent, CoverLetterDetailsComponent],
-  providers: [CoverLetterService],
+  providers: [CoverLetterService, CoverLetterResolver],
 })
 export class CoverLetterModule {}

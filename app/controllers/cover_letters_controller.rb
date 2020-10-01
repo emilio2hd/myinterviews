@@ -4,10 +4,12 @@ class CoverLettersController < ApplicationController
   before_action :set_cover_letter, only: %i[show edit update destroy duplicate new_email send_email]
 
   def index
-    @cover_letters = CoverLetter.all
+    @cover_letters = CoverLetter.page(params[:page])
+    respond_to :html, :json
   end
 
   def show
+    respond_to :html, :json
   end
 
   def new
@@ -53,24 +55,36 @@ class CoverLettersController < ApplicationController
   def create
     @cover_letter = CoverLetter.new(cover_letter_params)
 
-    if @cover_letter.save
-      redirect_to @cover_letter, notice: t('messages.successfully_created', entity: t('cover_letters.item'))
-    else
-      render :new
+    respond_to do |format|
+      if @cover_letter.save
+        format.html { redirect_to @cover_letter, notice: t('messages.successfully_created', entity: t('cover_letters.item')) }
+        format.json { render json: @cover_letter, status: :ok }
+      else
+        format.html { render :new }
+        format.json { render json: @cover_letter, status: :bad_request }
+      end
     end
   end
 
   def update
-    if @cover_letter.update(cover_letter_params)
-      redirect_to @cover_letter, notice: t('messages.successfully_updated', entity: t('cover_letters.item'))
-    else
-      render :edit
+    respond_to do |format|
+      if @cover_letter.update(cover_letter_params)
+        format.html { redirect_to @cover_letter, notice: t('messages.successfully_updated', entity: t('cover_letters.item')) }
+        format.json { render json: @cover_letter, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @cover_letter, status: :bad_request }
+      end
     end
   end
 
   def destroy
     @cover_letter.destroy
-    redirect_to cover_letters_url, notice: t('messages.successfully_destroyed', entity: t('cover_letters.item'))
+
+    respond_to do |format|
+      format.html { redirect_to cover_letters_url, notice: t('messages.successfully_destroyed', entity: t('cover_letters.item')) }
+      format.json { head :ok }
+    end
   end
 
   private

@@ -1,5 +1,4 @@
 <nz-space nzDirection="vertical" *ngIf="(coverLetter$ | async) as coverLetter">
-
   <nz-space-item>
     <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
       <nz-page-header-title>Cover Letter</nz-page-header-title>
@@ -31,8 +30,8 @@
   <nz-space-item>
     <nz-card>
       <div 
-        data-testid="coverLetterDescription"
-        [innerHTML]="coverLetter.description"
+        data-testid="coverLetterContent"
+        [innerHTML]="coverLetter.content"
       ></div>
     </nz-card>
   </nz-space-item>

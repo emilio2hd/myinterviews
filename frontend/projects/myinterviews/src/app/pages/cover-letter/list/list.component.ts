@@ -39,10 +39,22 @@ export class CoverLetterListComponent implements OnInit {
   }
 
   onDeleteConfirm(coverLetter: CoverLetter) {
-    this.notification.create(
-      'success',
-      'Applications',
-      `"${coverLetter.title}" successfully deleted`
-    );
+    this.coverLetterService.delete(coverLetter.id).subscribe({
+      next: () => {
+        const currentParams = this.paginationParamsSubject.value;
+        this.paginationParamsSubject.next({ ...currentParams });
+
+        this.notification.create(
+          'success',
+          'Applications',
+          `"${coverLetter.title}" successfully deleted`
+        );
+      },
+      error: () =>
+        this.notification.error(
+          'Cover Letter',
+          `Uh-oh! Something wrong has happened. Unable to delete "${coverLetter.title}"`
+        ),
+    });
   }
 }
