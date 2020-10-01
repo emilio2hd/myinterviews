@@ -1,0 +1,39 @@
+<nz-space nzDirection="vertical" *ngIf="(coverLetter$ | async) as coverLetter">
+
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
+      <nz-page-header-title>Cover Letter</nz-page-header-title>
+      <nz-page-header-subtitle data-testid="coverLetterTitle">{{coverLetter.title}}</nz-page-header-subtitle>
+      <nz-page-header-extra>
+        <a 
+          data-testid="btnEdit"
+          nz-button 
+          [routerLink]="['edit']"
+        >
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+          Edit
+        </a>
+        <button
+          data-testid="btnDelete" 
+          nz-button 
+          nzType="danger"
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this task?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="onConfirmDelete(coverLetter)"
+        >
+          Delete
+        </button>
+      </nz-page-header-extra>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card>
+      <div 
+        data-testid="coverLetterDescription"
+        [innerHTML]="coverLetter.description"
+      ></div>
+    </nz-card>
+  </nz-space-item>
+</nz-space>

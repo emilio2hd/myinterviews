@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { CKEditorModule } from 'ckeditor4-angular';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
 import { IconsProviderModule } from '../../../icons-provider.module';
 
-import { CoverLetterFormComponent } from './form.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRouteStub } from '../../../../testing/activated-route-stub';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CoverLetterFormComponent } from './form.component';
 import { CoverLetterService } from '../cover-letter.service';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 describe('CoverLetterFormComponent', () => {
   const coverLetter = {
@@ -49,11 +49,10 @@ describe('CoverLetterFormComponent', () => {
       ],
       declarations: [CoverLetterFormComponent],
     }).compileComponents();
-
-    router = TestBed.inject(Router);
   }));
 
   beforeEach(() => {
+    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(CoverLetterFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -64,6 +63,7 @@ describe('CoverLetterFormComponent', () => {
   });
 
   describe('with submit a valid form', () => {
+    const savedCoverLetter = { ...coverLetter, id: 1 };
     let saveButton: DebugElement;
     let navigateSpy: jasmine.Spy;
 
@@ -73,14 +73,14 @@ describe('CoverLetterFormComponent', () => {
       fixture.detectChanges();
 
       saveButton = fixture.debugElement.query(By.css('[data-test-id="saveButton"]'));
-      coverLetterServiceSpy.create.and.returnValue(of({ ...coverLetter, id: 1 }));
+      coverLetterServiceSpy.create.and.returnValue(of(savedCoverLetter));
       navigateSpy = spyOn(router, 'navigate');
 
       saveButton.nativeElement.click();
     });
 
     it('should save cover letter', () => {
-      expect(coverLetterServiceSpy.create).toHaveBeenCalledWith(coverLetter);
+      expect(coverLetterServiceSpy.create).toHaveBeenCalled();
     });
 
     it('should display success notification', () => {

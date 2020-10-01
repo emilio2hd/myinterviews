@@ -23,7 +23,7 @@ describe('CoverLetterService', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('get cover letters', () => {
+  describe('#getAll', () => {
     it('should get all cover letters', () => {
       const resultData: any[] = [
         { id: 1, title: 'CL 1', description: 'description cl 1' },
@@ -53,8 +53,8 @@ describe('CoverLetterService', () => {
     });
   });
 
-  describe('create cover letter', () => {
-    it('should get all cover letters', () => {
+  describe('#create', () => {
+    it('should be able to create cover letter', () => {
       const newCoverLetter: CoverLetter = {
         title: 'new cover letter',
         description: 'some cover letter description',
