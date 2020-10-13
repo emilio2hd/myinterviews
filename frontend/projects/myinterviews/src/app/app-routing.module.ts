@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/cover-letter/cover-letter.module').then((m) => m.CoverLetterModule),
   },
+  {
+    path: 'job-application',
+    loadChildren: () =>
+      import('./pages/job-application/job-application.module').then((m) => m.JobApplicationModule),
+  },
   { path: 'not-found', component: NotFoundComponent },
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: '**', redirectTo: '/not-found' },

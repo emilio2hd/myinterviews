@@ -1,0 +1,150 @@
+<nz-space nzDirection="vertical">
+
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="onBack()">
+      <nz-page-header-title>Job Application</nz-page-header-title>
+      <nz-page-header-subtitle>New</nz-page-header-subtitle>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card>
+      <form nz-form [nzLayout]="'vertical'" [formGroup]="jobApplicationForm" (ngSubmit)="submitForm()">
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationPosition" nzRequired>Position</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <input
+                  nz-input
+                  id="jobApplicationPosition"
+                  formControlName="position"
+                />
+                <ng-template #errorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Position is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationCompany" nzRequired>Company</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <input
+                  nz-input
+                  id="jobApplicationCompany"
+                  formControlName="company"
+                />
+                <ng-template #errorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Company is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationLocation" nzRequired>Location</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <input
+                  nz-input
+                  id="jobApplicationLocation"
+                  formControlName="location"
+                />
+                <ng-template #errorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Location is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          
+          <div nz-col nzSpan="6">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationStatus">Status</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <nz-select id="jobApplicationStatus" formControlName="status">
+                  <nz-option [nzValue]="item.value" [nzLabel]="item.label" *ngFor="let item of getStatusList()"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col nzSpan="6">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationBeganAt">Began At</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <nz-date-picker id="jobApplicationBeganAt" formControlName="beganAt"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationCvUrl">Resume URL</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <input
+                  nz-input
+                  id="jobApplicationCvUrl"
+                  formControlName="cvUrl"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="jobApplicationTechStackList" nzRequired>Technologies</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <nz-select id="jobApplicationTechStackList" 
+                  nzMode="tags" formControlName="techStackList"
+                ></nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        
+        <nz-form-item>
+          <nz-form-label>Job Description</nz-form-label>
+          <nz-form-control>
+            <ckeditor [editor]="Editor" formControlName="jobDescription"></ckeditor>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Cover Letter</nz-form-label>
+          <nz-form-control>
+            <ckeditor [editor]="Editor" formControlName="coverLetter"></ckeditor>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label>Overall Feedback</nz-form-label>
+          <nz-form-control>
+            <ckeditor [editor]="Editor" formControlName="overallFeedback"></ckeditor>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary"
+              data-test-id="saveButton"
+              [disabled]="!this.jobApplicationForm.valid"
+            >
+            Save
+          </button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </nz-card>
+  </nz-space-item>
+
+</nz-space>

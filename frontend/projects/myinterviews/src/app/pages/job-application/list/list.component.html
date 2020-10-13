@@ -1,0 +1,64 @@
+<nz-space nzDirection="vertical">
+
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Job Application</nz-page-header-title>
+      <nz-page-header-extra>
+        <a nz-button routerLink="new" nzType="primary">New</a>
+      </nz-page-header-extra>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card>
+      <ng-container *ngIf="(result$ | async) as result; else emptyResult">
+        <nz-table 
+          [nzData]="result.data"
+          [nzFrontPagination]="false"
+          [nzLoading]="loading"
+          [nzTotal]="result.totalCount"
+          [nzPageSize]="result.pageSize"
+          [nzPageIndex]="result.currentPage"
+          (nzQueryParams)="onQueryParamsChange($event)"
+        >
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Company</th>
+              <th>Location</th>
+              <th>Began At</th>
+              <th width="80">Status</th>
+              <th width="15%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let jobApplication of result.data; trackBy: trackById">
+              <td>
+                <a [routerLink]="[jobApplication.id]">{{ jobApplication.position }}</a>
+              </td>
+              <td>{{ jobApplication.company }}</td>
+              <td>{{ jobApplication.location }}</td>
+              <td>{{ jobApplication.beganAt }}</td>
+              <td>{{ getStatusText(jobApplication.status) }}</td>
+              <td>
+                <a [routerLink]="[jobApplication.id, 'edit']">Edit</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure delete this job application?"
+                  nzPopconfirmPlacement="right"
+                  (nzOnConfirm)="onDeleteConfirm(jobApplication)"
+                >Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-container>
+      
+      <ng-template #emptyResult>
+        <nz-empty></nz-empty>
+      </ng-template>
+    </nz-card>
+  </nz-space-item>
+
+</nz-space>

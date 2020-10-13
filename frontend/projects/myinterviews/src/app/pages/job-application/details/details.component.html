@@ -1,0 +1,146 @@
+<ng-container *ngIf="(jobApplication$ | async) as jobApplication">
+  <nz-space nzDirection="vertical" >
+    <nz-space-item>
+      <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
+        <nz-page-header-title>Job Application</nz-page-header-title>
+        <nz-page-header-subtitle data-testid="jobApplicationTitle">{{jobApplication.position}}</nz-page-header-subtitle>
+        <nz-page-header-tags>
+          <button nz-button [nzSize]="'small'" nzType="dashed" (click)="open()" 
+                  nz-tooltip nzTooltipTitle="Click to see the timeline">
+            {{getStatusText(jobApplication.status)}}
+          </button>
+        </nz-page-header-tags>
+        <nz-page-header-extra>
+          <a 
+            data-testid="btnEdit"
+            nz-button 
+            [routerLink]="['edit']"
+          >
+            <i nz-icon nzType="edit" nzTheme="outline"></i>
+            Edit
+          </a>
+          <button
+            data-testid="btnDelete" 
+            nz-button 
+            nzType="danger"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure delete this job application?"
+            nzPopconfirmPlacement="bottom"
+            (nzOnConfirm)="onConfirmDelete(jobApplication)"
+          >
+            Delete
+          </button>
+        </nz-page-header-extra>
+        <nz-page-header-content>
+          <div class="content">
+            <div class="main">
+              <nz-descriptions nzSize="small" [nzColumn]="2">
+                <nz-descriptions-item nzTitle="Company" [nzSpan]="1">
+                  {{jobApplication.company}}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Location" [nzSpan]="1">
+                  {{jobApplication.location}}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Resume URL" [nzSpan]="">
+                  <a [href]="jobApplication.cvUrl" target="_blank">{{jobApplication.cvUrl}}</a>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Began At" [nzSpan]="1">
+                  {{jobApplication.beganAt}}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Technologies" [nzSpan]="2">
+                  <nz-tag *ngFor="let tech of jobApplication.techStackList">{{tech}}</nz-tag>
+                </nz-descriptions-item>
+              </nz-descriptions>
+            </div>
+          </div>
+        </nz-page-header-content>
+      </nz-page-header>
+    </nz-space-item>
+  
+    <nz-space-item>
+      <nz-card>
+        <nz-tabset>
+          <nz-tab nzTitle="Job Description">
+            <div 
+              [innerHTML]="jobApplication.jobDescription"
+            ></div>
+          </nz-tab>          
+          <nz-tab nzTitle="Cover Letter">
+            <div 
+              [innerHTML]="jobApplication.coverLetter"
+            ></div>
+          </nz-tab>
+          <nz-tab nzTitle="Overall Feedback">
+            <div 
+              *ngIf="jobApplication.overallFeedback; else noFeedback"
+              [innerHTML]="jobApplication.overallFeedback"
+            ></div>
+            <ng-template #noFeedback>
+              <nz-empty nzNotFoundContent="No feedback"></nz-empty>
+            </ng-template>
+          </nz-tab>
+        </nz-tabset>
+      </nz-card>
+    </nz-space-item>
+  </nz-space>
+  
+  <nz-drawer 
+    [nzClosable]="false"
+    [nzWidth]="600"
+    [nzVisible]="visible"
+    nzPlacement="right" 
+    nzTitle="Application Timeline"
+    (nzOnClose)="close()"
+  >
+    <ng-template #dotPending>
+      <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
+    </ng-template>
+    <nz-timeline [nzPending]="getPendingStatus(jobApplication)" [nzPendingDot]="dotPending">
+      <nz-timeline-item [nzDot]="dotTemplate1" class="waiting">
+        <nz-card [nzBordered]="false" [nzTitle]="waitingTemplate">
+          Application sent to <strong>{{jobApplication.company}}</strong>
+        </nz-card>
+        
+        <ng-template #waitingTemplate>
+          <i nz-icon nz-tooltip nzType="send"></i>
+          Start
+        </ng-template>
+        <ng-template #dotTemplate1>
+          <div class="timeline-date">{{jobApplication.beganAt}}</div>
+        </ng-template>
+      </nz-timeline-item>
+      
+      <ng-container *ngFor="let entry of jobApplication.interviews | keyvalue">
+        <nz-timeline-item [nzDot]="dotTemplate1">
+          <ng-container *ngFor="let interview of entry.value">
+            <nz-card 
+              [nzBordered]="false"
+              [nzTitle]="avatarTemplate"
+              [nzExtra]="extraTemplate"
+            >
+              <span 
+                *ngIf="interview.feedback" 
+                [innerHTML]="interview.feedback"
+              ></span>
+            </nz-card>
+            
+            <ng-template #avatarTemplate>
+              <i nz-icon
+                nz-tooltip
+                [nzType]="getInterviewIcon(interview.typeOf)"
+                [nzTooltipTitle]="interview.typeOf"
+              ></i>
+              {{interview.interviewer}}
+            </ng-template>
+            <ng-template #extraTemplate>
+              <small>{{interview.time}}</small>
+            </ng-template>
+          </ng-container>
+        </nz-timeline-item>
+        <ng-template #dotTemplate1>
+          <div class="timeline-date">{{formatDate(entry.key)}}</div>
+        </ng-template>
+      </ng-container>
+    </nz-timeline>
+  </nz-drawer>
+</ng-container>

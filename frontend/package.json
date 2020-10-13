@@ -23,6 +23,7 @@
     "@ckeditor/ckeditor5-build-classic": "^23.0.0",
     "@types/lodash": "^4.14.159",
     "lodash": "^4.17.19",
+    "moment": "^2.29.1",
     "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
