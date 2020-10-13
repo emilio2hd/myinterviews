@@ -3,11 +3,14 @@ class MyApplicationsController < ApplicationController
 
   def index
     @my_applications = MyApplication.ordered_by_last.page(params[:page])
+    respond_to :html, :json
   end
 
   def show
     @interviews = Interview.where(my_application_id: @my_application.id)
                            .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
+    
+    respond_to :html, :json
   end
 
   def new
@@ -20,24 +23,36 @@ class MyApplicationsController < ApplicationController
   def create
     @my_application = MyApplication.new(my_application_params)
 
-    if @my_application.save
-      redirect_to @my_application, notice: t('messages.successfully_created', entity: t('my_applications.item'))
-    else
-      render :new
+    respond_to do |format|
+      if @my_application.save
+        format.html { redirect_to @my_application, notice: t('messages.successfully_created', entity: t('my_applications.item')) }
+        format.json { render json: @my_application, status: :ok }
+      else
+        format.html { render :new }
+        format.json { render json: @my_application, status: :bad_request }
+      end
     end
   end
 
   def update
-    if @my_application.update(my_application_params)
-      redirect_to @my_application, notice: t('messages.successfully_updated', entity: t('my_applications.item'))
-    else
-      render :edit
+    respond_to do |format|
+      if @my_application.update(my_application_params)
+        format.html { redirect_to @my_application, notice: t('messages.successfully_updated', entity: t('my_applications.item')) }
+        format.json { render json: @my_application, status: :ok }
+      else
+        format.html { render :edit }
+        format.json { render json: @my_application, status: :bad_request }
+      end
     end
   end
 
   def destroy
     @my_application.destroy
-    redirect_to my_applications_url, notice: t('messages.successfully_destroyed', entity: t('my_applications.item'))
+
+    respond_to do |format|
+      format.html { redirect_to my_applications_url, notice: t('messages.successfully_destroyed', entity: t('my_applications.item')) }
+      format.json { head :ok }
+    end
   end
 
   protected

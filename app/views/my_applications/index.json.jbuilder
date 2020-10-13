@@ -1,0 +1,1 @@
+json.partial! "shared/pagination", collection: @my_applications
