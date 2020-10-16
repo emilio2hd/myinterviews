@@ -1,0 +1,70 @@
+<nz-space nzDirection="vertical" *ngIf="(interview$ | async) as interview">
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
+      <nz-page-header-title>Interview</nz-page-header-title>
+      <nz-page-header-subtitle data-testid="interviewTitle">{{interview.title}}</nz-page-header-subtitle>
+      <nz-page-header-extra>
+        <a 
+          data-testid="btnEdit"
+          nz-button 
+          [routerLink]="['edit']"
+        >
+          <i nz-icon nzType="edit" nzTheme="outline"></i>
+          Edit
+        </a>
+        <button
+          data-testid="btnDelete" 
+          nz-button 
+          nzType="danger"
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this interview?"
+          nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="onConfirmDelete(interview)"
+        >
+          Delete
+        </button>
+      </nz-page-header-extra>
+      <nz-page-header-content>
+        <div class="content">
+          <div class="main">
+            <nz-descriptions nzSize="small" [nzColumn]="3">
+              <nz-descriptions-item nzTitle="Application" [nzSpan]="1">
+                <a [routerLink]="['/job-application', interview.myApplicationId]" routerLinkActive="router-link-active">
+                  {{interview.applicationPosition}}
+                  -
+                  {{interview.companyName}}
+                </a>
+              </nz-descriptions-item>
+              <nz-descriptions-item nzTitle="Interviewer Name" [nzSpan]="1">
+                {{interview.interviewerName}}
+              </nz-descriptions-item>
+              <nz-descriptions-item nzTitle="Interviewer Email" [nzSpan]="1">
+                {{interview.interviewerEmail}}
+              </nz-descriptions-item>
+
+              <nz-descriptions-item nzTitle="Type" [nzSpan]="1">
+                {{getTypeOfText(interview.typeOf)}}
+              </nz-descriptions-item>
+              <nz-descriptions-item nzTitle="At" [nzSpan]="2">
+                {{interview.at | date:'short'}}
+              </nz-descriptions-item>
+            </nz-descriptions>
+          </div>
+        </div>
+      </nz-page-header-content>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card>
+      <nz-tabset>
+        <nz-tab nzTitle="Feedback">
+          <div [innerHTML]="interview.feedback"></div>
+        </nz-tab>
+        <nz-tab nzTitle="Notes">
+          <div [innerHTML]="interview.notes"></div>
+        </nz-tab>
+      </nz-tabset>
+    </nz-card>
+  </nz-space-item>
+</nz-space>

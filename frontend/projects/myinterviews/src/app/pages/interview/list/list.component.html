@@ -1,0 +1,64 @@
+<nz-space nzDirection="vertical">
+
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Interview</nz-page-header-title>
+      <nz-page-header-extra>
+        <a nz-button routerLink="new" nzType="primary">New</a>
+      </nz-page-header-extra>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card>
+      <ng-container *ngIf="(interview$ | async) as interview; else emptyResult">
+        <nz-table 
+          [nzData]="interview.data"
+          [nzFrontPagination]="false"
+          [nzLoading]="loading"
+          [nzTotal]="interview.totalCount"
+          [nzPageSize]="interview.pageSize"
+          [nzPageIndex]="interview.currentPage"
+          (nzQueryParams)="onQueryParamsChange($event)"
+        >
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Position</th>
+              <th>Company</th>
+              <th>Began At</th>
+              <th>Status</th>
+              <th width="15%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of interview.data">
+              <td>
+                <a [routerLink]="[data.id]">{{ data.interviewerName }}</a>
+              </td>
+              <td>{{ data.applicationPosition }}</td>
+              <td>{{ data.companyName }}</td>
+              <td>{{ data.at | date:'short' }}</td>
+              <td>{{ getTypeOfText(data.typeOf) }}</td>
+              <td>
+                <a [routerLink]="[data.id, 'edit']">Edit</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure delete this interview?"
+                  nzPopconfirmPlacement="right"
+                  (nzOnConfirm)="onDeleteConfirm(data)"
+                >Delete</a>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-container>
+      
+      <ng-template #emptyResult>
+        <nz-empty></nz-empty>
+      </ng-template>
+    </nz-card>
+  </nz-space-item>
+
+</nz-space>

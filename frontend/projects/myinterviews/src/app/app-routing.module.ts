@@ -17,6 +17,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/job-application/job-application.module').then((m) => m.JobApplicationModule),
   },
+  {
+    path: 'interview',
+    loadChildren: () => import('./pages/interview/interview.module').then((m) => m.InterviewModule),
+  },
   { path: 'not-found', component: NotFoundComponent },
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: '**', redirectTo: '/not-found' },
