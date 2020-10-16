@@ -4,9 +4,11 @@ class InterviewsController < ApplicationController
 
   def index
     @interviews = Interview.includes(:my_application).ordered_by_last.page(params[:page])
+    respond_to :html, :json
   end
 
   def show
+    respond_to :html, :json
   end
 
   def new
@@ -19,26 +21,42 @@ class InterviewsController < ApplicationController
   def create
     @interview = Interview.new(interview_params)
 
-    if @interview.save
-      redirect_to @interview, notice: t('messages.successfully_created', entity: t('interviews.item'))
-    else
-      load_applications
-      render :new
+    respond_to do |format|
+      if @interview.save
+        format.html { redirect_to @interview, notice: t('messages.successfully_created', entity: t('interviews.item')) }
+        format.json { render json: @interview, status: :ok }
+      else
+        format.html {
+          load_applications
+          render :new 
+        }
+        format.json { render json: @cover_letter, status: :bad_request }
+      end
     end
   end
 
   def update
-    if @interview.update(interview_params)
-      redirect_to @interview, notice: t('messages.successfully_updated', entity: t('interviews.item'))
-    else
-      load_applications
-      render :edit
+    respond_to do |format|
+      if @interview.update(interview_params)
+        format.html { redirect_to @interview, notice: t('messages.successfully_updated', entity: t('interviews.item')) }
+        format.json { render json: @interview, status: :ok }
+      else
+        format.html {
+          load_applications
+          render :edit 
+        }
+        format.json { render json: @cover_letter, status: :bad_request }
+      end
     end
   end
 
   def destroy
     @interview.destroy
-    redirect_to interviews_path, notice: t('messages.successfully_destroyed', entity: t('interviews.item'))
+
+    respond_to do |format|
+      format.html { redirect_to interviews_path, notice: t('messages.successfully_destroyed', entity: t('interviews.item')) }
+      format.json { head :ok }
+    end
   end
 
   protected

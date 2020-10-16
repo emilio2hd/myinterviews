@@ -1,0 +1,1 @@
+json.partial! "shared/pagination", collection: @interviews, colletion_item_partial: "interviews/interview"
