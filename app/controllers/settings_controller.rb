@@ -6,20 +6,25 @@ class SettingsController < ApplicationController
   def index
     email_settings      = Setting.email || {}
     @setting_email_form = SettingEmailForm.new(email_settings.symbolize_keys.except(:password))
+
+    respond_to :html, :json
   end
 
   def update_all
     @setting_email_form = SettingEmailForm.new(setting_params[:email])
 
-    if @setting_email_form.valid?
-      email_setting = @setting_email_form.serializable_hash.symbolize_keys
+    respond_to do |format|
+      if @setting_email_form.valid?
+        email_setting = @setting_email_form.serializable_hash.symbolize_keys
+        Setting.merge!(:email, email_setting)
 
-      Setting.merge!(:email, email_setting)
+        format.html { return redirect_to settings_path, notice: t('messages.successfully_updated', entity: 'Settings') }
+        format.json { return render json: @setting_email_form, status: :ok }
+      end
 
-      return redirect_to settings_path, notice: t('messages.successfully_updated', entity: 'Settings')
+      format.html { render :index }
+      format.json { render json: @setting_email_form, status: :bad_request }
     end
-
-    render :index
   end
 
   private
