@@ -21,6 +21,10 @@ const routes: Routes = [
     path: 'interview',
     loadChildren: () => import('./pages/interview/interview.module').then((m) => m.InterviewModule),
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./pages/settings/settings.module').then((m) => m.SettingsModule),
+  },
   { path: 'not-found', component: NotFoundComponent },
   { path: '', pathMatch: 'full', redirectTo: '/welcome' },
   { path: '**', redirectTo: '/not-found' },
