@@ -1,0 +1,78 @@
+<nz-space nzDirection="vertical">
+  <nz-space-item>
+    <nz-page-header [nzGhost]="false">
+      <nz-page-header-title>Dashboard</nz-page-header-title>
+    </nz-page-header>
+  </nz-space-item>
+
+  <div *ngIf="(dashboardData$ | async) as dashboardData">
+    <div nz-row [nzGutter]="16">
+      <div nz-col [nzSpan]="12">
+        <nz-card nzTitle="Last 10 Applications" [nzActions]="[actionNewApplication, actionViewApplications]">
+          <nz-table 
+            #applicationsTable 
+            [nzData]="dashboardData.applications"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+          >
+            <thead>
+              <tr>
+                <th>Position</th>
+                <th>Company</th>
+                <th>Status</th>
+                <th>Began at</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of applicationsTable.data">
+                <td>
+                  <a [routerLink]="['..', 'job-application', data.id]">{{ data.position }}</a>
+                </td>
+                <td>{{ data.company }}</td>
+                <td>{{ data.status }}</td>
+                <td>{{ data.beganAt }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-card>
+        <ng-template #actionNewApplication>
+          <a [routerLink]="['..', 'job-application', 'new']">New Application</a>
+        </ng-template>
+        <ng-template #actionViewApplications>
+          <a [routerLink]="['..', 'job-application']">View All Applications</a>
+        </ng-template>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <nz-card nzTitle="Last 10 Interviews" [nzActions]="[actionNewInterview, actionViewInterviews]">
+          <nz-table 
+            #interviewsTable 
+            [nzData]="dashboardData.interviews"
+            [nzFrontPagination]="false"
+            [nzShowPagination]="false"
+          >
+            <thead>
+              <tr>
+                <th>At</th>
+                <th>Application</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of interviewsTable.data">
+                <td>
+                  <a [routerLink]="['..', 'interview', data.id]">{{ data.at }}</a>
+                </td>
+                <td>{{ data.application }}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+        </nz-card>
+        <ng-template #actionNewInterview>
+          <a [routerLink]="['..', 'interview', 'new']">New Interview</a>
+        </ng-template>
+        <ng-template #actionViewInterviews>
+          <a [routerLink]="['..', 'interview']">View All Interviews</a>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</nz-space>
