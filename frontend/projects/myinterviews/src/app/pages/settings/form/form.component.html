@@ -88,7 +88,7 @@
                   <nz-form-item>
                     <nz-form-label nzFor="settingsPort" nzRequired>Port</nz-form-label>
                     <nz-form-control [nzErrorTip]="portErrorTpl">
-                      <input nz-input id="settingsPort" formControlName="port"/>
+                      <input nz-input  id="settingsPort" formControlName="port"/>
                       <ng-template #portErrorTpl let-control>
                         <ng-container *ngIf="control.hasError('required')">
                           Port is required

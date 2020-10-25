@@ -5,6 +5,8 @@ import { CoverLetterListComponent } from './list/list.component';
 import { CoverLetterFormComponent } from './form/form.component';
 import { CoverLetterResolver } from './cover-letter.resolver';
 import { CoverLetterDetailsComponent } from './details/details.component';
+import { CoverLetterCopierResolver } from './cover-letter-copier.resolver';
+import { SendEmailComponent } from './send-email/send-email.component';
 
 // prettier-ignore
 const routes: Routes = [
@@ -19,6 +21,16 @@ const routes: Routes = [
     path: ':id/edit',
     component: CoverLetterFormComponent,
     resolve: { coverLetter: CoverLetterResolver },
+  },
+  {
+    path: ':id/copy',
+    component: CoverLetterFormComponent,
+    resolve: { coverLetter: CoverLetterCopierResolver }
+  },
+  {
+    path: ':id/send-email',
+    component: SendEmailComponent,
+    resolve: { coverLetter: CoverLetterResolver }
   },
 ];
 

@@ -23,6 +23,15 @@
         >
           Delete
         </button>
+        <button nz-button nzNoAnimation nz-dropdown [nzDropdownMenu]="menu" style="border: none; padding: 0">
+          <i nz-icon nzType="ellipsis" nzTheme="outline" style="font-size: 20px; vertical-align: top;"></i>
+        </button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item><a [routerLink]="['copy']">Copy</a></li>
+            <li nz-menu-item><a [routerLink]="['send-email']">Send via Email</a></li>
+          </ul>
+        </nz-dropdown-menu>
       </nz-page-header-extra>
     </nz-page-header>
   </nz-space-item>

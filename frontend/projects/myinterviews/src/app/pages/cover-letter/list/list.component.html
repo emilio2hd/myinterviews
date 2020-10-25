@@ -35,12 +35,26 @@
               <td>
                 <a [routerLink]="[data.id, 'edit']">Edit</a>
                 <nz-divider nzType="vertical"></nz-divider>
-                <a
-                  nz-popconfirm
-                  nzPopconfirmTitle="Are you sure delete this cover letter?"
-                  nzPopconfirmPlacement="right"
-                  (nzOnConfirm)="onDeleteConfirm(data)"
-                >Delete</a>
+                <a nz-dropdown class="operation" nzTrigger="click" [nzDropdownMenu]="menu"> More <i nz-icon nzType="down"></i> </a>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                  <ul nz-menu>
+                    <li nz-menu-item>
+                      <a [routerLink]="[data.id, 'copy']">Copy</a>
+                    </li>
+                    <li nz-menu-item>
+                      <a [routerLink]="[data.id, 'send-email']">Send via Email</a>
+                    </li>
+                    <li nz-menu-divider></li>
+                    <li nz-menu-item>
+                      <a
+                        nz-popconfirm
+                        nzPopconfirmTitle="Are you sure delete this cover letter?"
+                        nzPopconfirmPlacement="right"
+                        (nzOnConfirm)="onDeleteConfirm(data)"
+                      >Delete</a>
+                    </li>
+                  </ul>
+                </nz-dropdown-menu>
               </td>
             </tr>
           </tbody>

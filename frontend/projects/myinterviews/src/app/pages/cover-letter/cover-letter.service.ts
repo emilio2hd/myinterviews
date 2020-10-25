@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { PaginatedResult } from '@lib/pagination';
 import { CoverLetter } from '.';
@@ -31,6 +31,18 @@ export class CoverLetterService {
     return this.http
       .put<any>(`/api/cover_letters/${coverLetter.id}.json`, snakeCoverLetter)
       .pipe(map((result) => toCamelCase<CoverLetter>(result)));
+  }
+
+  sendEmail(coverLetterId: number, emailForm: any): Observable<any> {
+    const snakeEmailForm = toSnakeCase(emailForm);
+    const formData = new FormData();
+
+    for (const key of Object.keys(snakeEmailForm)) {
+      const value = snakeEmailForm[key];
+      formData.append(`cover_letter_email_form[${key}]`, value);
+    }
+
+    return this.http.post<any>(`/api/cover_letters/${coverLetterId}/send_email.json`, formData);
   }
 
   findById(coverLetterId: number): Observable<CoverLetter> {

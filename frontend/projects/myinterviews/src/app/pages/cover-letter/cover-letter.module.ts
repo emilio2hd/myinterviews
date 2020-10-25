@@ -12,6 +12,9 @@ import { CoverLetterService } from './cover-letter.service';
 import { CoverLetterFormComponent } from './form/form.component';
 import { CoverLetterDetailsComponent } from './details/details.component';
 import { CoverLetterResolver } from './cover-letter.resolver';
+import { CoverLetterCopierResolver } from './cover-letter-copier.resolver';
+import { SendEmailComponent } from './send-email/send-email.component';
+import { FileUploadComponent } from './send-email/file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -21,7 +24,13 @@ import { CoverLetterResolver } from './cover-letter.resolver';
     CKEditorModule,
     DemoNgZorroAntdModule,
   ],
-  declarations: [CoverLetterListComponent, CoverLetterFormComponent, CoverLetterDetailsComponent],
-  providers: [CoverLetterService, CoverLetterResolver],
+  declarations: [
+    CoverLetterListComponent,
+    CoverLetterFormComponent,
+    CoverLetterDetailsComponent,
+    SendEmailComponent,
+    FileUploadComponent,
+  ],
+  providers: [CoverLetterService, CoverLetterResolver, CoverLetterCopierResolver],
 })
 export class CoverLetterModule {}

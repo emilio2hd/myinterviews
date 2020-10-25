@@ -32,8 +32,36 @@ class CoverLettersController < ApplicationController
     @cover_letter_email_form = CoverLetterEmailForm.new(cover_letter_email_params)
 
     if Setting.email.nil?
-      flash[:alert] = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
-      return render :new_email
+      respond_to do |format|
+        no_email_error = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
+        format.html {
+          flash[:alert] = no_email_error
+          return render :new_email
+        }
+        format.json { return render json: { message: no_email_error }, status: :bad_request }
+      end
+      
+    end
+
+    respond_to do |format|
+      if @cover_letter_email_form.valid?
+        begin
+          CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
+          format.html { return redirect_to @cover_letter, notice: t('cover_letters.messages.email_sent') }
+          format.json { return render json: @cover_letter, status: :ok }
+        rescue StandardError => e
+          no_email_sent = t('cover_letters.messages.email_wasnt_sent')
+          format.html {
+            logger.error e
+            flash[:alert] = no_email_sent
+            return render :new_email
+          }
+          format.json { return render json: { message: no_email_sent }, status: :internal_server_error }
+        end
+      else
+        format.html { return render :new_email }
+        format.json { return render json: @cover_letter_email_form, status: :bad_request }
+      end
     end
 
     if @cover_letter_email_form.valid?
