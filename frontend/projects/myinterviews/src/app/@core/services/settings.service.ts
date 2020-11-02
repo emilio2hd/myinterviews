@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 import { toSnakeCase, toCamelCase } from '@lib/util';
-import { Settings } from './settings';
+import { Settings } from '../models';
 
 @Injectable()
 export class SettingsService {
@@ -18,8 +18,6 @@ export class SettingsService {
 
   update(settings: Settings): Observable<Settings> {
     const snakeSettings = toSnakeCase({ setting: { email: settings } });
-
-    console.log(snakeSettings);
 
     return this.http
       .patch<any>(`/api/settings/update_all.json`, snakeSettings)

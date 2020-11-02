@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Data } from '@angular/router';
-import { Subscription, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription, pipe, combineLatest } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import * as _ from 'lodash';
+
+import { SettingsService } from '@core/services';
 
 import { CoverLetterService } from '../cover-letter.service';
 import { CoverLetter } from '../cover-letter';
@@ -19,17 +22,26 @@ export class SendEmailComponent implements OnInit, OnDestroy {
   private getCoverLetterFromRouterData = pipe(
     map((routerData: Data) => (routerData.coverLetter || {}) as CoverLetter)
   );
+
   private subscriptions = new Subscription();
   emailForm: FormGroup;
-  public Editor = ClassicEditor;
+  Editor = ClassicEditor;
 
   coverLetter$ = this.getCoverLetterFromRouterData(this.route.data);
+  hasNoSettings$ = this.settingsService.get().pipe(
+    map((settings) => {
+      const isSettingEmpty = _.chain(settings).omitBy(_.isNull).isEmpty().value();
+      return isSettingEmpty;
+    }),
+    shareReplay(1)
+  );
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private coverLetterService: CoverLetterService,
+    private settingsService: SettingsService,
     private notificationService: NzNotificationService
   ) {}
 
@@ -40,13 +52,20 @@ export class SendEmailComponent implements OnInit, OnDestroy {
       subject: ['hey', [Validators.required]],
       attachment: [''],
       message: ['', [Validators.required]],
+      hasSettings: [], // hidden value just to disable the form if has no settings
     });
 
     this.subscriptions.add(
-      this.coverLetter$.subscribe((coverLetter) => {
-        this.emailForm.get('coverLetterId').setValue(coverLetter.id);
-        this.emailForm.get('message').setValue(coverLetter.content);
-      })
+      combineLatest([this.hasNoSettings$, this.coverLetter$]).subscribe(
+        ([hasNoSettings, coverLetter]) => {
+          if (hasNoSettings) {
+            this.emailForm.get('hasSettings').setErrors({ incorrect: true });
+          }
+
+          this.emailForm.get('coverLetterId').setValue(coverLetter.id);
+          this.emailForm.get('message').setValue(coverLetter.content);
+        }
+      )
     );
   }
 

@@ -9,6 +9,17 @@
 
   <nz-space-item>
     <nz-card>
+      <ng-template #emailWarning>
+        <div>You don't have the email settings configured.</div>
+        <div>Got to <a routerLink='/settings'>Settings</a> to manage it</div>
+      </ng-template>
+      <nz-alert
+        *ngIf="(hasNoSettings$ | async)"
+        nzShowIcon
+        nzType="warning" 
+        [nzMessage]="emailWarning"
+      ></nz-alert>
+      
       <form nz-form [nzLayout]="'vertical'" [formGroup]="emailForm" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-label nzFor="emailTo" nzRequired>To</nz-form-label>

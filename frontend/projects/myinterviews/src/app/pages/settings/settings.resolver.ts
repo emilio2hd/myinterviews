@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Settings } from './settings';
-import { SettingsService } from './settings.service';
+import { Settings } from '@core/models';
+import { SettingsService } from '@core/services';
 
 @Injectable()
 export class SettingsResolver implements Resolve<Settings> {

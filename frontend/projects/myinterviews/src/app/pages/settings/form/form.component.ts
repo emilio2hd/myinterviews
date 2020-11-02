@@ -5,8 +5,9 @@ import { pipe, Subscription } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Settings } from '../settings';
-import { SettingsService } from '../settings.service';
+
+import { Settings } from '@core/models';
+import { SettingsService } from '@core/services';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +30,6 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private route: ActivatedRoute,
     private settingsService: SettingsService,
     private notificationService: NzNotificationService
@@ -68,10 +68,6 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
     if (this.subscriptions) {
       this.subscriptions.unsubscribe();
     }
-  }
-
-  log(value) {
-    console.log('onCheckboxChanged: ', value);
   }
 
   submitForm() {
