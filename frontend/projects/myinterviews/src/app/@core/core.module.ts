@@ -1,6 +1,8 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorsInterceptor, HttpResponseConverterInterceptor } from './interceptors';
+
+import { HttpResponseConverterInterceptor } from './interceptors/http-response-converter.interceptor';
+import { HttpErrorsInterceptor } from './interceptors/http-errors.interceptor';
 
 @NgModule({
   imports: [],
