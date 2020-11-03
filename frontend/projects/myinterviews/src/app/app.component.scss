@@ -1,13 +1,9 @@
 :host {
-  display: flex;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-layout {
-  height: 100vh;
-}
 
 .menu-sidebar {
   position: relative;
@@ -71,6 +67,10 @@ nz-header {
 
 nz-content {
   margin: 20px;
+}
+
+nz-footer {
+  padding-top: 0px;
 }
 
 .inner-content {

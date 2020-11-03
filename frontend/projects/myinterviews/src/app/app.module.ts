@@ -12,6 +12,7 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NzResultModule } from 'ng-zorro-antd/result';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +33,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzResultModule,
     NzButtonModule,
+    NzGridModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
