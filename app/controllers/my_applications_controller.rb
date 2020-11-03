@@ -1,23 +1,16 @@
 class MyApplicationsController < ApplicationController
-  before_action :set_my_application, only: %i[show edit update destroy]
+  before_action :set_my_application, only: %i[show update destroy]
 
   def index
     @my_applications = MyApplication.ordered_by_last.page(params[:page])
-    respond_to :html, :json
+    respond_to :json
   end
 
   def show
     @interviews = Interview.where(my_application_id: @my_application.id)
                            .ordered_by_last.group_by { |i| localize(i.at, format: :only_date) }
     
-    respond_to :html, :json
-  end
-
-  def new
-    @my_application = MyApplication.new
-  end
-
-  def edit
+    respond_to :json
   end
 
   def create
@@ -25,10 +18,8 @@ class MyApplicationsController < ApplicationController
 
     respond_to do |format|
       if @my_application.save
-        format.html { redirect_to @my_application, notice: t('messages.successfully_created', entity: t('my_applications.item')) }
         format.json { render json: @my_application, status: :ok }
       else
-        format.html { render :new }
         format.json { render json: @my_application, status: :bad_request }
       end
     end
@@ -37,10 +28,8 @@ class MyApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @my_application.update(my_application_params)
-        format.html { redirect_to @my_application, notice: t('messages.successfully_updated', entity: t('my_applications.item')) }
         format.json { render json: @my_application, status: :ok }
       else
-        format.html { render :edit }
         format.json { render json: @my_application, status: :bad_request }
       end
     end
@@ -50,7 +39,6 @@ class MyApplicationsController < ApplicationController
     @my_application.destroy
 
     respond_to do |format|
-      format.html { redirect_to my_applications_url, notice: t('messages.successfully_destroyed', entity: t('my_applications.item')) }
       format.json { head :ok }
     end
   end
