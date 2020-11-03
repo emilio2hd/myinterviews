@@ -7,7 +7,7 @@ class SettingsController < ApplicationController
     email_settings      = Setting.email || {}
     @setting_email_form = SettingEmailForm.new(email_settings.symbolize_keys.except(:password))
 
-    respond_to :html, :json
+    respond_to :json
   end
 
   def update_all
@@ -18,11 +18,9 @@ class SettingsController < ApplicationController
         email_setting = @setting_email_form.serializable_hash.symbolize_keys
         Setting.merge!(:email, email_setting)
 
-        format.html { return redirect_to settings_path, notice: t('messages.successfully_updated', entity: 'Settings') }
         format.json { return render json: @setting_email_form, status: :ok }
       end
 
-      format.html { render :index }
       format.json { render json: @setting_email_form, status: :bad_request }
     end
   end
