@@ -1,31 +1,15 @@
 require 'cryptography'
 
 class CoverLettersController < ApplicationController
-  before_action :set_cover_letter, only: %i[show edit update destroy duplicate new_email send_email]
+  before_action :set_cover_letter, only: %i[show update destroy send_email]
 
   def index
     @cover_letters = CoverLetter.page(params[:page])
-    respond_to :html, :json
+    respond_to :json
   end
 
   def show
-    respond_to :html, :json
-  end
-
-  def new
-    @cover_letter = CoverLetter.new
-  end
-
-  def duplicate
-    @cover_letter       = CoverLetter.new @cover_letter.attributes
-    @cover_letter.title = "#{@cover_letter.title} [#{t('messages.copy')}]"
-    render :new
-  end
-
-  def new_email
-    flash[:alert]                    = t('cover_letters.messages.no_email_settings') if Setting.email.nil?
-    @cover_letter_email_form         = CoverLetterEmailForm.new
-    @cover_letter_email_form.message = @cover_letter.content
+    respond_to :json
   end
 
   def send_email
@@ -34,50 +18,23 @@ class CoverLettersController < ApplicationController
     if Setting.email.nil?
       respond_to do |format|
         no_email_error = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
-        format.html {
-          flash[:alert] = no_email_error
-          return render :new_email
-        }
         format.json { return render json: { message: no_email_error }, status: :bad_request }
       end
-      
     end
 
     respond_to do |format|
       if @cover_letter_email_form.valid?
         begin
           CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
-          format.html { return redirect_to @cover_letter, notice: t('cover_letters.messages.email_sent') }
           format.json { return render json: @cover_letter, status: :ok }
         rescue StandardError => e
           no_email_sent = t('cover_letters.messages.email_wasnt_sent')
-          format.html {
-            logger.error e
-            flash[:alert] = no_email_sent
-            return render :new_email
-          }
           format.json { return render json: { message: no_email_sent }, status: :internal_server_error }
         end
       else
-        format.html { return render :new_email }
         format.json { return render json: @cover_letter_email_form, status: :bad_request }
       end
     end
-
-    if @cover_letter_email_form.valid?
-      begin
-        CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
-        return redirect_to @cover_letter, notice: t('cover_letters.messages.email_sent')
-      rescue StandardError => e
-        logger.error e
-        flash[:alert] = t('cover_letters.messages.email_wasnt_sent')
-      end
-    end
-
-    render :new_email
-  end
-
-  def edit
   end
 
   def create
@@ -85,10 +42,8 @@ class CoverLettersController < ApplicationController
 
     respond_to do |format|
       if @cover_letter.save
-        format.html { redirect_to @cover_letter, notice: t('messages.successfully_created', entity: t('cover_letters.item')) }
         format.json { render json: @cover_letter, status: :ok }
       else
-        format.html { render :new }
         format.json { render json: @cover_letter, status: :bad_request }
       end
     end
@@ -97,10 +52,8 @@ class CoverLettersController < ApplicationController
   def update
     respond_to do |format|
       if @cover_letter.update(cover_letter_params)
-        format.html { redirect_to @cover_letter, notice: t('messages.successfully_updated', entity: t('cover_letters.item')) }
         format.json { render json: @cover_letter, status: :ok }
       else
-        format.html { render :edit }
         format.json { render json: @cover_letter, status: :bad_request }
       end
     end
@@ -110,7 +63,6 @@ class CoverLettersController < ApplicationController
     @cover_letter.destroy
 
     respond_to do |format|
-      format.html { redirect_to cover_letters_url, notice: t('messages.successfully_destroyed', entity: t('cover_letters.item')) }
       format.json { head :ok }
     end
   end
