@@ -51,6 +51,9 @@ group :test do
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rails-controller-testing', '1.0.1'
   gem 'rspec-its'
+  gem 'capybara'
+  gem 'webdrivers'
+  gem 'capybara-screenshot'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
