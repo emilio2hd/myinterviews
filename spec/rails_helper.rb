@@ -13,9 +13,6 @@ require 'rspec/rails'
 
 require 'ffaker'
 require 'factory_bot'
-require 'capybara/rspec'
-require 'selenium/webdriver'
-require 'capybara-screenshot/rspec'
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
