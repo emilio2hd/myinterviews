@@ -2,7 +2,6 @@ def chrome_options
   opts = Selenium::WebDriver::Chrome::Options.new
   opts.add_argument('--no-sandbox')
   opts.add_argument('--disable-gpu')
-  opts.add_argument('--window-size=1200,1200')
   opts
 end
 
@@ -28,3 +27,9 @@ end
 
 Capybara.default_driver = :chrome
 Capybara.javascript_driver = :chrome
+
+RSpec.configure do |config|
+  config.before(:each) do
+    Capybara.page.driver.browser.manage.window.maximize
+  end
+end
