@@ -2,10 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static#index'
   
-  scope '/api' do
-    defaults format: :json do
-      get '/dashboard', to: 'home#index'
-    end
+  scope '/api', defaults: { format: :json } do
+    get '/dashboard', to: 'home#index'
 
     resources :my_applications
     resources :interviews
