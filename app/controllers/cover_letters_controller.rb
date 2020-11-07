@@ -26,7 +26,7 @@ class CoverLettersController < ApplicationController
       if @cover_letter_email_form.valid?
         begin
           CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
-          format.json { return render json: @cover_letter, status: :ok }
+          format.json { return head :ok }
         rescue StandardError => e
           no_email_sent = t('cover_letters.messages.email_wasnt_sent')
           format.json { return render json: { message: no_email_sent }, status: :internal_server_error }
