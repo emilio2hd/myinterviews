@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CoverLetterMailer, type: :mailer do
   describe 'presentation_email' do
     let(:cover_letter) { create(:cover_letter) }
-    let(:attachment) { Rack::Test::UploadedFile.new(Rails.root.join('public', 'robots.txt')) }
+    let(:attachment) { Rack::Test::UploadedFile.new(Rails.root.join('spec', 'mailers', 'attachment', 'attachment_test.txt')) }
     let(:cover_letter_email_params) do
       { subject: 'New Job Position', message: cover_letter.content, email_to: 'hr@supercoolcompany.com' }
     end
@@ -33,7 +33,7 @@ RSpec.describe CoverLetterMailer, type: :mailer do
       let(:cover_letter_email_form) { CoverLetterEmailForm.new(cover_letter_email_params.merge(attachment: attachment)) }
 
       it 'should have attachments' do
-        expect(mail.attachments['robots.txt']).not_to be_nil
+        expect(mail.attachments['attachment_test.txt']).not_to be_nil
       end
     end
   end
