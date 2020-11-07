@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CoverLetterListComponent } from './list/list.component';
-import { CoverLetterFormComponent } from './form/form.component';
+import { CoverLetterEditorComponent } from './editor/editor.component';
 import { CoverLetterResolver } from './cover-letter.resolver';
 import { CoverLetterDetailsComponent } from './details/details.component';
 import { CoverLetterCopierResolver } from './cover-letter-copier.resolver';
@@ -11,7 +11,7 @@ import { SendEmailComponent } from './send-email/send-email.component';
 // prettier-ignore
 const routes: Routes = [
   { path: '', component: CoverLetterListComponent },
-  { path: 'new', component: CoverLetterFormComponent },
+  { path: 'new', component: CoverLetterEditorComponent },
   {
     path: ':id',
     component: CoverLetterDetailsComponent,
@@ -19,12 +19,12 @@ const routes: Routes = [
   },
   {
     path: ':id/edit',
-    component: CoverLetterFormComponent,
+    component: CoverLetterEditorComponent,
     resolve: { coverLetter: CoverLetterResolver },
   },
   {
     path: ':id/copy',
-    component: CoverLetterFormComponent,
+    component: CoverLetterEditorComponent,
     resolve: { coverLetter: CoverLetterCopierResolver }
   },
   {

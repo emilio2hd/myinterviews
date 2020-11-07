@@ -1,49 +1,34 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Data } from '@angular/router';
 import { Subscription, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { CoverLetterService } from '../cover-letter.service';
 import { CoverLetter } from '../cover-letter';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss'],
+  selector: 'app-cover-letter-editor',
+  templateUrl: './editor.component.html',
+  styleUrls: ['./editor.component.scss'],
 })
-export class CoverLetterFormComponent implements OnInit, OnDestroy {
+export class CoverLetterEditorComponent implements OnInit, OnDestroy {
   private getCoverLetterFromRouterData = pipe(
     map((routerData: Data) => (routerData.coverLetter || {}) as CoverLetter)
   );
   private subscriptions = new Subscription();
-  coverLetterForm: FormGroup;
-  public Editor = ClassicEditor;
 
   coverLetter$ = this.getCoverLetterFromRouterData(this.route.data);
 
   constructor(
-    private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private coverLetterService: CoverLetterService,
     private notificationService: NzNotificationService
   ) {}
 
-  ngOnInit(): void {
-    this.coverLetterForm = this.fb.group({
-      id: [''],
-      title: ['', [Validators.required]],
-      content: ['', [Validators.required]],
-    });
-
-    this.subscriptions.add(
-      this.coverLetter$.subscribe((coverLetter) => this.coverLetterForm.patchValue(coverLetter))
-    );
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     if (this.subscriptions) {
@@ -51,17 +36,15 @@ export class CoverLetterFormComponent implements OnInit, OnDestroy {
     }
   }
 
+  getHeader(coverLetter: CoverLetter) {
+    return coverLetter.id ? 'Edit' : 'New';
+  }
+
   onBack() {
     this.router.navigate(['..'], { relativeTo: this.route });
   }
 
-  submitForm() {
-    if (!this.coverLetterForm.valid) {
-      return;
-    }
-
-    const coverLetter = this.coverLetterForm.value as CoverLetter;
-
+  onFormSubmit(coverLetter: CoverLetter) {
     if (coverLetter.id) {
       this.subscriptions.add(
         this.coverLetterService

@@ -13,17 +13,17 @@ import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
 import { IconsProviderModule } from '../../../icons-provider.module';
 
 import { ActivatedRouteStub } from '../../../../testing/activated-route-stub';
-import { CoverLetterFormComponent } from './form.component';
+import { CoverLetterEditorComponent } from './editor.component';
 import { CoverLetterService } from '../cover-letter.service';
 
-describe('CoverLetterFormComponent', () => {
+describe('CoverLetterEditorComponent', () => {
   const coverLetter = {
     title: 'Cover letter title',
     content: 'Cover letter description',
   };
 
-  let component: CoverLetterFormComponent;
-  let fixture: ComponentFixture<CoverLetterFormComponent>;
+  let component: CoverLetterEditorComponent;
+  let fixture: ComponentFixture<CoverLetterEditorComponent>;
   let coverLetterServiceSpy: jasmine.SpyObj<CoverLetterService>;
   let notificationServiceSpy: jasmine.SpyObj<NzNotificationService>;
   let router: Router;
@@ -47,13 +47,13 @@ describe('CoverLetterFormComponent', () => {
         { provide: CoverLetterService, useValue: coverLetterServiceSpy },
         { provide: NzNotificationService, useValue: notificationServiceSpy },
       ],
-      declarations: [CoverLetterFormComponent],
+      declarations: [CoverLetterEditorComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     router = TestBed.inject(Router);
-    fixture = TestBed.createComponent(CoverLetterFormComponent);
+    fixture = TestBed.createComponent(CoverLetterEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

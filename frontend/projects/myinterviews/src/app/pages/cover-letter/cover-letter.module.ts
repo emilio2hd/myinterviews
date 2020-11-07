@@ -9,12 +9,13 @@ import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { CoverLetterRoutingModule } from './cover-letter-routing.module';
 import { CoverLetterListComponent } from './list/list.component';
 import { CoverLetterService } from './cover-letter.service';
-import { CoverLetterFormComponent } from './form/form.component';
+import { CoverLetterEditorComponent } from './editor/editor.component';
 import { CoverLetterDetailsComponent } from './details/details.component';
 import { CoverLetterResolver } from './cover-letter.resolver';
 import { CoverLetterCopierResolver } from './cover-letter-copier.resolver';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { FileUploadComponent } from './send-email/file-upload/file-upload.component';
+import { CoverLetterFormComponent } from './editor/form/form.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FileUploadComponent } from './send-email/file-upload/file-upload.compon
   ],
   declarations: [
     CoverLetterListComponent,
+    CoverLetterEditorComponent,
     CoverLetterFormComponent,
     CoverLetterDetailsComponent,
     SendEmailComponent,
