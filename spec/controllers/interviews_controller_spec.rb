@@ -10,7 +10,9 @@ RSpec.describe InterviewsController, type: :controller do
   describe 'GET #index' do
     it 'assigns all interviews as @interviews' do
       interview = Interview.create! valid_attributes
-      get :index, params: {}
+
+      get :index, params: { format: :json}
+
       expect(assigns(:interviews)).to eq([interview])
     end
   end
@@ -18,22 +20,9 @@ RSpec.describe InterviewsController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested interview as @interview' do
       interview = Interview.create! valid_attributes
-      get :show, params: { id: interview.to_param }
-      expect(assigns(:interview)).to eq(interview)
-    end
-  end
 
-  describe 'GET #new' do
-    it 'assigns a new interview as @interview' do
-      get :new, params: {}
-      expect(assigns(:interview)).to be_a_new(Interview)
-    end
-  end
+      get :show, params: { id: interview.to_param, format: :json }
 
-  describe 'GET #edit' do
-    it 'assigns the requested interview as @interview' do
-      interview = Interview.create! valid_attributes
-      get :edit, params: { id: interview.to_param }
       expect(assigns(:interview)).to eq(interview)
     end
   end
@@ -41,30 +30,25 @@ RSpec.describe InterviewsController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new Interview' do
-        expect { post :create, params: { interview: valid_attributes } }.to change(Interview, :count).by(1)
+        expect { post :create, params: { interview: valid_attributes, format: :json } }
+            .to change(Interview, :count).by(1)
       end
 
       it 'assigns a newly created interview as @interview' do
-        post :create, params: { interview: valid_attributes }
+        post :create, params: { interview: valid_attributes, format: :json }
+
+        expect(response).to have_http_status(:ok)
         expect(assigns(:interview)).to be_a(Interview)
         expect(assigns(:interview)).to be_persisted
-      end
-
-      it 'redirects to the created interview' do
-        post :create, params: { interview: valid_attributes }
-        expect(response).to redirect_to(Interview.last)
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved interview as @interview' do
-        post :create, params: { interview: invalid_attributes }
-        expect(assigns(:interview)).to be_a_new(Interview)
-      end
+        post :create, params: { interview: invalid_attributes, format: :json }
 
-      it "re-renders the 'new' template" do
-        post :create, params: { interview: invalid_attributes }
-        expect(response).to render_template('new')
+        expect(response).to have_http_status(:bad_request)
+        expect(assigns(:interview)).to be_a_new(Interview)
       end
     end
   end
@@ -75,59 +59,31 @@ RSpec.describe InterviewsController, type: :controller do
 
       it 'updates the requested interview' do
         interview = Interview.create! valid_attributes
-        put :update, params: { id: interview.to_param, interview: new_attributes }
+
+        put :update, params: { id: interview.to_param, interview: new_attributes, format: :json }
         interview.reload
+
         expect(interview.interviewer_name).to eq("#{valid_attributes[:interviewer_name]} edited")
       end
 
       it 'assigns the requested interview as @interview' do
         interview = Interview.create! valid_attributes
-        put :update, params: { id: interview.to_param, interview: valid_attributes }
-        expect(assigns(:interview)).to eq(interview)
-      end
 
-      it 'redirects to the interview' do
-        interview = Interview.create! valid_attributes
-        put :update, params: { id: interview.to_param, interview: valid_attributes }
-        expect(response).to redirect_to(interview)
+        put :update, params: { id: interview.to_param, interview: valid_attributes, format: :json }
+
+        expect(response).to have_http_status(:ok)
+        expect(assigns(:interview)).to eq(interview)
       end
     end
 
     context 'with invalid params' do
       it 'assigns the interview as @interview' do
         interview = Interview.create! valid_attributes
-        put :update, params: { id: interview.to_param, interview: invalid_attributes }
+
+        put :update, params: { id: interview.to_param, interview: invalid_attributes, format: :json }
+
+        expect(response).to have_http_status(:bad_request)
         expect(assigns(:interview)).to eq(interview)
-      end
-
-      it "re-renders the 'edit' template" do
-        interview = Interview.create! valid_attributes
-        put :update, params: { id: interview.to_param, interview: invalid_attributes }
-        expect(response).to render_template('edit')
-      end
-    end
-
-    context 'with stale object' do
-      before do
-        @interview = Interview.create! valid_attributes
-
-        @updated = Interview.find(@interview.id)
-        @updated.update!(interviewer_name: "#{valid_attributes[:interviewer_name]} another edition")
-
-        attributes = valid_attributes.merge(lock_version: @interview.lock_version)
-        put :update, params: { id: @interview.to_param, interview: attributes }
-      end
-
-      it 'assigns the my_application with a updated record' do
-        expect(assigns(:interview)).to eq(@updated)
-      end
-
-      it 'should assign flash error' do
-        expect(flash.now[:error]).to include('user has made a change to that record')
-      end
-
-      it "re-renders the 'edit' template" do
-        expect(response).to render_template('edit')
       end
     end
   end
@@ -135,14 +91,10 @@ RSpec.describe InterviewsController, type: :controller do
   describe 'DELETE #destroy' do
     it 'destroys the requested interview' do
       interview = Interview.create! valid_attributes
-      expect { delete :destroy, params: { id: interview.to_param } }.to change(Interview, :count).by(-1)
-    end
+      expect { delete :destroy, params: { id: interview.to_param, format: :json } }
+          .to change(Interview, :count).by(-1)
 
-    it 'redirects to the interviews list' do
-      interview = Interview.create! valid_attributes
-      delete :destroy, params: { id: interview.to_param }
-      expect(response).to redirect_to(interviews_url)
+      expect(response).to have_http_status(:ok)
     end
   end
-
 end
