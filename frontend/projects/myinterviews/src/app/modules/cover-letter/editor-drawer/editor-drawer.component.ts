@@ -15,7 +15,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import { CoverLetter } from '../cover-letter';
+import { CoverLetter } from '@core/models';
+
 import { CoverLetterApiService } from '../cover-letter.api.service';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 

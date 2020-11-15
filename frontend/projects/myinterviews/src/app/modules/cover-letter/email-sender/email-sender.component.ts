@@ -9,8 +9,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as _ from 'lodash';
 
 import { APP_SETTINGS } from '@app/app.token';
-import { Settings } from '@core/models';
-import { CoverLetter } from '../cover-letter';
+import { Settings, CoverLetter } from '@core/models';
+
 import { CoverLetterApiService } from '../cover-letter.api.service';
 
 @Component({

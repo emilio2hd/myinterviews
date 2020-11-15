@@ -2,13 +2,15 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BehaviorSubject, pipe } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
+import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 
-import { CoverLetterApiService, CoverLetter } from '..';
+import { CoverLetter } from '@core/models';
+
+import { CoverLetterApiService } from '..';
 import { EditorDrawerComponent } from '../editor-drawer/editor-drawer.component';
-import { NzModalService } from 'ng-zorro-antd/modal';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 
 @Component({

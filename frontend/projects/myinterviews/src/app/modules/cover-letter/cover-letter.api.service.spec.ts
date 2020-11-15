@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { CoverLetterApiService } from './cover-letter.api.service';
-import { CoverLetter } from './cover-letter';
+import { CoverLetter } from '@core/models';
 import { PaginatedResult } from '@lib/pagination';
+
+import { CoverLetterApiService } from './cover-letter.api.service';
 
 describe('CoverLetterApiService', () => {
   let service: CoverLetterApiService;

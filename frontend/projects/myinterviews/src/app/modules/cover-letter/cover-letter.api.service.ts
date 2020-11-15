@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { PaginatedResult } from '@lib/pagination';
-import { CoverLetter } from '.';
 import { toSnakeCase, toCamelCase } from '@lib/util';
+import { CoverLetter } from '@core/models';
 
 @Injectable()
 export class CoverLetterApiService {
