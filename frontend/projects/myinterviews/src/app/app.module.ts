@@ -18,7 +18,7 @@ import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { SettingsService } from '@core/services';
 
 registerLocaleData(en);
