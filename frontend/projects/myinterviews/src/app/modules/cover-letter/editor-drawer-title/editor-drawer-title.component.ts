@@ -8,7 +8,9 @@ import {
 } from '@angular/core';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import { BehaviorSubject } from 'rxjs';
-import { CoverLetter } from '../cover-letter';
+
+import { CoverLetter } from '@core/models';
+
 import { EditorDrawerComponent } from '../editor-drawer/editor-drawer.component';
 
 @Component({

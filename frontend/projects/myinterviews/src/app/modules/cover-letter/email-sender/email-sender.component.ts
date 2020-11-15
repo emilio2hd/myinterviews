@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 import { APP_SETTINGS } from '@app/app.token';
 import { Settings, CoverLetter } from '@core/models';
 
-import { CoverLetterApiService } from '../cover-letter.api.service';
+import { CoverLetterApiService } from '../services';
 
 @Component({
   selector: 'app-email-sender',

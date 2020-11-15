@@ -5,10 +5,13 @@ import { of } from 'rxjs';
 
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
-import { PaginatedResult } from '@lib/pagination/pagination-result';
 import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
+
+import { PaginatedResult } from '@lib/pagination';
+import { CoverLetter } from '@core/models';
+
 import { CoverLetterListComponent } from './list.component';
-import { CoverLetter, CoverLetterApiService } from '..';
+import { CoverLetterApiService } from '../services';
 
 describe('ListComponent', () => {
   const resultData: any[] = [

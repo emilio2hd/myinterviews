@@ -9,7 +9,7 @@ import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 
 import { CoverLetter } from '@core/models';
 
-import { CoverLetterApiService } from '..';
+import { CoverLetterApiService } from '../services';
 import { EditorDrawerComponent } from '../editor-drawer/editor-drawer.component';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 

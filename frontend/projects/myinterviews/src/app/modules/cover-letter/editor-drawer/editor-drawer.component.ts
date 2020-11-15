@@ -17,7 +17,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { CoverLetter } from '@core/models';
 
-import { CoverLetterApiService } from '../cover-letter.api.service';
+import { CoverLetterApiService } from '../services';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 
 @Component({
