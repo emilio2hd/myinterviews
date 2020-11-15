@@ -16,7 +16,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { CoverLetter } from '../cover-letter';
-import { CoverLetterService } from '../cover-letter.service';
+import { CoverLetterApiService } from '../cover-letter.api.service';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 
 @Component({
@@ -68,7 +68,7 @@ export class EditorDrawerComponent implements OnInit, OnDestroy {
   constructor(
     private drawerRef: NzDrawerRef<CoverLetter>,
     private formBuilder: FormBuilder,
-    private coverLetterService: CoverLetterService,
+    private coverLetterService: CoverLetterApiService,
     private notificationService: NzNotificationService,
     private modalService: NzModalService
   ) {}

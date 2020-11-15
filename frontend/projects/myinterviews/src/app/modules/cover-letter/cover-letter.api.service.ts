@@ -8,7 +8,7 @@ import { CoverLetter } from '.';
 import { toSnakeCase, toCamelCase } from '@lib/util';
 
 @Injectable()
-export class CoverLetterService {
+export class CoverLetterApiService {
   constructor(private http: HttpClient) {}
 
   getAll(pageIndex: number): Observable<PaginatedResult<CoverLetter>> {

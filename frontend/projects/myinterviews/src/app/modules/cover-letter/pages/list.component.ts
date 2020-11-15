@@ -6,7 +6,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd/drawer';
 
-import { CoverLetterService, CoverLetter } from '..';
+import { CoverLetterApiService, CoverLetter } from '..';
 import { EditorDrawerComponent } from '../editor-drawer/editor-drawer.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
@@ -36,7 +36,7 @@ export class CoverLetterListComponent implements OnInit {
   drawerRef: NzDrawerRef<EditorDrawerComponent, { coverLetter?: CoverLetter; refresh: boolean }>;
 
   constructor(
-    private coverLetterService: CoverLetterService,
+    private coverLetterService: CoverLetterApiService,
     private notification: NzNotificationService,
     private drawerService: NzDrawerService,
     private modalService: NzModalService

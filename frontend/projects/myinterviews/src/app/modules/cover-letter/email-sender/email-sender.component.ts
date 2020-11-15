@@ -11,7 +11,7 @@ import * as _ from 'lodash';
 import { APP_SETTINGS } from '@app/app.token';
 import { Settings } from '@core/models';
 import { CoverLetter } from '../cover-letter';
-import { CoverLetterService } from '../cover-letter.service';
+import { CoverLetterApiService } from '../cover-letter.api.service';
 
 @Component({
   selector: 'app-email-sender',
@@ -78,7 +78,7 @@ export class EmailSenderComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private modal: NzModalRef,
-    private coverLetterService: CoverLetterService,
+    private coverLetterService: CoverLetterApiService,
     private notificationService: NzNotificationService,
     @Inject(APP_SETTINGS) public settings$: Observable<Settings>
   ) {}

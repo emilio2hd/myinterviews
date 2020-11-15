@@ -8,7 +8,7 @@ import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 import { PaginatedResult } from '@lib/pagination/pagination-result';
 import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
 import { CoverLetterListComponent } from './list.component';
-import { CoverLetter, CoverLetterService } from '..';
+import { CoverLetter, CoverLetterApiService } from '..';
 
 describe('ListComponent', () => {
   const resultData: any[] = [
@@ -30,7 +30,7 @@ describe('ListComponent', () => {
 
   let component: CoverLetterListComponent;
   let fixture: ComponentFixture<CoverLetterListComponent>;
-  let coverLetterServiceSpy: jasmine.SpyObj<CoverLetterService>;
+  let coverLetterServiceSpy: jasmine.SpyObj<CoverLetterApiService>;
 
   beforeEach(async(() => {
     coverLetterServiceSpy = jasmine.createSpyObj('CoverLetterService', ['getAll']);
@@ -40,7 +40,7 @@ describe('ListComponent', () => {
       declarations: [CoverLetterListComponent],
       providers: [
         { provide: NZ_I18N, useValue: en_US },
-        { provide: CoverLetterService, useValue: coverLetterServiceSpy },
+        { provide: CoverLetterApiService, useValue: coverLetterServiceSpy },
       ],
     }).compileComponents();
   }));

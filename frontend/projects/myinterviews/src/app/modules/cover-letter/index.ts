@@ -1,2 +1,2 @@
 export * from './cover-letter';
-export * from './cover-letter.service';
+export * from './cover-letter.api.service';

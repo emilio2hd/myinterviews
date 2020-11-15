@@ -1,21 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { CoverLetterService } from './cover-letter.service';
+import { CoverLetterApiService } from './cover-letter.api.service';
 import { CoverLetter } from './cover-letter';
 import { PaginatedResult } from '@lib/pagination';
 
-describe('CoverLetterService', () => {
-  let service: CoverLetterService;
+describe('CoverLetterApiService', () => {
+  let service: CoverLetterApiService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [CoverLetterService],
+      providers: [CoverLetterApiService],
     });
 
-    service = TestBed.inject(CoverLetterService);
+    service = TestBed.inject(CoverLetterApiService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
