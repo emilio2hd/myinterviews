@@ -8,11 +8,13 @@ import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 
 import { CoverLetterRoutingModule } from './cover-letter-routing.module';
 import { CoverLetterPageComponent } from './pages/cover-letter-page.component';
-import { CoverLetterApiService } from './services/cover-letter.api.service';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { EditorDrawerComponent } from './editor-drawer/editor-drawer.component';
-import { EditorDrawerTitleComponent } from './editor-drawer-title/editor-drawer-title.component';
-import { EmailSenderComponent } from './email-sender/email-sender.component';
+import { CoverLetterApiService } from './services';
+import {
+  FileUploadComponent,
+  EditorDrawerComponent,
+  EditorDrawerTitleComponent,
+  EmailSenderComponent,
+} from './components';
 
 @NgModule({
   imports: [
