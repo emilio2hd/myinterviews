@@ -14,11 +14,11 @@ import { EditorDrawerComponent } from '../editor-drawer/editor-drawer.component'
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  selector: 'app-cover-letter-page',
+  templateUrl: './cover-letter-page.component.html',
+  styleUrls: ['./cover-letter-page.component.scss'],
 })
-export class CoverLetterListComponent implements OnInit {
+export class CoverLetterPageComponent implements OnInit {
   private paginationParamsSubject = new BehaviorSubject<{ pageIndex: number }>({
     pageIndex: 1,
   });

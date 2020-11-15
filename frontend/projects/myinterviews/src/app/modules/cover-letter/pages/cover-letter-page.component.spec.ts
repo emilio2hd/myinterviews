@@ -10,7 +10,7 @@ import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
 import { PaginatedResult } from '@lib/pagination';
 import { CoverLetter } from '@core/models';
 
-import { CoverLetterListComponent } from './list.component';
+import { CoverLetterPageComponent } from './cover-letter-page.component';
 import { CoverLetterApiService } from '../services';
 
 describe('ListComponent', () => {
@@ -31,8 +31,8 @@ describe('ListComponent', () => {
     isEmpty: false,
   };
 
-  let component: CoverLetterListComponent;
-  let fixture: ComponentFixture<CoverLetterListComponent>;
+  let component: CoverLetterPageComponent;
+  let fixture: ComponentFixture<CoverLetterPageComponent>;
   let coverLetterServiceSpy: jasmine.SpyObj<CoverLetterApiService>;
 
   beforeEach(async(() => {
@@ -40,7 +40,7 @@ describe('ListComponent', () => {
 
     TestBed.configureTestingModule({
       imports: [DemoNgZorroAntdModule, RouterTestingModule.withRoutes([]), NoopAnimationsModule],
-      declarations: [CoverLetterListComponent],
+      declarations: [CoverLetterPageComponent],
       providers: [
         { provide: NZ_I18N, useValue: en_US },
         { provide: CoverLetterApiService, useValue: coverLetterServiceSpy },
@@ -51,7 +51,7 @@ describe('ListComponent', () => {
   beforeEach(() => {
     coverLetterServiceSpy.getAll.and.returnValue(of(coverLetters));
 
-    fixture = TestBed.createComponent(CoverLetterListComponent);
+    fixture = TestBed.createComponent(CoverLetterPageComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

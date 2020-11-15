@@ -7,7 +7,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 
 import { CoverLetterRoutingModule } from './cover-letter-routing.module';
-import { CoverLetterListComponent } from './pages/list.component';
+import { CoverLetterPageComponent } from './pages/cover-letter-page.component';
 import { CoverLetterApiService } from './services/cover-letter.api.service';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { EditorDrawerComponent } from './editor-drawer/editor-drawer.component';
@@ -23,7 +23,7 @@ import { EmailSenderComponent } from './email-sender/email-sender.component';
     DemoNgZorroAntdModule,
   ],
   declarations: [
-    CoverLetterListComponent,
+    CoverLetterPageComponent,
     FileUploadComponent,
     EditorDrawerComponent,
     EditorDrawerTitleComponent,
