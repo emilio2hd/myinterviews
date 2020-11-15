@@ -8,4 +8,5 @@ export interface Settings {
   port: number;
   authentication: string;
   enableStarttlsAuto: number;
+  valid: boolean;
 }

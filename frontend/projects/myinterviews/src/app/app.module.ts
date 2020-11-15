@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SettingsService } from '@core/services';
 
 registerLocaleData(en);
 
@@ -38,7 +39,15 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [SettingsService],
+      useFactory: (settingsService: SettingsService) => () => settingsService.load(),
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
