@@ -1,0 +1,60 @@
+<nz-page-header *ngIf="coverLetterOnFocus">
+  <nz-page-header-title>{{getTitle()}}</nz-page-header-title>
+
+  <nz-page-header-extra>
+    <nz-space>
+      <nz-space-item>
+        <nz-button-group>
+          <button
+            nz-button
+            nzType="primary"
+            [disabled]="!(formValid$ | async)"
+            (click)="onSaveClick()"
+          >
+            Save
+        </button>
+          <button 
+            nz-button
+            nz-dropdown nzType="primary"
+            nzPlacement="bottomRight"
+            [nzDropdownMenu]="saveOptions"
+            [disabled]="!(formValid$ | async)"
+          >
+            <i nz-icon nzType="ellipsis"></i>
+          </button>
+        </nz-button-group>
+        <nz-dropdown-menu #saveOptions="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item (click)="onSaveAsCopyClick()">Save as copy</li>
+          </ul>
+        </nz-dropdown-menu>
+      </nz-space-item>
+
+      <nz-space-item>
+        <button nz-button (click)="onCloseClick()">Close</button>
+      </nz-space-item>
+
+      <nz-space-item *ngIf="!isNew()">
+        <button nz-button nzNoAnimation nz-dropdown [nzDropdownMenu]="menu" style="border: none; padding: 0">
+          <i nz-icon nzType="ellipsis" nzTheme="outline" style="font-size: 20px; vertical-align: top;"></i>
+        </button>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item><a (click)="onSendEmailClick()">Send via Email</a></li>
+            <li nz-menu-divider></li>
+            <li nz-menu-item>
+              <a
+                nz-popconfirm
+                nzPopconfirmTitle="Are you sure delete this cover letter?"
+                nzPopconfirmPlacement="right"
+                (nzOnConfirm)="deleteClick.emit()"
+              >
+                Delete
+              </a>
+            </li>
+          </ul>
+        </nz-dropdown-menu>
+      </nz-space-item>
+    </nz-space>
+  </nz-page-header-extra>
+</nz-page-header>

@@ -16,8 +16,11 @@
       "dom"
     ],
     "paths": {
+      "@app/*": ["projects/myinterviews/src/app/*"],
       "@core/*": ["projects/myinterviews/src/app/@core/*"],
       "@lib/*": ["projects/myinterviews/src/app/@lib/*"],
+      "@testing": ["projects/myinterviews/src/testing/index"],
+      "@testing/*": ["projects/myinterviews/src/testing/*"]
     },
   },
   "angularCompilerOptions": {

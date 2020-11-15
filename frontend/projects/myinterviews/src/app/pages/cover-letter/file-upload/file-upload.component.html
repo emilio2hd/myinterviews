@@ -1,5 +1,8 @@
 <div class="file-drop-area">
-  <button nz-button nzType="default" class="file-btn">Choose file</button>
+  <button nz-button nzType="default" class="file-btn">
+    <i nz-icon nzType="upload"></i>
+    Click to Upload
+  </button>
   <span class="file-msg">{{file ? file.name : 'or drag and drop file here' }}</span>
   <input class="file-input" type="file">
 </div>

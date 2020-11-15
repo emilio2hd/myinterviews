@@ -4,7 +4,7 @@
     <nz-page-header [nzGhost]="false">
       <nz-page-header-title>Cover Letter</nz-page-header-title>
       <nz-page-header-extra>
-        <a nz-button routerLink="new" nzType="primary">New</a>
+        <button nz-button nzType="primary" (click)="onNewClick()">New</button>
       </nz-page-header-extra>
     </nz-page-header>
   </nz-space-item>
@@ -30,31 +30,17 @@
           <tbody>
             <tr *ngFor="let data of coverLetter.data">
               <td>
-                <a [routerLink]="[data.id]">{{ data.title }}</a>
+                <a (click)="onEditClick(data)">{{ data.title }}</a>
               </td>
               <td>
-                <a [routerLink]="[data.id, 'edit']">Edit</a>
+                <a (click)="onSendClick(data)">Send</a>
                 <nz-divider nzType="vertical"></nz-divider>
-                <a nz-dropdown class="operation" nzTrigger="click" [nzDropdownMenu]="menu"> More <i nz-icon nzType="down"></i> </a>
-                <nz-dropdown-menu #menu="nzDropdownMenu">
-                  <ul nz-menu>
-                    <li nz-menu-item>
-                      <a [routerLink]="[data.id, 'copy']">Copy</a>
-                    </li>
-                    <li nz-menu-item>
-                      <a [routerLink]="[data.id, 'send-email']">Send via Email</a>
-                    </li>
-                    <li nz-menu-divider></li>
-                    <li nz-menu-item>
-                      <a
-                        nz-popconfirm
-                        nzPopconfirmTitle="Are you sure delete this cover letter?"
-                        nzPopconfirmPlacement="right"
-                        (nzOnConfirm)="onDeleteConfirm(data)"
-                      >Delete</a>
-                    </li>
-                  </ul>
-                </nz-dropdown-menu>
+                <a
+                  nz-popconfirm
+                  nzPopconfirmTitle="Are you sure delete this cover letter?"
+                  nzPopconfirmPlacement="right"
+                  (nzOnConfirm)="onDeleteConfirm(data)"
+                >Delete</a>
               </td>
             </tr>
           </tbody>
@@ -68,3 +54,13 @@
   </nz-space-item>
 
 </nz-space>
+
+<ng-template #drawerTitle>
+  <app-editor-drawer-title
+    *ngIf="coverLetterOnFocus"
+    [coverLetterOnFocus]="coverLetterOnFocus"
+    [drawerRef]="drawerRef"
+    (deleteClick)="onDeleteConfirm(coverLetterOnFocus)"
+  >
+  </app-editor-drawer-title>
+</ng-template>

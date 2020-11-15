@@ -9,13 +9,11 @@ import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { CoverLetterRoutingModule } from './cover-letter-routing.module';
 import { CoverLetterListComponent } from './list/list.component';
 import { CoverLetterService } from './cover-letter.service';
-import { CoverLetterEditorComponent } from './editor/editor.component';
-import { CoverLetterDetailsComponent } from './details/details.component';
 import { CoverLetterResolver } from './cover-letter.resolver';
-import { CoverLetterCopierResolver } from './cover-letter-copier.resolver';
-import { SendEmailComponent } from './send-email/send-email.component';
-import { FileUploadComponent } from './send-email/file-upload/file-upload.component';
-import { CoverLetterFormComponent } from './editor/form/form.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { EditorDrawerComponent } from './editor-drawer/editor-drawer.component';
+import { EditorDrawerTitleComponent } from './editor-drawer-title/editor-drawer-title.component';
+import { EmailSenderComponent } from './email-sender/email-sender.component';
 
 @NgModule({
   imports: [
@@ -27,12 +25,11 @@ import { CoverLetterFormComponent } from './editor/form/form.component';
   ],
   declarations: [
     CoverLetterListComponent,
-    CoverLetterEditorComponent,
-    CoverLetterFormComponent,
-    CoverLetterDetailsComponent,
-    SendEmailComponent,
     FileUploadComponent,
+    EditorDrawerComponent,
+    EditorDrawerTitleComponent,
+    EmailSenderComponent,
   ],
-  providers: [CoverLetterService, CoverLetterResolver, CoverLetterCopierResolver],
+  providers: [CoverLetterService, CoverLetterResolver],
 })
 export class CoverLetterModule {}

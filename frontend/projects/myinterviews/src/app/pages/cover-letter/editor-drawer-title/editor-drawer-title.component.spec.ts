@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SendEmailComponent } from './send-email.component';
+import { EditorDrawerTitleComponent } from './editor-drawer-title.component';
 
-describe('SendEmailComponent', () => {
-  let component: SendEmailComponent;
-  let fixture: ComponentFixture<SendEmailComponent>;
+describe('EditorDrawerTitleComponent', () => {
+  let component: EditorDrawerTitleComponent;
+  let fixture: ComponentFixture<EditorDrawerTitleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SendEmailComponent ]
+      declarations: [ EditorDrawerTitleComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SendEmailComponent);
+    fixture = TestBed.createComponent(EditorDrawerTitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

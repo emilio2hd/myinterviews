@@ -57,7 +57,7 @@ describe('CoverLetterService', () => {
     it('should be able to create cover letter', () => {
       const newCoverLetter: CoverLetter = {
         title: 'new cover letter',
-        description: 'some cover letter description',
+        content: 'some cover letter description',
       };
 
       const savedCoverLetter: CoverLetter = { ...newCoverLetter, id: 1 };

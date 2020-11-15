@@ -15,24 +15,16 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+
   <nz-form-item>
     <nz-form-label>Content</nz-form-label>
     <nz-form-control>
       <ckeditor
         formControlName="content" 
         data-testid="coverLetterContent"
+        [config]="config"
         [editor]="Editor"
       ></ckeditor>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control>
-      <button nz-button nzType="primary"
-        data-test-id="saveButton"
-        [disabled]="!this.coverLetterForm.valid"
-      >
-      Save
-    </button>
     </nz-form-control>
   </nz-form-item>
 </form>

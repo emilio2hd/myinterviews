@@ -1,0 +1,76 @@
+<nz-space nzDirection="vertical">
+  
+  <nz-space-item>
+    <ng-template #emailWarning>
+      <div>You don't have the email settings configured.</div>
+      <div>Go to Settings to manage it</div>
+    </ng-template>
+    <nz-alert
+      *ngIf="(hasNoSettings$ | async)"
+      nzShowIcon
+      nzType="warning" 
+      [nzMessage]="emailWarning"
+    ></nz-alert>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-spin [nzSpinning]="sending" nzTip="Please, wait...">
+      <form nz-form [nzLayout]="'vertical'" [formGroup]="emailForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="toErrorTpl">
+            <input nz-input id="emailTo" formControlName="emailTo" placeholder="To" />
+            <ng-template #toErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                To is required
+              </ng-container>
+              <ng-container *ngIf="control.hasError('email')">
+                To not a valid email
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="subjectErrorTpl">
+            <input nz-input id="subjectTo" formControlName="subject" placeholder="Subject" />
+            <ng-template #subjectErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                Subject is required
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+          <nz-form-control [nzErrorTip]="subjectErrorTpl">
+            <app-file-upload formControlName="attachment"></app-file-upload>
+          </nz-form-control>
+        </nz-form-item>
+    
+        <nz-form-item>
+          <nz-form-control>
+            <ckeditor 
+              *ngIf="isModalOpen"
+              formControlName="message"
+              [config]="config"
+              [editor]="Editor"
+            ></ckeditor>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </nz-spin>
+  </nz-space-item>
+</nz-space>
+
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="destroyModal()" [disabled]="sending">Close</button>
+  <button
+    nz-button
+    nzType="primary"
+    [nzLoading]="sending"
+    [disabled]="!this.emailForm.valid"
+    (click)="submitForm()"
+  >
+    {{sendButtonText}}
+  </button>
+</div>
