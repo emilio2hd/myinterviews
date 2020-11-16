@@ -4,6 +4,8 @@ tmp/**/*
 docs
 .vagrant
 shell
+frontend/node_modules
+frontend/dist
 
 # Git
 .git
