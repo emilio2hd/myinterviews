@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201116191219) do
+ActiveRecord::Schema.define(version: 20201116193059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 20201116191219) do
     t.string "cv_url", limit: 255
     t.date "began_at", null: false
     t.integer "status", default: 0
-    t.integer "lock_version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "overall_feedback", default: ""

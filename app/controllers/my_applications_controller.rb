@@ -43,12 +43,6 @@ class MyApplicationsController < ApplicationController
     end
   end
 
-  protected
-
-  def correct_stale_record_version
-    @my_application.reload
-  end
-
   private
 
   def set_my_application
@@ -57,7 +51,6 @@ class MyApplicationsController < ApplicationController
 
   def my_application_params
     params.fetch(:my_application, {}).permit(:position, :company, :began_at, :location, :cv_url, :status,
-                                             :job_description, :cover_letter, :lock_version, :overall_feedback,
-                                             tech_stack_list: [])
+                                             :job_description, :cover_letter, :overall_feedback, tech_stack_list: [])
   end
 end
