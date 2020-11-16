@@ -25,20 +25,6 @@ RSpec.describe MyApplication, type: :model do
     end
   end
 
-  context 'with stale object' do
-    let!(:application) { create(:application_sent) }
-
-    before do
-      @ob1 = MyApplication.find(application.id)
-      @ob2 = MyApplication.find(application.id)
-      @ob1.update(position: 'New Position')
-    end
-
-    it 'should throw exception' do
-      expect { @ob2.update(position: 'Other Position') }.to raise_error(ActiveRecord::StaleObjectError)
-    end
-  end
-
   describe '#destroy' do
     let(:application) { create(:application_with_interviews) }
 

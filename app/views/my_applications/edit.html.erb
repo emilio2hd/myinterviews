@@ -9,7 +9,6 @@
 
       <!-- form start -->
       <%= form_for(@my_application, html: { class: 'form-horizontal' }) do |form| %>
-          <%= form.hidden_field :lock_version %>
           <%= render 'form', form: form %>
           <div class="box-footer">
             <%= form.submit t('button.save'), class: 'btn btn-primary' %>

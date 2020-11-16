@@ -9,7 +9,6 @@
 #  cv_url           :string(255)
 #  job_description  :text
 #  location         :string(255)      not null
-#  lock_version     :integer          default(0), not null
 #  overall_feedback :text             default("")
 #  position         :string(255)      not null
 #  status           :integer          default("sent")

@@ -14,19 +14,4 @@ RSpec.describe CoverLetter, type: :model do
       expect(subject.save).to be_truthy
     end
   end
-
-  context 'with stale object' do
-    let!(:cover_letter) { create(:cover_letter) }
-    let(:new_title) { FFaker::Company.position }
-
-    before do
-      @ob1 = CoverLetter.find(cover_letter.id)
-      @ob2 = CoverLetter.find(cover_letter.id)
-      @ob1.update(title: new_title)
-    end
-
-    it 'should throw exception' do
-      expect { @ob2.update(title: new_title) }.to raise_error(ActiveRecord::StaleObjectError)
-    end
-  end
 end
