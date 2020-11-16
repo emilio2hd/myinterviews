@@ -40,12 +40,6 @@ class InterviewsController < ApplicationController
     end
   end
 
-  protected
-
-  def correct_stale_record_version
-    @interview.reload
-  end
-
   private
 
   def set_interview
@@ -53,7 +47,7 @@ class InterviewsController < ApplicationController
   end
 
   def interview_params
-    params.fetch(:interview, {}).permit(:interviewer_name, :interviewer_email, :at, :type_of, :lock_version,
+    params.fetch(:interview, {}).permit(:interviewer_name, :interviewer_email, :at, :type_of,
                                         :my_application_id, :notes, :feedback)
   end
 end

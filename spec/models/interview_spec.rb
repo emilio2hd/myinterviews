@@ -18,19 +18,4 @@ RSpec.describe Interview, type: :model do
       expect(subject.save).to be_truthy
     end
   end
-
-  context 'with stale object' do
-    let!(:interview) { create(:talk_interview) }
-    let(:new_name) { FFaker::Name.name }
-
-    before do
-      @ob1 = Interview.find(interview.id)
-      @ob2 = Interview.find(interview.id)
-      @ob1.update(interviewer_name: new_name)
-    end
-
-    it 'should throw exception' do
-      expect { @ob2.update(interviewer_name: new_name) }.to raise_error(ActiveRecord::StaleObjectError)
-    end
-  end
 end
