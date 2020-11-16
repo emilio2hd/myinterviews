@@ -31,7 +31,6 @@ en:
     successfully_published: "%{entity} was successfully published."
     not_found: "%{entity} not found."
     are_you_sure: "Are you sure?"
-    object_has_been_changed: "Another user has made a change to that record since you accessed the edit form."
     copy: "Copy"
   time:
     formats:

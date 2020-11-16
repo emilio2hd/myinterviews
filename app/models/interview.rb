@@ -7,7 +7,6 @@
 #  feedback          :text
 #  interviewer_email :string(255)
 #  interviewer_name  :string(255)
-#  lock_version      :integer          default(0), not null
 #  notes             :text
 #  type_of           :integer          default("talk"), not null
 #  my_application_id :integer          not null

@@ -4,8 +4,6 @@ RSpec.describe MyApplicationsController, type: :controller do
   let(:valid_attributes) { attributes_for(:application_sent) }
   let(:invalid_attributes) { attributes_for(:application_sent).merge(position: nil) }
 
-  it { is_expected.to rescue_from(ActiveRecord::StaleObjectError).with(:handle_stale_object) }
-
   describe 'GET #index' do
     it 'assigns all my_applications as @my_applications' do
       my_application = MyApplication.create! valid_attributes
@@ -100,30 +98,6 @@ RSpec.describe MyApplicationsController, type: :controller do
 
       it 'assigns the my_application as @my_application' do
         expect(assigns(:my_application)).to eq(@my_application)
-      end
-
-      it "re-renders the 'edit' template" do
-        expect(response).to render_template('edit')
-      end
-    end
-
-    context 'with stale object' do
-      before do
-        @my_application = MyApplication.create! valid_attributes
-
-        @updated = MyApplication.find(@my_application.id)
-        @updated.update(position: "#{valid_attributes[:position]} another edition")
-
-        attributes = valid_attributes.merge(lock_version: @my_application.lock_version)
-        put :update, params: { id: @my_application.to_param, my_application: attributes }
-      end
-
-      it 'assigns the my_application with a updated record' do
-        expect(assigns(:my_application)).to eq(@updated)
-      end
-
-      it 'should assign flash error' do
-        expect(flash.now[:error]).to include('user has made a change to that record')
       end
 
       it "re-renders the 'edit' template" do

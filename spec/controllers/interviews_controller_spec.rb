@@ -5,8 +5,6 @@ RSpec.describe InterviewsController, type: :controller do
   let(:valid_attributes) { attributes_for(:talk_interview).merge(my_application_id: my_application.id) }
   let(:invalid_attributes) { attributes_for(:talk_interview).merge(my_application_id: nil) }
 
-  it { is_expected.to rescue_from(ActiveRecord::StaleObjectError).with(:handle_stale_object) }
-
   describe 'GET #index' do
     it 'assigns all interviews as @interviews' do
       interview = Interview.create! valid_attributes
@@ -103,30 +101,6 @@ RSpec.describe InterviewsController, type: :controller do
       it "re-renders the 'edit' template" do
         interview = Interview.create! valid_attributes
         put :update, params: { id: interview.to_param, interview: invalid_attributes }
-        expect(response).to render_template('edit')
-      end
-    end
-
-    context 'with stale object' do
-      before do
-        @interview = Interview.create! valid_attributes
-
-        @updated = Interview.find(@interview.id)
-        @updated.update!(interviewer_name: "#{valid_attributes[:interviewer_name]} another edition")
-
-        attributes = valid_attributes.merge(lock_version: @interview.lock_version)
-        put :update, params: { id: @interview.to_param, interview: attributes }
-      end
-
-      it 'assigns the my_application with a updated record' do
-        expect(assigns(:interview)).to eq(@updated)
-      end
-
-      it 'should assign flash error' do
-        expect(flash.now[:error]).to include('user has made a change to that record')
-      end
-
-      it "re-renders the 'edit' template" do
         expect(response).to render_template('edit')
       end
     end
