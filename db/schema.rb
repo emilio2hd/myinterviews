@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200419212833) do
+ActiveRecord::Schema.define(version: 20201116181717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20200419212833) do
   create_table "cover_letters", id: :serial, force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "lock_version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
