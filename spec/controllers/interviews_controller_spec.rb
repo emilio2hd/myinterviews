@@ -5,8 +5,6 @@ RSpec.describe InterviewsController, type: :controller do
   let(:valid_attributes) { attributes_for(:talk_interview).merge(my_application_id: my_application.id) }
   let(:invalid_attributes) { attributes_for(:talk_interview).merge(my_application_id: nil) }
 
-  it { is_expected.to rescue_from(ActiveRecord::StaleObjectError).with(:handle_stale_object) }
-
   describe 'GET #index' do
     it 'assigns all interviews as @interviews' do
       interview = Interview.create! valid_attributes
