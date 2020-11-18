@@ -13,7 +13,45 @@
         <div nz-row [nzGutter]="16">
           <div nz-col nzSpan="12">
             <nz-form-item>
-              <nz-form-label nzFor="interviewerApplication" nzRequired>Application</nz-form-label>
+              <nz-form-label nzFor="interviewerName" nzRequired>Interviewer Name</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorTpl">
+                <input
+                  nz-input
+                  id="interviewerName"
+                  formControlName="interviewerName"
+                />
+                <ng-template #errorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Interviewer name is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="interviewerEmail">Interviewer Email</nz-form-label>
+              <nz-form-control [nzErrorTip]="errorEmailTpl">
+                <input
+                  nz-input
+                  id="interviewerEmail"
+                  formControlName="interviewerEmail"
+                />
+                <ng-template #errorEmailTpl let-control>
+                  <ng-container *ngIf="control.hasError('email')">
+                    Interviewer email is not valid
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="interviewerApplication">Application</nz-form-label>
               <nz-form-control [nzErrorTip]="errorApplicationTpl">
                 <nz-select
                   id="interviewerApplication"
@@ -61,44 +99,6 @@
                   formControlName="at"
                   nzFormat="yyyy-MM-dd HH:mm"
                 ></nz-date-picker>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-        </div>
-
-        <div nz-row [nzGutter]="16">
-          <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label nzFor="interviewerName" nzRequired>Interviewer Name</nz-form-label>
-              <nz-form-control [nzErrorTip]="errorTpl">
-                <input
-                  nz-input
-                  id="interviewerName"
-                  formControlName="interviewerName"
-                />
-                <ng-template #errorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')">
-                    Interviewer name is required
-                  </ng-container>
-                </ng-template>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-
-          <div nz-col nzSpan="12">
-            <nz-form-item>
-              <nz-form-label nzFor="interviewerEmail">Interviewer Email</nz-form-label>
-              <nz-form-control [nzErrorTip]="errorEmailTpl">
-                <input
-                  nz-input
-                  id="interviewerEmail"
-                  formControlName="interviewerEmail"
-                />
-                <ng-template #errorEmailTpl let-control>
-                  <ng-container *ngIf="control.hasError('email')">
-                    Interviewer email is not valid
-                  </ng-container>
-                </ng-template>
               </nz-form-control>
             </nz-form-item>
           </div>

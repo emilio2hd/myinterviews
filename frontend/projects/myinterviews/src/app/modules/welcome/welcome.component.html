@@ -53,7 +53,7 @@
             <thead>
               <tr>
                 <th>At</th>
-                <th>Application</th>
+                <th>Interviewer</th>
               </tr>
             </thead>
             <tbody>
@@ -61,7 +61,7 @@
                 <td>
                   <a [routerLink]="['..', 'interview', data.id]">{{ data.at }}</a>
                 </td>
-                <td>{{ data.application }}</td>
+                <td>{{ data.interviewerName }}</td>
               </tr>
             </tbody>
           </nz-table>

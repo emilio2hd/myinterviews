@@ -9,7 +9,7 @@ export interface Application {
 export interface Interview {
   id: number;
   at: string;
-  application: string;
+  interviewerName: string;
 }
 
 export interface DasboardData {

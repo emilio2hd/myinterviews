@@ -29,11 +29,14 @@
           <div class="main">
             <nz-descriptions nzSize="small" [nzColumn]="3">
               <nz-descriptions-item nzTitle="Application" [nzSpan]="1">
-                <a [routerLink]="['/job-application', interview.myApplicationId]" routerLinkActive="router-link-active">
-                  {{interview.applicationPosition}}
-                  -
-                  {{interview.companyName}}
-                </a>
+                <ng-container *ngIf="interview.myApplicationId; else noApplication">
+                  <a [routerLink]="['/job-application', interview.myApplicationId]" routerLinkActive="router-link-active">
+                    {{interview.applicationPosition}}
+                    -
+                    {{interview.companyName}}
+                  </a>
+                </ng-container>
+                <ng-template #noApplication>None</ng-template>
               </nz-descriptions-item>
               <nz-descriptions-item nzTitle="Interviewer Name" [nzSpan]="1">
                 {{interview.interviewerName}}

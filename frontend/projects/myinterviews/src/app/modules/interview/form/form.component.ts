@@ -41,7 +41,7 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.interviewForm = this.fb.group({
       id: [''],
-      myApplicationId: ['', [Validators.required]],
+      myApplicationId: [''],
       interviewerName: ['', [Validators.required]],
       interviewerEmail: ['', [Validators.email]],
       typeOf: [''],

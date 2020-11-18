@@ -5,5 +5,5 @@ end
 json.interviews @interviews do |interview|
   json.extract! interview, :id
   json.at localize(interview.at, format: :resumed)
-  json.application interview.my_application.position
+  json.interviewer_name interview.interviewer_name
 end
