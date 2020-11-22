@@ -1,16 +1,19 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { ErrorHandler, NgModule, Optional, SkipSelf } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import { HttpResponseConverterInterceptor, HttpErrorsInterceptor } from './interceptors';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+
+import { HttpResponseConverterInterceptor } from './interceptors';
 import { SettingsService } from './services';
+import { GlobalErrorHandler } from './global-error.handler';
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [HttpClientModule, NzNotificationModule],
   exports: [],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpResponseConverterInterceptor, multi: true }, // Keep this one as the first one
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorsInterceptor, multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }, // Keep this as the first one
+    { provide: HTTP_INTERCEPTORS, useClass: HttpResponseConverterInterceptor, multi: true }, // Keep this one as the second one
     SettingsService,
   ],
 })
