@@ -8,11 +8,19 @@ import { catchError } from 'rxjs/operators';
  *
  * @param title - Notification title
  * @param message - Notification message
+ * @param callbackFn - Function to be called when error is captured
  */
-export const errorNotifier = <T>(title: string, message: string) => {
+export const errorNotifier = <T>(
+  title: string,
+  message: string,
+  callbackFn: () => void = () => {}
+) => {
   return (source: Observable<T>): Observable<T> => {
     return source.pipe(
-      catchError((error) => throwError(new ErrorNotification(title, message, error)))
+      catchError((error) => {
+        callbackFn();
+        return throwError(new ErrorNotification(title, message, error));
+      })
     );
   };
 };
