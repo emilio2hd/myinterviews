@@ -87,10 +87,6 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
     return `${application.position} - ${application.company}`;
   }
 
-  private createNotification(type: 'success' | 'error', message: string) {
-    this.notificationService.create(type, 'Cover Letter', message);
-  }
-
   private getCallbacks(interview: Interview, action: string) {
     return {
       next: () => {
@@ -107,5 +103,9 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
         );
       },
     };
+  }
+
+  private createNotification(type: 'success' | 'error', message: string) {
+    this.notificationService.create(type, 'Interview', message);
   }
 }

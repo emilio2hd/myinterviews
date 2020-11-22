@@ -12,6 +12,7 @@ import { APP_SETTINGS } from '@app/app.token';
 import { Settings, CoverLetter } from '@core/models';
 
 import { CoverLetterApiService } from '../../services';
+import { errorNotifier } from '@app/@lib/rxjs';
 
 @Component({
   selector: 'app-email-sender',
@@ -105,25 +106,24 @@ export class EmailSenderComponent implements OnInit, OnDestroy {
     const { coverLetterId, ...emailFormValues } = this.emailForm.value;
 
     this.subscriptions.add(
-      this.coverLetterService.sendEmail(coverLetterId, emailFormValues).subscribe({
-        next: () => {
-          this.notificationService.create(
-            'success',
+      this.coverLetterService
+        .sendEmail(coverLetterId, emailFormValues)
+        .pipe(
+          errorNotifier(
+            'Send Cover Letter',
+            `Uh-oh! Something wrong has happened. Unable to send email to "${emailFormValues.emailTo}"`,
+            () => (this.sending = false)
+          )
+        )
+        .subscribe(() => {
+          this.notificationService.success(
             'Send Cover Letter',
             `Cover letter successfully sent to "${emailFormValues.emailTo}"`
           );
 
+          this.sending = false;
           this.modal.destroy();
-        },
-        error: () => {
-          this.notificationService.create(
-            'error',
-            'Send Cover Letter',
-            `Uh-oh! Something wrong has happened. Unable to send email to "${emailFormValues.emailTo}"`
-          );
-        },
-        complete: () => (this.sending = false),
-      })
+        })
     );
   }
 

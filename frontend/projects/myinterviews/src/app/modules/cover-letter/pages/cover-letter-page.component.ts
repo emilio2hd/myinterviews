@@ -25,7 +25,7 @@ export class CoverLetterPageComponent implements OnInit {
   private getAllCoverLetters$ = pipe(
     tap((_) => (this.loading = true)),
     switchMap(({ pageIndex }) =>
-      this.coverLetterService.getAll(pageIndex).pipe(tap(() => (this.loading = false)))
+      this.coverLetterService.getPaginatedResults(pageIndex).pipe(tap(() => (this.loading = false)))
     )
   );
 
@@ -97,21 +97,12 @@ export class CoverLetterPageComponent implements OnInit {
         const currentParams = this.paginationParamsSubject.value;
         this.paginationParamsSubject.next({ ...currentParams });
 
-        this.notification.create(
-          'success',
-          'Applications',
-          `"${coverLetter.title}" successfully deleted`
-        );
+        this.notification.success('Cover Letter', `"${coverLetter.title}" successfully deleted`);
 
         if (this.drawerRef) {
           this.drawerRef.close({ refresh: true });
         }
       },
-      error: () =>
-        this.notification.error(
-          'Cover Letter',
-          `Uh-oh! Something wrong has happened. Unable to delete "${coverLetter.title}"`
-        ),
     });
   }
 }

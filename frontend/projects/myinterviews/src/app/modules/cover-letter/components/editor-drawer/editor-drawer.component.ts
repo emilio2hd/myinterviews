@@ -16,6 +16,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { CoverLetter } from '@core/models';
+import { errorNotifier } from '@lib/rxjs';
 
 import { CoverLetterApiService } from '../../services';
 import { EmailSenderComponent } from '../email-sender/email-sender.component';
@@ -88,6 +89,16 @@ export class EditorDrawerComponent implements OnInit, OnDestroy {
     }
   }
 
+  submitForm() {
+    if (!this.coverLetterForm.valid) {
+      return;
+    }
+
+    const coverLetter = this.coverLetterForm.value as CoverLetter;
+
+    this.saveCoverLetter(coverLetter, 'successfully saved');
+  }
+
   saveAsCopy() {
     if (!this.coverLetterForm.valid) {
       return;
@@ -95,17 +106,7 @@ export class EditorDrawerComponent implements OnInit, OnDestroy {
 
     const { id, ...coverLetterClone } = this.coverLetterForm.value as CoverLetter;
 
-    this.subscriptions.add(
-      this.coverLetterService.create(coverLetterClone).subscribe(() => {
-        this.notificationService.create(
-          'success',
-          'Cover Letter',
-          `"${coverLetterClone.title}" saved as new`
-        );
-
-        this.drawerRef.close({ refresh: true });
-      })
-    );
+    this.saveCoverLetter(coverLetterClone, 'saved as new');
   }
 
   sendEmail() {
@@ -122,44 +123,24 @@ export class EditorDrawerComponent implements OnInit, OnDestroy {
     });
   }
 
-  submitForm() {
-    if (!this.coverLetterForm.valid) {
-      return;
-    }
-
-    const coverLetter = this.coverLetterForm.value as CoverLetter;
-
-    if (coverLetter.id) {
-      this.subscriptions.add(
-        this.coverLetterService
-          .update(coverLetter)
-          .subscribe(this.getCallbacks(coverLetter, 'updated'))
-      );
-    } else {
-      this.subscriptions.add(
-        this.coverLetterService
-          .create(coverLetter)
-          .subscribe(this.getCallbacks(coverLetter, 'created'))
-      );
-    }
+  private saveCoverLetter(coverLetter: CoverLetter, successMessage: string) {
+    this.subscriptions.add(
+      this.coverLetterService
+        .save(coverLetter)
+        .pipe(
+          errorNotifier(
+            'Cover Letter',
+            `Uh-oh! Something wrong has happened. Unable to save "${coverLetter.title}"`
+          )
+        )
+        .subscribe(() => {
+          this.showSuccessMessage(`"${coverLetter.title}" ${successMessage}`);
+          this.drawerRef.close({ refresh: true });
+        })
+    );
   }
 
-  private createNotification(type: 'success' | 'error', message: string) {
-    this.notificationService.create(type, 'Cover Letter', message);
-  }
-
-  private getCallbacks(coverLetter: CoverLetter, action: string) {
-    return {
-      next: () => {
-        this.createNotification('success', `"${coverLetter.title}" successfully ${action}`);
-        this.drawerRef.close({ refresh: true });
-      },
-      error: () => {
-        this.createNotification(
-          'error',
-          `Uh-oh! Something wrong has happened. Unable to save "${coverLetter.title}"`
-        );
-      },
-    };
+  private showSuccessMessage(message: string) {
+    this.notificationService.success('Cover Letter', message);
   }
 }
