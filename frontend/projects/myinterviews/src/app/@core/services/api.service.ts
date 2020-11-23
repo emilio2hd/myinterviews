@@ -9,7 +9,7 @@ import { Entity } from '@core/models';
 export abstract class ApiService<T extends Entity> {
   abstract baseUrl: string;
 
-  protected apiUrl = (urlBit = '') => `${this.baseUrl}${urlBit}.json`;
+  protected apiUrl = (urlBit = '') => `${this.baseUrl}${urlBit}`;
 
   constructor(protected http: HttpClient) {}
 
@@ -27,19 +27,19 @@ export abstract class ApiService<T extends Entity> {
     return this.create(entity);
   }
 
-  create(coverLetter: T): Observable<T> {
-    const snakeCoverLetter = toSnakeCase({ coverLetter });
+  create(entity: T): Observable<T> {
+    const sneakedEntity = toSnakeCase(this.beforeSendRequest(entity));
 
     return this.http
-      .post<any>(this.apiUrl(), snakeCoverLetter)
+      .post<any>(this.apiUrl(), sneakedEntity)
       .pipe(map((result) => toCamelCase<T>(result)));
   }
 
-  update(coverLetter: T): Observable<T> {
-    const snakeCoverLetter = toSnakeCase({ coverLetter });
+  update(entity: T): Observable<T> {
+    const sneakedEntity = toSnakeCase(this.beforeSendRequest(entity));
 
     return this.http
-      .put<any>(this.apiUrl(`/${coverLetter.id}`), snakeCoverLetter)
+      .put<any>(this.apiUrl(`/${entity.id}`), sneakedEntity)
       .pipe(map((result) => toCamelCase<T>(result)));
   }
 
@@ -49,5 +49,9 @@ export abstract class ApiService<T extends Entity> {
 
   delete(enityId: number): Observable<any> {
     return this.http.delete(this.apiUrl(`/${enityId}`));
+  }
+
+  protected beforeSendRequest(entity: T): any {
+    return entity;
   }
 }

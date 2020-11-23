@@ -25,4 +25,8 @@ export class CoverLetterApiService extends ApiService<CoverLetter> {
 
     return this.http.post<any>(this.apiUrl(`/${coverLetterId}/send_email`), formData);
   }
+
+  protected beforeSendRequest(coverLetter: CoverLetter): any {
+    return { coverLetter: super.beforeSendRequest(coverLetter) };
+  }
 }
