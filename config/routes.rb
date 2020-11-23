@@ -23,5 +23,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*other', to: 'static#index'
+  get '*other', to: 'static#index', constraints: lambda { |req| !req.path.start_with? '/api' }
 end
