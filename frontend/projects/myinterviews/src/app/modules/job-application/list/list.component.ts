@@ -25,7 +25,9 @@ export class JobApplicationListComponent implements OnInit {
   private getAllApplications$ = pipe(
     tap((_) => (this.loading = true)),
     switchMap(({ pageIndex }) =>
-      this.jobApplicationService.getAll(pageIndex).pipe(tap(() => (this.loading = false)))
+      this.jobApplicationService
+        .getPaginatedResults(pageIndex)
+        .pipe(tap(() => (this.loading = false)))
     )
   );
 

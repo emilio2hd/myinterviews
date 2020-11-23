@@ -1,3 +1,5 @@
+import { Entity } from '@app/@core/models';
+
 export enum JobApplicationStatusEnum {
   NoAnswer = 'no_answer',
   Ongoing = 'ongoing',
@@ -24,8 +26,7 @@ export interface Interview {
   interviewer: string;
 }
 
-export interface JobApplication {
-  id?: number;
+export interface JobApplication extends Entity {
   company: string;
   position: string;
   location: string;

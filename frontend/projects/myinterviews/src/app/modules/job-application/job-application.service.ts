@@ -1,43 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
-import { PaginatedResult } from '@lib/pagination';
+import { ApiService } from '@core/services';
 import { JobApplication } from '.';
-import { toSnakeCase, toCamelCase } from '@lib/util';
 
 @Injectable()
-export class JobApplicationService {
-  constructor(private http: HttpClient) {}
+export class JobApplicationService extends ApiService<JobApplication> {
+  baseUrl = '/api/my_applications';
 
-  getAll(pageIndex: number): Observable<PaginatedResult<JobApplication>> {
-    const params = new HttpParams().append('page', `${pageIndex}`);
-
-    return this.http.get<PaginatedResult<JobApplication>>('/api/my_applications.json', { params });
+  constructor(protected http: HttpClient) {
+    super(http);
   }
 
-  findById(jobApplicationId: number): Observable<JobApplication> {
-    return this.http.get<JobApplication>(`/api/my_applications/${jobApplicationId}.json`);
-  }
-
-  create(jobApplication: JobApplication): Observable<JobApplication> {
-    const snakeJobApplication = toSnakeCase({ myApplication: jobApplication });
-
-    return this.http
-      .post<any>('/api/my_applications.json', snakeJobApplication)
-      .pipe(map((result) => toCamelCase<JobApplication>(result)));
-  }
-
-  update(jobApplication: JobApplication): Observable<JobApplication> {
-    const snakeJobApplication = toSnakeCase({ myApplication: jobApplication });
-
-    return this.http
-      .put<any>(`/api/my_applications/${jobApplication.id}.json`, snakeJobApplication)
-      .pipe(map((result) => toCamelCase<JobApplication>(result)));
-  }
-
-  delete(jobApplicationId: number): Observable<any> {
-    return this.http.delete(`/api/my_applications/${jobApplicationId}.json`);
+  protected beforeSendRequest(jobApplication: JobApplication): any {
+    return { myApplication: super.beforeSendRequest(jobApplication) };
   }
 }

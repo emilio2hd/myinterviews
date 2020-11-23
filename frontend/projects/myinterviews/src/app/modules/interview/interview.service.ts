@@ -6,9 +6,7 @@ import { map } from 'rxjs/operators';
 import { ApiService } from '@core/services';
 import { Interview, Application } from './interview.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class InterviewService extends ApiService<Interview> {
   baseUrl = '/api/interviews';
 
