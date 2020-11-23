@@ -1,7 +1,6 @@
-class HomeController < ApplicationController
+class HomeController < ApiController
   def index
     @applications = MyApplication.last_10.all
     @interviews   = Interview.includes(:my_application).next_10.all
-    respond_to :json
   end
 end

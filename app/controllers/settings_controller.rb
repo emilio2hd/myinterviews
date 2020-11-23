@@ -2,27 +2,23 @@ require 'openssl'
 require 'base64'
 require 'cryptography'
 
-class SettingsController < ApplicationController
+class SettingsController < ApiController
   def index
     email_settings      = Setting.email || {}
     @setting_email_form = SettingEmailForm.new(email_settings.symbolize_keys.except(:password))
-
-    respond_to :json
   end
 
   def update_all
     @setting_email_form = SettingEmailForm.new(setting_params[:email])
 
-    respond_to do |format|
       if @setting_email_form.valid?
         email_setting = @setting_email_form.serializable_hash.symbolize_keys
         Setting.merge!(:email, email_setting)
 
-        format.json { return render json: @setting_email_form, status: :ok }
+        return render json: @setting_email_form, status: :ok
       end
 
-      format.json { render json: @setting_email_form, status: :bad_request }
-    end
+      render json: @setting_email_form, status: :bad_request
   end
 
   private
