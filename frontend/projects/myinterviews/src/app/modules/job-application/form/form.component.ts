@@ -39,7 +39,7 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
       position: ['', [Validators.required]],
       company: ['', [Validators.required]],
       location: ['', [Validators.required]],
-      beganAt: [''],
+      beganAt: ['', [Validators.required]],
       status: [''],
       cvUrl: [''],
       techStackList: [[]],
