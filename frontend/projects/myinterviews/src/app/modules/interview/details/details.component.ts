@@ -5,7 +5,7 @@ import { pipe } from 'rxjs';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
-import { InterviewService } from '../interview.service';
+import { InterviewApiService } from '../interview.api.service';
 import { Interview, InterviewTypeMapping } from '../interview.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class InterviewDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private interviewService: InterviewService,
+    private interviewService: InterviewApiService,
     private notificationService: NzNotificationService
   ) {}
 

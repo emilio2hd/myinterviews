@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import { InterviewService } from '../interview.service';
+import { InterviewApiService } from '../interview.api.service';
 import { Interview, Application } from '../interview.model';
 
 @Component({
@@ -34,7 +34,7 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private interviewService: InterviewService,
+    private interviewService: InterviewApiService,
     private notificationService: NzNotificationService
   ) {}
 

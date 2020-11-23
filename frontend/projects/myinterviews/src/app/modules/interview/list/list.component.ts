@@ -5,7 +5,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
-import { InterviewService } from '../interview.service';
+import { InterviewApiService } from '../interview.api.service';
 import { Interview, InterviewTypeMapping } from '../interview.model';
 
 @Component({
@@ -29,7 +29,7 @@ export class InterviewListComponent implements OnInit {
   interview$ = this.getAllInterviews$(this.paginationParams$);
 
   constructor(
-    private interviewService: InterviewService,
+    private interviewService: InterviewApiService,
     private notification: NzNotificationService
   ) {}
 

@@ -3,12 +3,12 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { InterviewService } from './interview.service';
+import { InterviewApiService } from './interview.api.service';
 import { Application } from './interview.model';
 
 @Injectable()
 export class ApplicationsResolver implements Resolve<Application[]> {
-  constructor(private interviewService: InterviewService, private router: Router) {}
+  constructor(private interviewService: InterviewApiService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<Application[]> {
     return this.interviewService.getAllPosition().pipe(catchError((error) => of([])));

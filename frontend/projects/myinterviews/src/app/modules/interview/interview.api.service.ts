@@ -7,7 +7,7 @@ import { ApiService } from '@core/services';
 import { Interview, Application } from './interview.model';
 
 @Injectable()
-export class InterviewService extends ApiService<Interview> {
+export class InterviewApiService extends ApiService<Interview> {
   baseUrl = '/api/interviews';
 
   constructor(protected http: HttpClient) {
