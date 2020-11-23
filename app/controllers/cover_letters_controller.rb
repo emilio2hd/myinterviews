@@ -1,70 +1,57 @@
 require 'cryptography'
 
-class CoverLettersController < ApplicationController
+class CoverLettersController < ApiController
   before_action :set_cover_letter, only: %i[show update destroy send_email]
 
   def index
     @cover_letters = CoverLetter.page(params[:page])
-    respond_to :json
   end
 
   def show
-    respond_to :json
   end
 
   def send_email
     @cover_letter_email_form = CoverLetterEmailForm.new(cover_letter_email_params)
 
     if Setting.email.nil?
-      respond_to do |format|
-        no_email_error = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
-        format.json { return render json: { message: no_email_error }, status: :bad_request }
+      no_email_error = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
+      return render json: { message: no_email_error }, status: :bad_request
+    end
+
+    if @cover_letter_email_form.valid?
+      begin
+        CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
+        return head :ok
+      rescue StandardError
+        no_email_sent = t('cover_letters.messages.email_wasnt_sent')
+        return render json: { message: no_email_sent }, status: :internal_server_error
       end
     end
 
-    respond_to do |format|
-      if @cover_letter_email_form.valid?
-        begin
-          CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
-          format.json { return head :ok }
-        rescue StandardError => e
-          no_email_sent = t('cover_letters.messages.email_wasnt_sent')
-          format.json { return render json: { message: no_email_sent }, status: :internal_server_error }
-        end
-      else
-        format.json { return render json: @cover_letter_email_form, status: :bad_request }
-      end
-    end
+    return render json: @cover_letter_email_form, status: :bad_request
   end
 
   def create
     @cover_letter = CoverLetter.new(cover_letter_params)
 
-    respond_to do |format|
-      if @cover_letter.save
-        format.json { render json: @cover_letter, status: :ok }
-      else
-        format.json { render json: @cover_letter, status: :bad_request }
-      end
+    if @cover_letter.save
+      render json: @cover_letter
+    else
+      render json: @cover_letter, status: :bad_request
     end
   end
 
   def update
-    respond_to do |format|
-      if @cover_letter.update(cover_letter_params)
-        format.json { render json: @cover_letter, status: :ok }
-      else
-        format.json { render json: @cover_letter, status: :bad_request }
-      end
+    if @cover_letter.update(cover_letter_params)
+      render json: @cover_letter
+    else
+      render json: @cover_letter, status: :bad_request
     end
   end
 
   def destroy
     @cover_letter.destroy
-
-    respond_to do |format|
-      format.json { head :ok }
-    end
+    head :ok
   end
 
   private
