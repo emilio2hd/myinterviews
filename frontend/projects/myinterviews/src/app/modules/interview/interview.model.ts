@@ -1,5 +1,6 @@
-export interface Interview {
-  id?: number;
+import { Entity } from '@core/models';
+
+export interface Interview extends Entity {
   typeOf: string;
   feedback: string;
   notes: string;

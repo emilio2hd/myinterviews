@@ -21,7 +21,7 @@ export class InterviewListComponent implements OnInit {
   private getAllInterviews$ = pipe(
     tap((_) => (this.loading = true)),
     switchMap(({ pageIndex }) =>
-      this.interviewService.getAll(pageIndex).pipe(tap(() => (this.loading = false)))
+      this.interviewService.getPaginatedResults(pageIndex).pipe(tap(() => (this.loading = false)))
     )
   );
 
