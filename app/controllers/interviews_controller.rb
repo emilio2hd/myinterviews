@@ -1,43 +1,35 @@
-class InterviewsController < ApplicationController
+class InterviewsController < ApiController
   before_action :set_interview, only: %i[show update destroy]
 
   def index
     @interviews = Interview.includes(:my_application).ordered_by_last.page(params[:page])
-    respond_to :json
   end
 
   def show
-    respond_to :json
   end
 
   def create
     @interview = Interview.new(interview_params)
 
-    respond_to do |format|
-      if @interview.save
-        format.json { render json: @interview, status: :ok }
-      else
-        format.json { render json: @cover_letter, status: :bad_request }
-      end
+    if @interview.save
+      render json: @interview
+    else
+      render json: @cover_letter, status: :bad_request
     end
   end
 
   def update
-    respond_to do |format|
-      if @interview.update(interview_params)
-        format.json { render json: @interview, status: :ok }
-      else
-        format.json { render json: @cover_letter, status: :bad_request }
-      end
+    if @interview.update(interview_params)
+      render json: @interview
+    else
+      render json: @cover_letter, status: :bad_request
     end
   end
 
   def destroy
     @interview.destroy
 
-    respond_to do |format|
-      format.json { head :ok }
-    end
+    head :ok
   end
 
   private
