@@ -8,7 +8,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { JobApplication, JobApplicationStatusMapping } from '../job-application';
-import { JobApplicationService } from '../job-application.service';
+import { JobApplicationApiService } from '../job-application.api.service';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +29,7 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private jobApplicationService: JobApplicationService,
+    private jobApplicationService: JobApplicationApiService,
     private notificationService: NzNotificationService
   ) {}
 

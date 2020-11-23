@@ -5,11 +5,11 @@ import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { JobApplication } from './job-application';
-import { JobApplicationService } from './job-application.service';
+import { JobApplicationApiService } from './job-application.api.service';
 
 @Injectable()
 export class JobApplicationResolver implements Resolve<JobApplication> {
-  constructor(private jobApplicationService: JobApplicationService, private router: Router) {}
+  constructor(private jobApplicationService: JobApplicationApiService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<JobApplication> {
     return this.jobApplicationService.findById(parseInt(route.paramMap.get('id'), 10)).pipe(

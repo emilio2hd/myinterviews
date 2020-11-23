@@ -5,7 +5,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
-import { JobApplicationService } from '../job-application.service';
+import { JobApplicationApiService } from '../job-application.api.service';
 import {
   JobApplication,
   JobApplicationStatusMapping,
@@ -37,7 +37,7 @@ export class JobApplicationListComponent implements OnInit {
   trackById = (_: number, item: JobApplication) => item.id;
 
   constructor(
-    private jobApplicationService: JobApplicationService,
+    private jobApplicationService: JobApplicationApiService,
     private notification: NzNotificationService
   ) {}
 

@@ -10,7 +10,7 @@ import {
   JobApplicationStatusEnum,
   JobApplicationStatusMapping,
 } from '../job-application';
-import { JobApplicationService } from '../job-application.service';
+import { JobApplicationApiService } from '../job-application.api.service';
 
 @Component({
   selector: 'app-details',
@@ -32,7 +32,7 @@ export class JobApplicationDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private jobApplicationService: JobApplicationService,
+    private jobApplicationService: JobApplicationApiService,
     private notificationService: NzNotificationService
   ) {}
 

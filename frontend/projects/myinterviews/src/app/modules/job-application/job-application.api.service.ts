@@ -5,7 +5,7 @@ import { ApiService } from '@core/services';
 import { JobApplication } from '.';
 
 @Injectable()
-export class JobApplicationService extends ApiService<JobApplication> {
+export class JobApplicationApiService extends ApiService<JobApplication> {
   baseUrl = '/api/my_applications';
 
   constructor(protected http: HttpClient) {

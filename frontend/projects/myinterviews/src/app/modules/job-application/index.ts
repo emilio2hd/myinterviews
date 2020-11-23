@@ -1,2 +1,2 @@
 export * from './job-application';
-export * from './job-application.service';
+export * from './job-application.api.service';
