@@ -11,14 +11,14 @@ class SettingsController < ApiController
   def update_all
     @setting_email_form = SettingEmailForm.new(setting_params[:email])
 
-      if @setting_email_form.valid?
-        email_setting = @setting_email_form.serializable_hash.symbolize_keys
-        Setting.merge!(:email, email_setting)
+    if @setting_email_form.valid?
+      email_setting = @setting_email_form.serializable_hash.symbolize_keys
+      Setting.merge!(:email, email_setting)
 
-        return render json: @setting_email_form, status: :ok
-      end
+      return render json: @setting_email_form
+    end
 
-      render json: @setting_email_form, status: :bad_request
+    render json: @setting_email_form, status: :bad_request
   end
 
   private
