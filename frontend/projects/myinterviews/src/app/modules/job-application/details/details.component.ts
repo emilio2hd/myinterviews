@@ -9,7 +9,7 @@ import {
   JobApplication,
   JobApplicationStatusEnum,
   JobApplicationStatusMapping,
-} from '../job-application';
+} from '../job-application.model';
 import { JobApplicationApiService } from '../job-application.api.service';
 
 @Component({

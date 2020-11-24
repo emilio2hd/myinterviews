@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DasboardData } from './dashboard.model';
 import { Observable } from 'rxjs';
+
+import { DasboardData } from './dashboard.models';
 
 @Injectable()
 export class DashboardService {

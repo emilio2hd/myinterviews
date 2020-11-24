@@ -10,7 +10,7 @@ import {
   JobApplication,
   JobApplicationStatusMapping,
   JobApplicationStatusEnum,
-} from '../job-application';
+} from '../job-application.model';
 
 @Component({
   selector: 'app-job-application-list',

@@ -23,3 +23,12 @@ export interface JobApplication extends Entity {
   techStackList?: string[];
   interviews: { [date: string]: Interview };
 }
+
+export const JobApplicationStatusMapping: Record<JobApplicationStatusEnum, string> = {
+  [JobApplicationStatusEnum.NoAnswer]: 'No answer',
+  [JobApplicationStatusEnum.Ongoing]: 'Ongoing',
+  [JobApplicationStatusEnum.Canceled]: 'Canceled',
+  [JobApplicationStatusEnum.Accepted]: 'Accepted',
+  [JobApplicationStatusEnum.Refused]: 'Refused',
+  [JobApplicationStatusEnum.Sent]: 'Sent',
+};

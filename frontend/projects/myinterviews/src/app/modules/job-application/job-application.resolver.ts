@@ -4,7 +4,7 @@ import { Observable, EMPTY, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { JobApplication } from './job-application';
+import { JobApplication } from './job-application.model';
 import { JobApplicationApiService } from './job-application.api.service';
 
 @Injectable()

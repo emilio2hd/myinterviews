@@ -16,3 +16,8 @@ export interface Interview extends Entity {
   applicationPosition?: string;
   companyName?: string;
 }
+
+export const InterviewTypeMapping: Record<InterviewTypeEnum, string> = {
+  [InterviewTypeEnum.Talk]: 'Talk',
+  [InterviewTypeEnum.Technical]: 'Technical',
+};

@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-import { JobApplication, JobApplicationStatusMapping } from '../job-application';
+import { JobApplication, JobApplicationStatusMapping } from '../job-application.model';
 import { JobApplicationApiService } from '../job-application.api.service';
 
 @Component({
