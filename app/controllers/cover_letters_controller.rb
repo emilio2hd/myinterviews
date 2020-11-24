@@ -14,7 +14,7 @@ class CoverLettersController < ApiController
     @cover_letter_email_form = CoverLetterEmailForm.new(cover_letter_email_params)
 
     if Setting.email.nil?
-      no_email_error = t('cover_letters.messages.email_wasnt_sent_no_email_settings')
+      no_email_error = I18n.t('cover_letters.messages.email_wasnt_sent_no_email_settings')
       return render json: { message: no_email_error }, status: :bad_request
     end
 
@@ -23,7 +23,7 @@ class CoverLettersController < ApiController
         CoverLetterMailer.presentation_email(@cover_letter_email_form, Setting.email).deliver_now
         return head :ok
       rescue StandardError
-        no_email_sent = t('cover_letters.messages.email_wasnt_sent')
+        no_email_sent = I18n.t('cover_letters.messages.email_wasnt_sent')
         return render json: { message: no_email_sent }, status: :internal_server_error
       end
     end
