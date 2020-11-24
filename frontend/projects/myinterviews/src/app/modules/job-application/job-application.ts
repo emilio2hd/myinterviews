@@ -1,13 +1,6 @@
-import { Entity } from '@app/@core/models';
+import { JobApplicationStatusEnum } from '@core/models';
 
-export enum JobApplicationStatusEnum {
-  NoAnswer = 'no_answer',
-  Ongoing = 'ongoing',
-  Canceled = 'canceled',
-  Accepted = 'accepted',
-  Refused = 'refused',
-  Sent = 'sent',
-}
+export { JobApplicationStatusEnum, JobApplication } from '@core/models';
 
 export const JobApplicationStatusMapping: Record<JobApplicationStatusEnum, string> = {
   [JobApplicationStatusEnum.NoAnswer]: 'No answer',
@@ -17,25 +10,3 @@ export const JobApplicationStatusMapping: Record<JobApplicationStatusEnum, strin
   [JobApplicationStatusEnum.Refused]: 'Refused',
   [JobApplicationStatusEnum.Sent]: 'Sent',
 };
-
-export interface Interview {
-  id: number;
-  typeOf: string;
-  feedback: string;
-  time: string;
-  interviewer: string;
-}
-
-export interface JobApplication extends Entity {
-  company: string;
-  position: string;
-  location: string;
-  beganAt?: string;
-  overallFeedback?: string;
-  coverLetter?: string;
-  jobDescription?: string;
-  status?: JobApplicationStatusEnum;
-  cvUrl?: string;
-  techStackList?: string[];
-  interviews: { [date: string]: Interview };
-}

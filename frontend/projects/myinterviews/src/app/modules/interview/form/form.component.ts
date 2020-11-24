@@ -8,7 +8,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { InterviewApiService } from '../interview.api.service';
-import { Interview, Application } from '../interview.model';
+import { Interview, JobApplication } from '../interview.model';
 
 @Component({
   selector: 'app-form',
@@ -20,7 +20,7 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
     map((routerData: Data) => (routerData.interview || {}) as Interview)
   );
   private getApplicationsFromRouteData = pipe(
-    map((routerData: Data) => (routerData.applications || []) as Application[])
+    map((routerData: Data) => (routerData.applications || []) as JobApplication[])
   );
   private subscriptions = new Subscription();
 
@@ -83,7 +83,7 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  getApplicationLabel(application: Application) {
+  getApplicationLabel(application: JobApplication) {
     return `${application.position} - ${application.company}`;
   }
 

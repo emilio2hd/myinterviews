@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ApiService } from '@core/services';
-import { Interview, Application } from './interview.model';
+import { Interview, JobApplication } from './interview.model';
 
 @Injectable()
 export class InterviewApiService extends ApiService<Interview> {
@@ -14,9 +14,9 @@ export class InterviewApiService extends ApiService<Interview> {
     super(http);
   }
 
-  getAllPosition(): Observable<Application[]> {
+  getAllPosition(): Observable<JobApplication[]> {
     return this.http
-      .get<{ data: Application[] }>('/api/my_applications.json')
+      .get<{ data: JobApplication[] }>('/api/my_applications.json')
       .pipe(map((result) => result.data));
   }
 

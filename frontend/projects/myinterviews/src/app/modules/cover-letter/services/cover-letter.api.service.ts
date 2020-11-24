@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { toSnakeCase } from '@lib/util';
 import { CoverLetter } from '@core/models';
-import { ApiService } from '@app/@core/services';
+import { ApiService } from '@core/services';
 
 @Injectable()
 export class CoverLetterApiService extends ApiService<CoverLetter> {
