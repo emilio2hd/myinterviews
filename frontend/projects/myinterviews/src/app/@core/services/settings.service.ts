@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import * as _ from 'lodash';
 
@@ -33,6 +33,7 @@ export class SettingsService {
   load(): Promise<any> {
     return this.get()
       .pipe(
+        catchError(() => of(null)),
         tap((settings) => {
           const isEmpty = _.chain(settings).omitBy(_.isNull).isEmpty().value();
           this.settingsStore$.next({ ...settings, valid: !isEmpty });
