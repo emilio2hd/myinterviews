@@ -29,7 +29,7 @@
                   <a [routerLink]="['..', 'job-application', data.id]">{{ data.position }}</a>
                 </td>
                 <td>{{ data.company }}</td>
-                <td>{{ data.status }}</td>
+                <td>{{ getStatusText(data.status) }}</td>
                 <td>{{ data.beganAt }}</td>
               </tr>
             </tbody>

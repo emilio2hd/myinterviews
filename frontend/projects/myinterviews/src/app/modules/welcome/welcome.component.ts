@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { JobApplicationStatusEnum, JobApplicationStatusMapping } from '@core/models';
+
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -12,4 +15,8 @@ export class WelcomeComponent implements OnInit {
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit() {}
+
+  getStatusText(status: JobApplicationStatusEnum) {
+    return JobApplicationStatusMapping[status];
+  }
 }
