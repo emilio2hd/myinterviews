@@ -2,6 +2,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 if ENV['COVERAGE']
+  # Run COVERAGE=true bundle exec rspec in other to generate coverage report
   require 'simplecov'
   SimpleCov.start :rails
 end
@@ -11,8 +12,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-# Add additional requires below this line. Rails is not loaded until this point!
 
+require 'shoulda/matchers'
 require 'ffaker'
 require 'factory_bot'
 

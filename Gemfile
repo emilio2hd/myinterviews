@@ -46,7 +46,7 @@ group :test do
   gem 'simplecov', '~> 0.17', require: false
   gem 'database_cleaner'
   gem 'ffaker'
-  gem 'shoulda-matchers', '~> 4.0'
+  gem 'shoulda-matchers', '~> 4.0', require: false
   gem 'factory_bot_rails', '~> 4.10.0'
   gem 'rails-controller-testing', '1.0.1'
   gem 'rspec-its'
