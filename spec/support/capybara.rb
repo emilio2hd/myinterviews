@@ -3,7 +3,6 @@ require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 
 Capybara.server = :puma, { Silent: true }
-
 Capybara.javascript_driver = :selenium_chrome_headless
 
 Capybara::Screenshot.register_driver(:selenium_chrome_headless) do |driver, path|
@@ -21,7 +20,10 @@ RSpec.configure do |config|
 
   config.before do |example|
     if self.class.include?(Capybara::DSL)
-      Capybara.current_driver = :selenium_chrome if example.metadata[:headed_js]
+      if example.metadata[:headed_js]
+        Capybara.current_driver = :selenium_chrome
+        Capybara.page.driver.browser.manage.window.maximize
+      end
     end
   end
 end

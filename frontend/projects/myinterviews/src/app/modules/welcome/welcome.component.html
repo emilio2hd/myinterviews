@@ -8,9 +8,14 @@
   <div *ngIf="(dashboardData$ | async) as dashboardData">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzSpan]="12">
-        <nz-card nzTitle="Last 10 Applications" [nzActions]="[actionNewApplication, actionViewApplications]">
+        <nz-card
+          data-testid="listApplicationsCard"
+          nzTitle="Last 10 Applications"
+          [nzActions]="[actionNewApplication, actionViewApplications]"
+        >
           <nz-table 
-            #applicationsTable 
+            #applicationsTable
+            data-testid="lastApplicationsTable"
             [nzData]="dashboardData.applications"
             [nzFrontPagination]="false"
             [nzShowPagination]="false"
@@ -43,9 +48,14 @@
         </ng-template>
       </div>
       <div nz-col [nzSpan]="12">
-        <nz-card nzTitle="Last 10 Interviews" [nzActions]="[actionNewInterview, actionViewInterviews]">
+        <nz-card
+          data-testid="listInterviewsCard"
+          nzTitle="Last 10 Interviews"
+          [nzActions]="[actionNewInterview, actionViewInterviews]"
+        >
           <nz-table 
-            #interviewsTable 
+            #interviewsTable
+            data-testid="lastInterviewTable"
             [nzData]="dashboardData.interviews"
             [nzFrontPagination]="false"
             [nzShowPagination]="false"
