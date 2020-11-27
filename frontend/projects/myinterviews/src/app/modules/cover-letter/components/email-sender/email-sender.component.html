@@ -8,7 +8,8 @@
     <nz-alert
       *ngIf="(hasNoSettings$ | async)"
       nzShowIcon
-      nzType="warning" 
+      nzType="warning"
+      data-testid="coverLetterEmailSenderWarning"
       [nzMessage]="emailWarning"
     ></nz-alert>
   </nz-space-item>
@@ -18,7 +19,7 @@
       <form nz-form [nzLayout]="'vertical'" [formGroup]="emailForm" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-control [nzErrorTip]="toErrorTpl">
-            <input nz-input id="emailTo" formControlName="emailTo" placeholder="To" />
+            <input nz-input id="emailTo" formControlName="emailTo" placeholder="To" data-testid="coverLetterEmailTo" />
             <ng-template #toErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')">
                 To is required
@@ -32,7 +33,7 @@
     
         <nz-form-item>
           <nz-form-control [nzErrorTip]="subjectErrorTpl">
-            <input nz-input id="subjectTo" formControlName="subject" placeholder="Subject" />
+            <input nz-input id="subjectTo" formControlName="subject" placeholder="Subject" data-testid="coverLetterEmailSubject" />
             <ng-template #subjectErrorTpl let-control>
               <ng-container *ngIf="control.hasError('required')">
                 Subject is required
@@ -43,7 +44,7 @@
     
         <nz-form-item>
           <nz-form-control [nzErrorTip]="subjectErrorTpl">
-            <app-file-upload formControlName="attachment"></app-file-upload>
+            <app-file-upload formControlName="attachment" data-testid="coverLetterEmailAttachment"></app-file-upload>
           </nz-form-control>
         </nz-form-item>
     
@@ -52,6 +53,7 @@
             <ckeditor 
               *ngIf="isModalOpen"
               formControlName="message"
+              data-testid="coverLetterEmailMessage"
               [config]="config"
               [editor]="Editor"
             ></ckeditor>
@@ -63,10 +65,19 @@
 </nz-space>
 
 <div *nzModalFooter>
-  <button nz-button nzType="default" (click)="destroyModal()" [disabled]="sending">Close</button>
+  <button
+    nz-button
+    nzType="default"
+    data-testid="coverLetterEmailCloseButton"
+    [disabled]="sending"
+    (click)="destroyModal()"
+  >
+    Close
+  </button>
   <button
     nz-button
     nzType="primary"
+    data-testid="coverLetterEmailSendButton"
     [nzLoading]="sending"
     [disabled]="!this.emailForm.valid"
     (click)="submitForm()"

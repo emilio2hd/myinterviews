@@ -106,7 +106,7 @@ export class EditorDrawerComponent implements OnInit, OnDestroy {
 
     const { id, ...coverLetterClone } = this.coverLetterForm.value as CoverLetter;
 
-    this.saveCoverLetter(coverLetterClone, 'saved as new');
+    this.saveCoverLetter(coverLetterClone, 'saved as copy');
   }
 
   sendEmail() {

@@ -1,5 +1,5 @@
 <nz-page-header *ngIf="coverLetterOnFocus">
-  <nz-page-header-title>{{getTitle()}}</nz-page-header-title>
+  <nz-page-header-title data-testid="coverLetterDrawerTitle">{{getTitle()}}</nz-page-header-title>
 
   <nz-page-header-extra>
     <nz-space>
@@ -8,16 +8,18 @@
           <button
             nz-button
             nzType="primary"
+            data-testid="coverLetterDrawerSaveButton"
             [disabled]="!(formValid$ | async)"
             (click)="onSaveClick()"
           >
             Save
-        </button>
+          </button>
           <button 
             nz-button
             nz-dropdown nzType="primary"
             nzPlacement="bottomRight"
             nzTrigger="click"
+            data-testid="coverLetterDrawerMoreSaveOptionsButton"
             [nzDropdownMenu]="saveOptions"
             [disabled]="!(formValid$ | async)"
           >
@@ -26,28 +28,55 @@
         </nz-button-group>
         <nz-dropdown-menu #saveOptions="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item (click)="onSaveAsCopyClick()">Save as copy</li>
+            <li
+              nz-menu-item
+              data-testid="coverLetterDrawerSaveAsCopyButton"
+              (click)="onSaveAsCopyClick()"
+            >
+              Save as copy
+            </li>
           </ul>
         </nz-dropdown-menu>
       </nz-space-item>
 
       <nz-space-item>
-        <button nz-button (click)="onCloseClick()">Close</button>
+        <button
+          nz-button
+          data-testid="coverLetterDrawerCloseButton"
+          (click)="onCloseClick()"
+        >
+          Close
+        </button>
       </nz-space-item>
 
       <nz-space-item *ngIf="!isNew()">
-        <button nz-button nzNoAnimation nz-dropdown [nzDropdownMenu]="menu" style="border: none; padding: 0">
+        <button
+            nz-button
+            nzNoAnimation
+            nz-dropdown
+            data-testid="coverLetterDrawerMoreOptionsButton"
+            [nzDropdownMenu]="menu"
+            style="border: none; padding: 0"
+        >
           <i nz-icon nzType="ellipsis" nzTheme="outline" style="font-size: 20px; vertical-align: top;"></i>
         </button>
         <nz-dropdown-menu #menu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item><a (click)="onSendEmailClick()">Send via Email</a></li>
+            <li nz-menu-item>
+              <a
+                data-testid="coverLetterDrawerSendEmailButton"
+                (click)="onSendEmailClick()"
+              >
+                Send via Email
+              </a>
+            </li>
             <li nz-menu-divider></li>
             <li nz-menu-item>
               <a
                 nz-popconfirm
                 nzPopconfirmTitle="Are you sure delete this cover letter?"
                 nzPopconfirmPlacement="right"
+                data-testid="coverLetterDrawerDeleteButton"
                 (nzOnConfirm)="deleteClick.emit()"
               >
                 Delete
