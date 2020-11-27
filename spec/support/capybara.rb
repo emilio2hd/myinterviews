@@ -2,10 +2,16 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 
-Capybara.server = :puma, { Silent: true }
 Capybara.javascript_driver = :selenium_chrome_headless
 
+Capybara.configure do |config|
+  config.default_max_wait_time = 10
+  config.test_id = 'data-testid'
+  config.server = :puma, { Silent: true }
+end
+
 Capybara::Screenshot.register_driver(:selenium_chrome_headless) do |driver, path|
+  driver.browser.manage.window.resize_to(1920, 1080)
   driver.browser.save_screenshot(path)
 end
 
