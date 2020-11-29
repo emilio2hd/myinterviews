@@ -138,7 +138,7 @@ jobs:
           docker build .
 
 workflows:
-  my_app:
+  myinterviews_flow:
     jobs:
     - build
     - frontend:

@@ -7,7 +7,6 @@ myinterviews
 The goal of this app is to manage job applications, interviews, cover letters and feedbacks.
  
 ![Template](./docs/images/interviews.png)
-Do you wanna see the demo? [Click here!](https://myinterviews.herokuapp.com/)
 
 # Development
 Run `rails s` to run the api.  
