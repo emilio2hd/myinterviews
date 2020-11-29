@@ -86,16 +86,20 @@ jobs:
   api:
     docker:
     - image: cimg/ruby:2.6.6-browsers
-      environment:
-        RAILS_ENV: test
-        APP_DB_HOST: 127.0.0.1
-        APP_DB_USER: root
-
     - image: circleci/postgres:9.6.2-alpine
       environment:
         POSTGRES_USER: root
-        POSTGRES_DB: rails_app_test
+        POSTGRES_DB: myinterviews_test
         POSTGRES_PASSWORD: ''
+
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DB_HOST: 127.0.0.1
+      APP_DB_USER: root
+      APP_DB_PASSWORD: ""
+      RAILS_ENV: test
+      COVERAGE: true
 
     working_directory: *workspace_path
     steps:
