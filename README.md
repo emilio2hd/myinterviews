@@ -18,7 +18,7 @@ ng s
 ```
 
 ## Running acceptance tests
-In order to run the acceptance tests, it's necessary to compile the frontend and copy the `dist/frontend` content to public folder.
+In order to run the acceptance tests, it's necessary to compile the frontend and copy the `dist/myinterviews` content to public folder.
 If the environment variable `NPM_BIN` is set, the frontend will be compiled once, before running the test. Like:
 ```
 NPM_BIN=/path/to/npm bundle exec rspec
