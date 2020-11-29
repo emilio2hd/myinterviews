@@ -8,7 +8,33 @@ The goal of this app is to manage job applications, interviews, cover letters an
  
 ![Template](./docs/images/interviews.png)
 Do you wanna see the demo? [Click here!](https://myinterviews.herokuapp.com/)
- 
+
+# Development
+Run `rails s` to run the api.  
+Go to frontend folder and run
+```
+npm install
+ng s
+```
+
+## Running acceptance tests
+In order to run the acceptance tests, it's necessary to compile the frontend and copy the `dist/frontend` content to public folder.
+If the environment variable `NPM_BIN` is set, the frontend will be compiled once, before running the test. Like:
+```
+NPM_BIN=/path/to/npm bundle exec rspec
+```
+To force frontend compilation, set `COMPILE_FRONTEND=true`:
+```
+COMPILE_FRONTEND=true NPM_BIN=npm bundle exec rspec
+```
+or run:
+```
+bundle exec rake frontend:compile NPM_BIN=/path/to/npm
+```
+
+Once frontend is compiled, it should be running when accessing http://localhost:3000
+Now, it should be able to run `bundle exec rspec`.
+
 # Docker
 You can run the application using Docker.
 
@@ -59,47 +85,6 @@ web:
     - SECRET_KEY_BASE=ef8705c8be8bc5c562fd403847e1451d8e149ba4bf88dea34c7e0c99fc55556d3ea3e0619b24ff7399f19c3c0e7798b62ffe643e8a6911cee982e7143ef0e262
   links:
     - db
-```
-
-# Vagrant
-If you know nothing about docker or you're not willing to install it, you can use VirtualBox + Vagrant.  
-Run: `vagrant up`
-You might wanna go get a cup of coffee or watch something, because it's gonna take a while to complete.
-
-After it's finished, you will see something like:
-```shell
-~~~ LOG ~~~
-...
-==> default: Creating myinterviews-db
-==> default: Creating myinterviews-web
-```
-Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should).
-
-**Warning**: The shell script creates a docker-compose.yml at /opt/myinterviews/docker-compose.yml with
-a default `SECRET_KEY_BASE`, so please, do generate another key, replace it at docker-compose.yml and restart the web containers.  
-You can generate another key by executing:
-```
-vagrant ssh
-cd /opt/myinterviews/
-docker exec -it myinterviews-web bash -lc "rake secret"
-# Copy the generated secret
-vi docker-compose.yml
-# Replace the SECRET_KEY_BASE value and save
-docker-compose restart web
-```
- 
-In case something goes wrong, execute:
-```
-vagrant ssh
-cd /opt/myinterviews
-docker-compose logs
-```
-To see the logs of docker
-
-### Update the Application
-To update your application execute:
-```
-vagrant provision --provision-with update_app
 ```
 
 # Email Configuration
