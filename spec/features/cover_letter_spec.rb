@@ -13,7 +13,7 @@ feature 'Creating new cover letter', js: true do
     click_on('coverLetterNewButton')
 
     within '[data-testid="coverLetterDrawerTitle"]' do
-      expect(page).to have_content  'New cover letter'
+      expect(page).to have_content 'New cover letter'
     end
 
     fill_cover_letter(title, content)
@@ -42,7 +42,7 @@ feature 'Editing existing cover letter', js: true do
     end
 
     within '[data-testid="coverLetterDrawerTitle"]' do
-      expect(page).to have_content  cover_letter.title
+      expect(page).to have_content cover_letter.title
     end
 
     new_title = "[Edited] #{FFaker::Company.position}"
@@ -98,7 +98,7 @@ feature 'Delete cover letter', js: true do
     within '[data-testid="coverLetterTable"]' do
       expect(page).to have_content ruby_cover_letter.title
 
-      find('a', text: ruby_cover_letter.title).ancestor('tr').find('a', text: 'Delete').click()
+      find('a', text: ruby_cover_letter.title).ancestor('tr').find('a', text: 'Delete').click
     end
 
     confirm_delete
@@ -151,7 +151,7 @@ feature 'Send cover letter by email', js: true do
     within '[data-testid="coverLetterTable"]' do
       expect(page).to have_content cover_letter.title
 
-      find('a', text: cover_letter.title).ancestor('tr').find('a', text: 'Send').click()
+      find('a', text: cover_letter.title).ancestor('tr').find('a', text: 'Send').click
     end
 
     within 'nz-modal-container' do
@@ -168,7 +168,7 @@ feature 'Send cover letter by email', js: true do
       expect(page).to_not have_selector 'coverLetterEmailSendButton', text: 'Sending'
 
       has_notification_with?('successfully sent to')
-    end.to change { ActionMailer::Base.deliveries.size}.by(1)
+    end.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
 
   scenario 'From viewing cover letter' do
@@ -179,7 +179,7 @@ feature 'Send cover letter by email', js: true do
     end
 
     within '[data-testid="coverLetterDrawerTitle"]' do
-      expect(page).to have_content  cover_letter.title
+      expect(page).to have_content cover_letter.title
     end
 
     within '.ant-drawer-title' do
@@ -203,7 +203,7 @@ feature 'Send cover letter by email', js: true do
       expect(page).to_not have_selector 'coverLetterEmailSendButton', text: 'Sending'
 
       has_notification_with?('successfully sent to')
-    end.to change { ActionMailer::Base.deliveries.size}.by(1)
+    end.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
 end
 
@@ -224,11 +224,9 @@ end
 def fill_cover_letter(title, content, save = true)
   fill_in 'coverLetterTitle', with: ''
   fill_in 'coverLetterTitle', with: title
-  fill_in_ckeditor('[data-testid="coverLetterContent"]', with: content) unless !content
+  fill_in_ckeditor('[data-testid="coverLetterContent"]', with: content) if content
 
-  if save
-    find('[data-testid="coverLetterDrawerSaveButton"]').click
-  end
+  find('[data-testid="coverLetterDrawerSaveButton"]').click if save
 end
 
 def fill_in_ckeditor(locator = nil, with:)

@@ -10,7 +10,7 @@ RSpec.describe InterviewsController, type: :controller do
     it 'assigns all interviews as @interviews' do
       interview = Interview.create! valid_attributes
 
-      get :index, params: { format: :json}
+      get :index, params: { format: :json }
 
       expect(assigns(:interviews)).to eq([interview])
     end
@@ -30,7 +30,7 @@ RSpec.describe InterviewsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Interview' do
         expect { post :create, params: { interview: valid_attributes, format: :json } }
-            .to change(Interview, :count).by(1)
+          .to change(Interview, :count).by(1)
       end
 
       it 'assigns a newly created interview as @interview' do
@@ -45,7 +45,7 @@ RSpec.describe InterviewsController, type: :controller do
     context 'with application' do
       it 'creates a new interview with application' do
         expect { post :create, params: { interview: valid_attributes_with_interview, format: :json } }
-            .to change(Interview, :count).by(1)
+          .to change(Interview, :count).by(1)
       end
 
       it 'assigns a newly created interview as @interview' do
@@ -120,7 +120,7 @@ RSpec.describe InterviewsController, type: :controller do
     it 'destroys the requested interview' do
       interview = Interview.create! valid_attributes
       expect { delete :destroy, params: { id: interview.to_param, format: :json } }
-          .to change(Interview, :count).by(-1)
+        .to change(Interview, :count).by(-1)
 
       expect(response).to have_http_status(:ok)
     end

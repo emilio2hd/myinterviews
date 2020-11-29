@@ -24,7 +24,7 @@ RSpec.describe MyApplicationsController, type: :controller do
     context 'with valid params' do
       it 'creates a new MyApplication' do
         expect { post :create, params: { my_application: valid_attributes, format: :json } }
-            .to change(MyApplication, :count).by(1)
+          .to change(MyApplication, :count).by(1)
       end
 
       it 'assigns a newly created my_application as @my_application' do
@@ -78,7 +78,7 @@ RSpec.describe MyApplicationsController, type: :controller do
     before { @my_application = MyApplication.create! valid_attributes }
     it 'destroys the requested my_application' do
       expect { delete :destroy, params: { id: @my_application.to_param, format: :json } }
-          .to change(MyApplication, :count).by(-1)
+        .to change(MyApplication, :count).by(-1)
 
       expect(response).to have_http_status(200)
     end

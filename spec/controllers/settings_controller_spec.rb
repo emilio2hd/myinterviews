@@ -48,7 +48,7 @@ RSpec.describe SettingsController, type: :controller do
       context 'with no existing setting' do
         it 'creates email setting' do
           expect { post :update_all, params: valid_params }
-              .to change(Setting, :count).by(1)
+            .to change(Setting, :count).by(1)
 
           expect(response).to have_http_status(:ok)
           expect(Setting.email).to be_a_kind_of(Hash)
@@ -63,7 +63,7 @@ RSpec.describe SettingsController, type: :controller do
 
         it 'does not create a new email setting' do
           expect { post :update_all, params: valid_params }
-              .to_not change(Setting, :count)
+            .to_not change(Setting, :count)
 
           expect(Setting.email[:address]).to eq(new_email_attributes[:address])
         end

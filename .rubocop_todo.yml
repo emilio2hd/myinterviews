@@ -40,14 +40,14 @@ Layout/SpaceAroundEqualsInParameterDefault:
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Enabled: false
 
 # Cop supports --auto-correct.
 Lint/UnusedMethodArgument:
   Enabled: false
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 
 Metrics/AbcSize:
@@ -74,6 +74,9 @@ Metrics/CyclomaticComplexity:
 
 Metrics/PerceivedComplexity:
   Max: 12
+
+Rails/FilePath:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false

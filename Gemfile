@@ -29,7 +29,7 @@ gem 'rack-cors'
 gem 'ffi', '>= 1.9.24'
 
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.68', require: false

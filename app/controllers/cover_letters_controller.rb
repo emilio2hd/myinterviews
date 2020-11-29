@@ -28,7 +28,7 @@ class CoverLettersController < ApiController
       end
     end
 
-    return render json: @cover_letter_email_form, status: :bad_request
+    render json: @cover_letter_email_form, status: :bad_request
   end
 
   def create

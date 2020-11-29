@@ -28,7 +28,7 @@ RSpec.describe CoverLettersController, type: :controller do
     context 'with valid params' do
       it 'creates a new CoverLetter' do
         expect { post :create, params: { cover_letter: valid_attributes, format: :json } }
-            .to change(CoverLetter, :count).by(1)
+          .to change(CoverLetter, :count).by(1)
       end
 
       it 'assigns a newly created cover_letter as @cover_letter' do
@@ -68,7 +68,7 @@ RSpec.describe CoverLettersController, type: :controller do
 
       it 'should not send the email and return error message' do
         expect { post :send_email, params: email_params, format: :json }
-            .not_to change(ActionMailer::Base.deliveries, :count)
+          .not_to change(ActionMailer::Base.deliveries, :count)
 
         expect(json_body['message']).to eq("The email was not sent. You don't have the email settings configured")
       end
@@ -77,7 +77,7 @@ RSpec.describe CoverLettersController, type: :controller do
     context 'with valid params' do
       it 'should send the email' do
         expect { post :send_email, params: email_params, format: :json }
-            .to change(ActionMailer::Base.deliveries, :count).by(1)
+          .to change(ActionMailer::Base.deliveries, :count).by(1)
 
         expect(response).to have_http_status(:ok)
       end
@@ -90,7 +90,7 @@ RSpec.describe CoverLettersController, type: :controller do
 
       it 'should not send the email' do
         expect { post :send_email, params: email_params }
-            .not_to change(ActionMailer::Base.deliveries, :count)
+          .not_to change(ActionMailer::Base.deliveries, :count)
       end
 
       it 'assigns a newly created but unsaved cover_letter_email_form as @cover_letter_email_form' do
@@ -156,7 +156,7 @@ RSpec.describe CoverLettersController, type: :controller do
       cover_letter = CoverLetter.create! valid_attributes
 
       expect { delete :destroy, params: { id: cover_letter.to_param, format: :json } }
-          .to change(CoverLetter, :count).by(-1)
+        .to change(CoverLetter, :count).by(-1)
 
       expect(response).to have_http_status(:ok)
     end

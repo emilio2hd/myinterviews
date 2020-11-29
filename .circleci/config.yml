@@ -131,6 +131,7 @@ jobs:
         command: bundle exec rake factory_bot:lint
 
     - run: bundle exec rspec
+    - run: bundle exec rubocop
 
   build_docker_image:
     docker:

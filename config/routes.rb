@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'static#index'
-  
   scope '/api', defaults: { format: :json } do
     get '/dashboard', to: 'home#index'
 
@@ -23,5 +22,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*other', to: 'static#index', constraints: lambda { |req| !req.path.start_with? '/api' }
+  get '*other', to: 'static#index', constraints: ->(req) { !req.path.start_with? '/api' }
 end
