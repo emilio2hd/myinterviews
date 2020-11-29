@@ -122,7 +122,9 @@ jobs:
 
     - run:
         name: Database setup
-        command: bundle exec rails db:migrate
+        command: |
+          bundle exec rails db:schema:load --trace
+          bundle exec rails db:migrate
 
     - run:
         name: Check factory_bot factories
