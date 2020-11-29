@@ -17,6 +17,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
+/public
 /public/assets
 !/log/.keep
 !/tmp/.keep

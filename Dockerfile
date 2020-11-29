@@ -10,10 +10,10 @@ COPY frontend/package.json /app/package.json
 RUN npm install && npm install -g @angular/cli@9.1.12
 
 COPY ./frontend /app
-RUN ng build --prod
+RUN ng build --prod --sourceMap=true
 
 # Build Backend
-FROM ruby:2.5-slim
+FROM ruby:2.6.6-slim
 
 ENV RAILS_ROOT /myinterviews
 ENV RAILS_ENV=production
