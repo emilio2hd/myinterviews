@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditorDrawerTitleComponent } from './editor-drawer-title.component';
 
-describe('EditorDrawerTitleComponent', () => {
+xdescribe('EditorDrawerTitleComponent', () => {
   let component: EditorDrawerTitleComponent;
   let fixture: ComponentFixture<EditorDrawerTitleComponent>;
 
