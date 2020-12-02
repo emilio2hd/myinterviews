@@ -1,4 +1,5 @@
 require 'rails_helper'
+require_relative 'shared/components_helpers'
 
 feature 'Creating new cover letter', js: true do
   before do
@@ -207,32 +208,10 @@ feature 'Send cover letter by email', js: true do
   end
 end
 
-def confirm_delete
-  within '.ant-popover' do
-    click_button 'OK'
-  end
-end
-
-def has_notification_with?(message)
-  expect(page).to have_selector('nz-notification')
-
-  within 'nz-notification' do
-    expect(page).to have_content message
-  end
-end
-
 def fill_cover_letter(title, content, save = true)
   fill_in 'coverLetterTitle', with: ''
   fill_in 'coverLetterTitle', with: title
   fill_in_ckeditor('[data-testid="coverLetterContent"]', with: content) if content
 
   find('[data-testid="coverLetterDrawerSaveButton"]').click if save
-end
-
-def fill_in_ckeditor(locator = nil, with:)
-  ckeditor = all("#{locator} .ck-editor__editable").first
-  ckeditor.click
-  ckeditor.execute_script 'document.execCommand( "selectAll", false, null )'
-  ckeditor.send_keys :delete
-  ckeditor.send_keys with
 end

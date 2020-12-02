@@ -31,13 +31,20 @@
           <tbody>
             <tr *ngFor="let data of coverLetter.data">
               <td>
-                <a (click)="onEditClick(data)">{{ data.title }}</a>
+                <a
+                  [attr.data-testid]="'editCoverLetter-' + data.id"
+                  (click)="onEditClick(data)"
+                >{{ data.title }}</a>
               </td>
               <td>
-                <a (click)="onSendClick(data)">Send</a>
+                <a
+                  [attr.data-testid]="'sendCoverLetter-' + data.id"
+                  (click)="onSendClick(data)"
+                >Send</a>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a
                   nz-popconfirm
+                  [attr.data-testid]="'deleteCoverLetter-' + data.id"
                   nzPopconfirmTitle="Are you sure delete this cover letter?"
                   nzPopconfirmPlacement="right"
                   (nzOnConfirm)="onDeleteConfirm(data)"
