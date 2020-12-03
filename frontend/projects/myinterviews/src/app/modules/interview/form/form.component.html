@@ -1,9 +1,9 @@
-<nz-space nzDirection="vertical">
+<nz-space nzDirection="vertical" *ngIf="(interview$ | async) as interview">
 
   <nz-space-item>
-    <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="onBack()">
+    <nz-page-header nzBackIcon data-testid="pageHeader" [nzGhost]="false" (nzBack)="onBack()">
       <nz-page-header-title>Interview</nz-page-header-title>
-      <nz-page-header-subtitle>New</nz-page-header-subtitle>
+      <nz-page-header-subtitle>{{getSubtitle(interview)}}</nz-page-header-subtitle>
     </nz-page-header>
   </nz-space-item>
 
@@ -17,6 +17,7 @@
               <nz-form-control [nzErrorTip]="errorTpl">
                 <input
                   nz-input
+                  data-testid="interviewerName"
                   id="interviewerName"
                   formControlName="interviewerName"
                 />
@@ -35,6 +36,7 @@
               <nz-form-control [nzErrorTip]="errorEmailTpl">
                 <input
                   nz-input
+                  data-testid="interviewerEmail"
                   id="interviewerEmail"
                   formControlName="interviewerEmail"
                 />
@@ -55,6 +57,7 @@
               <nz-form-control [nzErrorTip]="errorApplicationTpl">
                 <nz-select
                   id="interviewerApplication"
+                  data-testid="interviewerApplication"
                   formControlName="myApplicationId"
                   nzPlaceHolder="Select application"
                   nzAllowClear
@@ -76,10 +79,11 @@
           </div>
           <div nz-col nzSpan="7">
             <nz-form-item>
-              <nz-form-label nzFor="interviewerTypeOf">Type</nz-form-label>
+              <nz-form-label nzFor="interviewTypeOf">Type</nz-form-label>
               <nz-form-control>
                 <nz-select
-                  id="interviewerTypeOf"
+                  id="interviewTypeOf"
+                  data-testid="interviewTypeOf"
                   formControlName="typeOf"
                   nzPlaceHolder="Select interview type"
                 >
@@ -91,13 +95,14 @@
           </div>
           <div nz-col nzSpan="5">
             <nz-form-item>
-              <nz-form-label nzFor="interviewerAt">At</nz-form-label>
+              <nz-form-label nzFor="interviewAt">At</nz-form-label>
               <nz-form-control>
-                <nz-date-picker 
-                  [nzShowTime]="{ nzFormat: 'HH:mm' }"
-                  id="interviewerAt" 
+                <nz-date-picker
+                  id="interviewAt"
+                  data-testid="interviewAt"
                   formControlName="at"
                   nzFormat="yyyy-MM-dd HH:mm"
+                  [nzShowTime]="{ nzFormat: 'HH:mm' }"
                 ></nz-date-picker>
               </nz-form-control>
             </nz-form-item>
@@ -107,20 +112,28 @@
         <nz-form-item>
           <nz-form-label>Notes</nz-form-label>
           <nz-form-control>
-            <ckeditor [editor]="Editor" formControlName="notes"></ckeditor>
+            <ckeditor
+              data-testid="interviewNotes"
+              formControlName="notes"
+              [editor]="Editor"
+            ></ckeditor>
           </nz-form-control>
         </nz-form-item>
         
         <nz-form-item>
           <nz-form-label>Feedback</nz-form-label>
           <nz-form-control>
-            <ckeditor [editor]="Editor" formControlName="feedback"></ckeditor>
+            <ckeditor
+              formControlName="feedback"
+              data-testid="interviewFeedback"
+              [editor]="Editor"
+            ></ckeditor>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control>
             <button nz-button nzType="primary"
-              data-test-id="saveButton"
+              data-testid="saveButton"
               [disabled]="!this.interviewForm.valid"
             >
             Save

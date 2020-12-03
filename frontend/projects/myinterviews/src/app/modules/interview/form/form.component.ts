@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Data } from '@angular/router';
 import { Subscription, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -27,8 +27,10 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
   interviewForm: FormGroup;
   Editor = ClassicEditor;
 
-  interview$ = this.getInterviewFromRouterData(this.route.data);
   applications$ = this.getApplicationsFromRouteData(this.route.data);
+  interview$ = this.getInterviewFromRouterData(this.route.data).pipe(
+    tap((interview) => this.interviewForm.patchValue(interview))
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -49,10 +51,6 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
       feedback: [''],
       notes: [''],
     });
-
-    this.subscriptions.add(
-      this.interview$.subscribe((interview) => this.interviewForm.patchValue(interview))
-    );
   }
 
   ngOnDestroy(): void {
@@ -85,6 +83,10 @@ export class InterviewFormComponent implements OnInit, OnDestroy {
 
   getApplicationLabel(application: JobApplication) {
     return `${application.position} - ${application.company}`;
+  }
+
+  getSubtitle(interview: Interview) {
+    return interview.id ? 'Edit' : 'New';
   }
 
   private getCallbacks(interview: Interview, action: string) {

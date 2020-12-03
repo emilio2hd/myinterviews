@@ -1,11 +1,11 @@
 <nz-space nzDirection="vertical" *ngIf="(interview$ | async) as interview">
   <nz-space-item>
-    <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
+    <nz-page-header nzBackIcon data-testid="pageHeader" [nzGhost]="false" (nzBack)="goToRecipesList()">
       <nz-page-header-title>Interview</nz-page-header-title>
       <nz-page-header-subtitle data-testid="interviewTitle">{{interview.title}}</nz-page-header-subtitle>
       <nz-page-header-extra>
         <a 
-          data-testid="btnEdit"
+          data-testid="editButton"
           nz-button 
           [routerLink]="['edit']"
         >
@@ -13,7 +13,7 @@
           Edit
         </a>
         <button
-          data-testid="btnDelete" 
+          data-testid="deleteButton"
           nz-button 
           nzType="danger"
           nz-popconfirm
@@ -27,10 +27,14 @@
       <nz-page-header-content>
         <div class="content">
           <div class="main">
-            <nz-descriptions nzSize="small" [nzColumn]="3">
+            <nz-descriptions data-testid="interviewDescription" nzSize="small" [nzColumn]="3">
               <nz-descriptions-item nzTitle="Application" [nzSpan]="1">
                 <ng-container *ngIf="interview.myApplicationId; else noApplication">
-                  <a [routerLink]="['/job-application', interview.myApplicationId]" routerLinkActive="router-link-active">
+                  <a
+                    data-testid="interviewApplication"
+                    routerLinkActive="router-link-active"
+                    [routerLink]="['/job-application', interview.myApplicationId]"
+                  >
                     {{interview.applicationPosition}}
                     -
                     {{interview.companyName}}
@@ -62,10 +66,10 @@
     <nz-card>
       <nz-tabset>
         <nz-tab nzTitle="Feedback">
-          <div [innerHTML]="interview.feedback"></div>
+          <div data-testid="interviewFeedback" [innerHTML]="interview.feedback"></div>
         </nz-tab>
         <nz-tab nzTitle="Notes">
-          <div [innerHTML]="interview.notes"></div>
+          <div data-testid="interviewNotes" [innerHTML]="interview.notes"></div>
         </nz-tab>
       </nz-tabset>
     </nz-card>

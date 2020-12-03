@@ -35,7 +35,7 @@ class InterviewsController < ApiController
   private
 
   def set_interview
-    @interview = Interview.includes(:my_application).find(params[:id])
+    @interview = Interview.find(params[:id])
   end
 
   def interview_params

@@ -1,10 +1,10 @@
 <nz-space nzDirection="vertical">
 
   <nz-space-item>
-    <nz-page-header [nzGhost]="false">
+    <nz-page-header data-testid="pageHeader" [nzGhost]="false">
       <nz-page-header-title>Interview</nz-page-header-title>
       <nz-page-header-extra>
-        <a nz-button routerLink="new" nzType="primary">New</a>
+        <a nz-button routerLink="new" data-testid="newButton" nzType="primary">New</a>
       </nz-page-header-extra>
     </nz-page-header>
   </nz-space-item>
@@ -12,7 +12,8 @@
   <nz-space-item>
     <nz-card>
       <ng-container *ngIf="(interview$ | async) as interview; else emptyResult">
-        <nz-table 
+        <nz-table
+          data-testid="interviewTable"
           [nzData]="interview.data"
           [nzFrontPagination]="false"
           [nzLoading]="loading"
@@ -41,10 +42,14 @@
               <td>{{ data.at | date:'short' }}</td>
               <td>{{ getTypeOfText(data.typeOf) }}</td>
               <td>
-                <a [routerLink]="[data.id, 'edit']">Edit</a>
+                <a
+                  [attr.data-testid]="'editInterview-' + data.id"
+                  [routerLink]="[data.id, 'edit']"
+                >Edit</a>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a
                   nz-popconfirm
+                  [attr.data-testid]="'deleteInterview-' + data.id"
                   nzPopconfirmTitle="Are you sure delete this interview?"
                   nzPopconfirmPlacement="right"
                   (nzOnConfirm)="onDeleteConfirm(data)"
