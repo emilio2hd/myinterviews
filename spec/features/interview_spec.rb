@@ -105,8 +105,8 @@ feature 'Editing existing interview', js: true do
   given!(:talk_interview) { create(:talk_interview, feedback: feedback, notes: notes) }
   given(:interview_changes) do
     {
-        interviewer_name: FFaker::Name.name,
-        interview_type: 'Technical'
+      interviewer_name: FFaker::Name.name,
+      interview_type: 'Technical'
     }
   end
 
@@ -199,7 +199,7 @@ end
 def type_date(date)
   find('[data-testid="interviewAt"]').click
   find('[data-testid="interviewAt"]').find('input').fill_in with: date
-  within'date-range-popup' do
+  within 'date-range-popup' do
     click_on 'Ok'
   end
 end
