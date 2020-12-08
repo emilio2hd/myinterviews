@@ -81,9 +81,9 @@ feature 'View job application', js: true do
       expect(page).to have_content application.position
     end
 
-    timelineLink = find('[data-testid="seeTimelineButton"]')
-    expect(timelineLink).to have_content('Sent')
-    timelineLink.click
+    timeline_link = find('[data-testid="seeTimelineButton"]')
+    expect(timeline_link).to have_content('Sent')
+    timeline_link.click
 
     expect(page).to have_content 'Application Timeline'
 
@@ -102,9 +102,9 @@ feature 'View job application', js: true do
       expect(page).to have_content application_with_interviews.position
     end
 
-    timelineLink = find('[data-testid="seeTimelineButton"]')
-    expect(timelineLink).to have_content('Sent')
-    timelineLink.click
+    timeline_link = find('[data-testid="seeTimelineButton"]')
+    expect(timeline_link).to have_content('Sent')
+    timeline_link.click
 
     expect(page).to have_content 'Application Timeline'
 
@@ -141,6 +141,7 @@ feature 'Delete job application', js: true do
   end
 end
 
+# rubocop:disable Metrics/AbcSize
 def fill_job_application(**kargs)
   fill_in 'jobApplicationPosition', with: kargs[:position_name] if kargs.key? :position_name
   fill_in 'jobApplicationCompany', with: kargs[:company_name] if kargs.key? :company_name
@@ -167,3 +168,4 @@ def fill_job_application(**kargs)
   fill_in_ckeditor('[data-testid="jobApplicationCoverLetter"]', with: kargs[:cover_letter]) if kargs.key? :cover_letter
   fill_in_ckeditor('[data-testid="jobApplicationOverallFeedback"]', with: kargs[:feedback]) if kargs.key? :feedback
 end
+# rubocop:enable Metrics/AbcSize
