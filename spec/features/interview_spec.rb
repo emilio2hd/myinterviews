@@ -190,16 +190,8 @@ def fill_interview(**keyword_args)
     find('.ant-select-item-option-content', text: keyword_args[:application_position]).click
   end
 
-  type_date keyword_args[:interview_date] if keyword_args.key? :interview_date
+  type_date '[data-testid="interviewAt"]', keyword_args[:interview_date] if keyword_args.key? :interview_date
 
   fill_in_ckeditor('[data-testid="interviewNotes"]', with: keyword_args[:interview_notes]) if keyword_args.key? :interview_notes
   fill_in_ckeditor('[data-testid="interviewFeedback"]', with: keyword_args[:interview_feedback]) if keyword_args.key? :interview_feedback
-end
-
-def type_date(date)
-  find('[data-testid="interviewAt"]').click
-  find('[data-testid="interviewAt"]').find('input').fill_in with: date
-  within 'date-range-popup' do
-    click_on 'Ok'
-  end
 end

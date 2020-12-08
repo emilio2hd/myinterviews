@@ -1,7 +1,7 @@
 <nz-space nzDirection="vertical">
 
   <nz-space-item>
-    <nz-page-header [nzGhost]="false">
+    <nz-page-header data-testid="pageHeader" [nzGhost]="false">
       <nz-page-header-title>Job Application</nz-page-header-title>
       <nz-page-header-extra>
         <a nz-button routerLink="new" nzType="primary">New</a>
@@ -12,7 +12,8 @@
   <nz-space-item>
     <nz-card>
       <ng-container *ngIf="(result$ | async) as result; else emptyResult">
-        <nz-table 
+        <nz-table
+          data-testid="jobApplicationTable"
           [nzData]="result.data"
           [nzFrontPagination]="false"
           [nzLoading]="loading"
@@ -41,10 +42,14 @@
               <td>{{ jobApplication.beganAt }}</td>
               <td>{{ getStatusText(jobApplication.status) }}</td>
               <td>
-                <a [routerLink]="[jobApplication.id, 'edit']">Edit</a>
+                <a
+                  [attr.data-testid]="'editJobApplication-' + jobApplication.id"
+                  [routerLink]="[jobApplication.id, 'edit']"
+                >Edit</a>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a
                   nz-popconfirm
+                  [attr.data-testid]="'deleteJobApplication-' + jobApplication.id"
                   nzPopconfirmTitle="Are you sure delete this job application?"
                   nzPopconfirmPlacement="right"
                   (nzOnConfirm)="onDeleteConfirm(jobApplication)"

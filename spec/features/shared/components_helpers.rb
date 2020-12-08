@@ -19,3 +19,10 @@ def confirm_delete
     click_button 'OK'
   end
 end
+
+def type_date(locator, date)
+  date_component = find(locator)
+  date_component.click
+  date_component.find('input').fill_in with: date
+  date_component.find('input').send_keys :enter
+end

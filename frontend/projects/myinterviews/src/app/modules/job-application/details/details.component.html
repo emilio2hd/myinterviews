@@ -1,18 +1,22 @@
 <ng-container *ngIf="(jobApplication$ | async) as jobApplication">
   <nz-space nzDirection="vertical" >
     <nz-space-item>
-      <nz-page-header [nzGhost]="false" nzBackIcon (nzBack)="goToRecipesList()">
+      <nz-page-header nzBackIcon data-testid="pageHeader" [nzGhost]="false" (nzBack)="goToRecipesList()">
         <nz-page-header-title>Job Application</nz-page-header-title>
         <nz-page-header-subtitle data-testid="jobApplicationTitle">{{jobApplication.position}}</nz-page-header-subtitle>
         <nz-page-header-tags>
-          <button nz-button [nzSize]="'small'" nzType="dashed" (click)="open()" 
-                  nz-tooltip nzTooltipTitle="Click to see the timeline">
+          <button nz-button nz-tooltip
+                  nzType="dashed"
+                  data-testid="seeTimelineButton"
+                  nzTooltipTitle="Click to see the timeline"
+                  [nzSize]="'small'" (click)="open()"
+          >
             {{getStatusText(jobApplication.status)}}
           </button>
         </nz-page-header-tags>
         <nz-page-header-extra>
-          <a 
-            data-testid="btnEdit"
+          <a
+            data-testid="editButton"
             nz-button 
             [routerLink]="['edit']"
           >
@@ -20,8 +24,8 @@
             Edit
           </a>
           <button
-            data-testid="btnDelete" 
-            nz-button 
+            nz-button
+            data-testid="deleteButton"
             nzType="danger"
             nz-popconfirm
             nzPopconfirmTitle="Are you sure delete this job application?"
@@ -34,7 +38,7 @@
         <nz-page-header-content>
           <div class="content">
             <div class="main">
-              <nz-descriptions nzSize="small" [nzColumn]="2">
+              <nz-descriptions data-testid="interviewDescription" nzSize="small" [nzColumn]="2">
                 <nz-descriptions-item nzTitle="Company" [nzSpan]="1">
                   {{jobApplication.company}}
                 </nz-descriptions-item>
@@ -61,17 +65,20 @@
       <nz-card>
         <nz-tabset>
           <nz-tab nzTitle="Job Description">
-            <div 
+            <div
+              data-testid="jobApplicationDescription"
               [innerHTML]="jobApplication.jobDescription"
             ></div>
           </nz-tab>          
           <nz-tab nzTitle="Cover Letter">
-            <div 
+            <div
+              data-testid="jobApplicationCoverLetter"
               [innerHTML]="jobApplication.coverLetter"
             ></div>
           </nz-tab>
           <nz-tab nzTitle="Overall Feedback">
-            <div 
+            <div
+              data-testid="jobApplicationFeedback"
               *ngIf="jobApplication.overallFeedback; else noFeedback"
               [innerHTML]="jobApplication.overallFeedback"
             ></div>
@@ -84,19 +91,24 @@
     </nz-space-item>
   </nz-space>
   
-  <nz-drawer 
+  <nz-drawer
+    nzPlacement="right" 
+    nzTitle="Application Timeline"
     [nzClosable]="false"
     [nzWidth]="600"
     [nzVisible]="visible"
-    nzPlacement="right" 
-    nzTitle="Application Timeline"
     (nzOnClose)="close()"
   >
     <ng-template #dotPending>
       <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
     </ng-template>
-    <nz-timeline [nzPending]="getPendingStatus(jobApplication)" [nzPendingDot]="dotPending">
-      <nz-timeline-item [nzDot]="dotTemplate1" class="waiting">
+
+    <nz-timeline data-testid="timeline" [nzPending]="getPendingStatus(jobApplication)" [nzPendingDot]="dotPending">
+      <nz-timeline-item
+        class="waiting"
+        data-testid="timelineItemWaitingInterview"
+        [nzDot]="dotTemplate1"
+      >
         <nz-card [nzBordered]="false" [nzTitle]="waitingTemplate">
           Application sent to <strong>{{jobApplication.company}}</strong>
         </nz-card>
@@ -105,6 +117,7 @@
           <i nz-icon nz-tooltip nzType="send"></i>
           Start
         </ng-template>
+
         <ng-template #dotTemplate1>
           <div class="timeline-date">{{jobApplication.beganAt}}</div>
         </ng-template>
@@ -113,7 +126,8 @@
       <ng-container *ngFor="let entry of jobApplication.interviews | keyvalue">
         <nz-timeline-item [nzDot]="dotTemplate1">
           <ng-container *ngFor="let interview of entry.value">
-            <nz-card 
+            <nz-card
+              [attr.data-testid]="'timelineItemInterview-' + interview.id"
               [nzBordered]="false"
               [nzTitle]="avatarTemplate"
               [nzExtra]="extraTemplate"
@@ -137,6 +151,7 @@
             </ng-template>
           </ng-container>
         </nz-timeline-item>
+
         <ng-template #dotTemplate1>
           <div class="timeline-date">{{formatDate(entry.key)}}</div>
         </ng-template>

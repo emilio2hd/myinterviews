@@ -12,7 +12,7 @@ FactoryBot.define do
       transient { interviews_count 3 }
 
       after(:create) do |application, evaluator|
-        create_list(:talk_interview, evaluator.interviews_count, my_application: application)
+        create_list(:talk_interview, evaluator.interviews_count, my_application: application, feedback: FFaker::HTMLIpsum.p)
       end
     end
   end

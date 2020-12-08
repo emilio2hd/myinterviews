@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Data } from '@angular/router';
 import { Subscription, pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { JobApplication, JobApplicationStatusMapping } from '../job-application.model';
 import { JobApplicationApiService } from '../job-application.api.service';
+import { Interview } from '@core/models';
 
 @Component({
   selector: 'app-form',
@@ -23,7 +24,9 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
   jobApplicationForm: FormGroup;
   public Editor = ClassicEditor;
 
-  jobApplication$ = this.getJobApplicationFromRouterData(this.route.data);
+  jobApplication$ = this.getJobApplicationFromRouterData(this.route.data).pipe(
+    tap((jobApplication) => this.jobApplicationForm.patchValue(jobApplication))
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -48,11 +51,11 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
       overallFeedback: [''],
     });
 
-    this.subscriptions.add(
+    /*this.subscriptions.add(
       this.jobApplication$.subscribe((jobApplication) =>
         this.jobApplicationForm.patchValue(jobApplication)
       )
-    );
+    );*/
   }
 
   ngOnDestroy(): void {
@@ -85,6 +88,10 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
           .subscribe(this.getCallbacks(jobApplication, 'created'))
       );
     }
+  }
+
+  getSubtitle(jobApplication: JobApplication) {
+    return jobApplication.id ? 'Edit' : 'New';
   }
 
   private createNotification(type: 'success' | 'error', message: string) {
