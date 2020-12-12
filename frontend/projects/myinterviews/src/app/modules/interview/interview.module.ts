@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { ReactiveFormsModule } from '@angular/forms';
+
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
+import { LayoutModule } from '@app/@layout/layout.module';
 
 import { InterviewRoutingModule } from './interview-routing.module';
 import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
@@ -18,6 +20,7 @@ import { ApplicationsResolver } from './applications.resolver';
     CommonModule,
     ReactiveFormsModule,
     InterviewRoutingModule,
+    LayoutModule,
     CKEditorModule,
     DemoNgZorroAntdModule,
   ],
