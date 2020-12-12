@@ -2,6 +2,7 @@ import { DebugElement } from '@angular/core';
 
 export * from './activated-route-stub';
 export * from './page';
+export * from './query-utils';
 
 /** Button events to pass to `DebugElement.triggerEventHandler` for RouterLink event handler */
 export const ButtonClickEvents = {

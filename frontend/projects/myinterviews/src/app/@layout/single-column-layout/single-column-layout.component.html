@@ -1,0 +1,23 @@
+<nz-space nzDirection="vertical">
+
+  <nz-space-item>
+    <nz-page-header
+      data-testid="pageHeader"
+      [nzBackIcon]="backIcon"
+      [nzGhost]="backgroundTransparent"
+    >
+      <nz-page-header-title data-testid="pageHeaderTitle">{{title}}</nz-page-header-title>
+      <nz-page-header-subtitle *ngIf="subtitle" data-testid="pageHeaderSubtitle">{{subtitle}}</nz-page-header-subtitle>
+      
+      <ng-content select="nz-page-header-extra" ngProjectAs="nz-page-header-extra"></ng-content>
+      <ng-content select="nz-page-header-content" ngProjectAs="nz-page-header-content"></ng-content>
+    </nz-page-header>
+  </nz-space-item>
+
+  <nz-space-item>
+    <nz-card data-testid="layoutMainContent">
+      <ng-content></ng-content>
+    </nz-card>
+  </nz-space-item>
+
+</nz-space>
