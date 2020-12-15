@@ -10,7 +10,7 @@ export class SingleColumnLayoutComponent implements OnInit {
 
   @Input() backgroundTransparent = false;
   @Input() subtitle: string | null = null;
-  @Input() displayBack: boolean = false;
+  @Input() displayBack = false;
 
   get backIcon() {
     return this.displayBack ? 'arrow-left' : null;

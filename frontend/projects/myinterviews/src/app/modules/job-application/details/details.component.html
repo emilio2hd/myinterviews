@@ -1,96 +1,91 @@
-<ng-container *ngIf="(jobApplication$ | async) as jobApplication">
-  <nz-space nzDirection="vertical" >
-    <nz-space-item>
-      <nz-page-header nzBackIcon data-testid="pageHeader" [nzGhost]="false" (nzBack)="goToRecipesList()">
-        <nz-page-header-title>Job Application</nz-page-header-title>
-        <nz-page-header-subtitle data-testid="jobApplicationTitle">{{jobApplication.position}}</nz-page-header-subtitle>
-        <nz-page-header-tags>
-          <button nz-button nz-tooltip
-                  nzType="dashed"
-                  data-testid="seeTimelineButton"
-                  nzTooltipTitle="Click to see the timeline"
-                  [nzSize]="'small'" (click)="open()"
-          >
-            {{getStatusText(jobApplication.status)}}
-          </button>
-        </nz-page-header-tags>
-        <nz-page-header-extra>
-          <a
-            data-testid="editButton"
-            nz-button 
-            [routerLink]="['edit']"
-          >
-            <i nz-icon nzType="edit" nzTheme="outline"></i>
-            Edit
-          </a>
-          <button
-            nz-button
-            data-testid="deleteButton"
-            nzType="danger"
-            nz-popconfirm
-            nzPopconfirmTitle="Are you sure delete this job application?"
-            nzPopconfirmPlacement="bottom"
-            (nzOnConfirm)="onConfirmDelete(jobApplication)"
-          >
-            Delete
-          </button>
-        </nz-page-header-extra>
-        <nz-page-header-content>
-          <div class="content">
-            <div class="main">
-              <nz-descriptions data-testid="interviewDescription" nzSize="small" [nzColumn]="2">
-                <nz-descriptions-item nzTitle="Company" [nzSpan]="1">
-                  {{jobApplication.company}}
-                </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Location" [nzSpan]="1">
-                  {{jobApplication.location}}
-                </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Resume URL" [nzSpan]="">
-                  <a [href]="jobApplication.cvUrl" target="_blank">{{jobApplication.cvUrl}}</a>
-                </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Began At" [nzSpan]="1">
-                  {{jobApplication.beganAt}}
-                </nz-descriptions-item>
-                <nz-descriptions-item nzTitle="Technologies" [nzSpan]="2">
-                  <nz-tag *ngFor="let tech of jobApplication.techStackList">{{tech}}</nz-tag>
-                </nz-descriptions-item>
-              </nz-descriptions>
-            </div>
-          </div>
-        </nz-page-header-content>
-      </nz-page-header>
-    </nz-space-item>
-  
-    <nz-space-item>
-      <nz-card>
-        <nz-tabset>
-          <nz-tab nzTitle="Job Description">
-            <div
-              data-testid="jobApplicationDescription"
-              [innerHTML]="jobApplication.jobDescription"
-            ></div>
-          </nz-tab>          
-          <nz-tab nzTitle="Cover Letter">
-            <div
-              data-testid="jobApplicationCoverLetter"
-              [innerHTML]="jobApplication.coverLetter"
-            ></div>
-          </nz-tab>
-          <nz-tab nzTitle="Overall Feedback">
-            <div
-              data-testid="jobApplicationFeedback"
-              *ngIf="jobApplication.overallFeedback; else noFeedback"
-              [innerHTML]="jobApplication.overallFeedback"
-            ></div>
-            <ng-template #noFeedback>
-              <nz-empty nzNotFoundContent="No feedback"></nz-empty>
-            </ng-template>
-          </nz-tab>
-        </nz-tabset>
-      </nz-card>
-    </nz-space-item>
-  </nz-space>
-  
+<app-single-column-layout
+  *ngIf="(jobApplication$ | async) as jobApplication"
+  title="Job Application"
+  displayBack="true"
+  [subtitle]="jobApplication.position"
+>
+  <nz-page-header-tags>
+    <button nz-button nz-tooltip
+            nzType="dashed"
+            data-testid="seeTimelineButton"
+            nzTooltipTitle="Click to see the timeline"
+            [nzSize]="'small'" (click)="open()"
+    >
+      {{getStatusText(jobApplication.status)}}
+    </button>
+  </nz-page-header-tags>
+
+  <nz-page-header-extra>
+    <a
+      data-testid="editButton"
+      nz-button 
+      [routerLink]="['edit']"
+    >
+      <i nz-icon nzType="edit" nzTheme="outline"></i>
+      Edit
+    </a>
+    <button
+      nz-button
+      data-testid="deleteButton"
+      nzType="danger"
+      nz-popconfirm
+      nzPopconfirmTitle="Are you sure delete this job application?"
+      nzPopconfirmPlacement="bottom"
+      (nzOnConfirm)="onConfirmDelete(jobApplication)"
+    >
+      Delete
+    </button>
+  </nz-page-header-extra>
+
+  <nz-page-header-content>
+    <div class="content">
+      <div class="main">
+        <nz-descriptions data-testid="interviewDescription" nzSize="small" [nzColumn]="2">
+          <nz-descriptions-item nzTitle="Company" [nzSpan]="1">
+            {{jobApplication.company}}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Location" [nzSpan]="1">
+            {{jobApplication.location}}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Resume URL" [nzSpan]="">
+            <a [href]="jobApplication.cvUrl" target="_blank">{{jobApplication.cvUrl}}</a>
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Began At" [nzSpan]="1">
+            {{jobApplication.beganAt}}
+          </nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Technologies" [nzSpan]="2">
+            <nz-tag *ngFor="let tech of jobApplication.techStackList">{{tech}}</nz-tag>
+          </nz-descriptions-item>
+        </nz-descriptions>
+      </div>
+    </div>
+  </nz-page-header-content>
+
+  <nz-tabset>
+    <nz-tab nzTitle="Job Description">
+      <div
+        data-testid="jobApplicationDescription"
+        [innerHTML]="jobApplication.jobDescription"
+      ></div>
+    </nz-tab>          
+    <nz-tab nzTitle="Cover Letter">
+      <div
+        data-testid="jobApplicationCoverLetter"
+        [innerHTML]="jobApplication.coverLetter"
+      ></div>
+    </nz-tab>
+    <nz-tab nzTitle="Overall Feedback">
+      <div
+        data-testid="jobApplicationFeedback"
+        *ngIf="jobApplication.overallFeedback; else noFeedback"
+        [innerHTML]="jobApplication.overallFeedback"
+      ></div>
+      <ng-template #noFeedback>
+        <nz-empty nzNotFoundContent="No feedback"></nz-empty>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+
   <nz-drawer
     nzPlacement="right" 
     nzTitle="Application Timeline"
@@ -158,4 +153,4 @@
       </ng-container>
     </nz-timeline>
   </nz-drawer>
-</ng-container>
+</app-single-column-layout>
