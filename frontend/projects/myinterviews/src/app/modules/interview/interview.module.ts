@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
-import { LayoutModule } from '@app/@layout/layout.module';
+import { LayoutModule } from '@layout/layout.module';
 
 import { InterviewRoutingModule } from './interview-routing.module';
 import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
