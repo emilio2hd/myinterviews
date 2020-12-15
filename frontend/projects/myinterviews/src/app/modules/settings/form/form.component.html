@@ -1,140 +1,125 @@
-<nz-space nzDirection="vertical">
+<app-single-column-layout title="Settings">
+  <nz-tabset nzSize="large" [nzSelectedIndex]="0">
+    <nz-tab nzTitle="Email">
+      <form nz-form [nzLayout]="'vertical'" [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsFromTitle" nzRequired>From</nz-form-label>
+              <nz-form-control [nzErrorTip]="fromErrorTpl">
+                <input nz-input id="settingsFromTitle" formControlName="from"/>
+                <ng-template #fromErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    From is required
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('email')">
+                    Invalid email
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsReplyTo">Reply To</nz-form-label>
+              <nz-form-control>
+                <input nz-input id="settingsReplyTo" formControlName="replyTo"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
 
-  <nz-space-item>
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Settings</nz-page-header-title>
-    </nz-page-header>
-  </nz-space-item>
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsUsername">Username</nz-form-label>
+              <nz-form-control>
+                <input nz-input id="settingsUsername" formControlName="userName"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsPassword">Password</nz-form-label>
+              <nz-form-control nzExtra="Leave the field blank if you don't want to change password">
+                <nz-input-group [nzSuffix]="suffixTemplate">
+                  <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" formControlName="password" />
+                </nz-input-group>
+                <ng-template #suffixTemplate>
+                  <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
 
-  <nz-space-item>
-    <nz-card>
-      <nz-card-tab>
-        <nz-tabset nzSize="large" [nzSelectedIndex]="0">
-          <nz-tab nzTitle="Email">
-            <form nz-form [nzLayout]="'vertical'" [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-              <div nz-row [nzGutter]="16">
-                <div nz-col nzSpan="12">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsFromTitle" nzRequired>From</nz-form-label>
-                    <nz-form-control [nzErrorTip]="fromErrorTpl">
-                      <input nz-input id="settingsFromTitle" formControlName="from"/>
-                      <ng-template #fromErrorTpl let-control>
-                        <ng-container *ngIf="control.hasError('required')">
-                          From is required
-                        </ng-container>
-                        <ng-container *ngIf="control.hasError('email')">
-                          Invalid email
-                        </ng-container>
-                      </ng-template>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-                <div nz-col nzSpan="12">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsReplyTo">Reply To</nz-form-label>
-                    <nz-form-control>
-                      <input nz-input id="settingsReplyTo" formControlName="replyTo"/>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-              </div>
-              
-              <div nz-row [nzGutter]="16">
-                <div nz-col nzSpan="12">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsUsername">Username</nz-form-label>
-                    <nz-form-control>
-                      <input nz-input id="settingsUsername" formControlName="userName"/>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-                <div nz-col nzSpan="12">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsPassword">Password</nz-form-label>
-                    <nz-form-control nzExtra="Leave the field blank if you don't want to change password">
-                      <nz-input-group [nzSuffix]="suffixTemplate">
-                        <input [type]="passwordVisible ? 'text' : 'password'" nz-input placeholder="input password" formControlName="password" />
-                      </nz-input-group>
-                      <ng-template #suffixTemplate>
-                        <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'" (click)="passwordVisible = !passwordVisible"></i>
-                      </ng-template>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-              </div>
+        <nz-form-item>
+          <nz-form-label nzFor="settingsDomain">Domain</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="settingsDomain" formControlName="domain"/>
+          </nz-form-control>
+        </nz-form-item>
 
-              <nz-form-item>
-                <nz-form-label nzFor="settingsDomain">Domain</nz-form-label>
-                <nz-form-control>
-                  <input nz-input id="settingsDomain" formControlName="domain"/>
-                </nz-form-control>
-              </nz-form-item>
+        <div nz-row [nzGutter]="16">
+          <div nz-col nzSpan="12">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsAddress" nzRequired>Address</nz-form-label>
+              <nz-form-control [nzErrorTip]="addressErrorTpl">
+                <input nz-input id="settingsAddress" formControlName="address"/>
+                <ng-template #addressErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Address is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="4">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsPort" nzRequired>Port</nz-form-label>
+              <nz-form-control [nzErrorTip]="portErrorTpl">
+                <input nz-input  id="settingsPort" formControlName="port"/>
+                <ng-template #portErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Port is required
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('pattern')">
+                    Only numbers is valid
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="8">
+            <nz-form-item>
+              <nz-form-label nzFor="settingsAuthentication">Authentication</nz-form-label>
+              <nz-form-control>
+                <input nz-input id="settingsAuthentication" formControlName="authentication"/>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
 
-              <div nz-row [nzGutter]="16">
-                <div nz-col nzSpan="12">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsAddress" nzRequired>Address</nz-form-label>
-                    <nz-form-control [nzErrorTip]="addressErrorTpl">
-                      <input nz-input id="settingsAddress" formControlName="address"/>
-                      <ng-template #addressErrorTpl let-control>
-                        <ng-container *ngIf="control.hasError('required')">
-                          Address is required
-                        </ng-container>
-                      </ng-template>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-                <div nz-col nzSpan="4">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsPort" nzRequired>Port</nz-form-label>
-                    <nz-form-control [nzErrorTip]="portErrorTpl">
-                      <input nz-input  id="settingsPort" formControlName="port"/>
-                      <ng-template #portErrorTpl let-control>
-                        <ng-container *ngIf="control.hasError('required')">
-                          Port is required
-                        </ng-container>
-                        <ng-container *ngIf="control.hasError('pattern')">
-                          Only numbers is valid
-                        </ng-container>
-                      </ng-template>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-                <div nz-col nzSpan="8">
-                  <nz-form-item>
-                    <nz-form-label nzFor="settingsAuthentication">Authentication</nz-form-label>
-                    <nz-form-control>
-                      <input nz-input id="settingsAuthentication" formControlName="authentication"/>
-                    </nz-form-control>
-                  </nz-form-item>
-                </div>
-              </div>
+        <nz-form-item>
+          <nz-form-control>
+            <label nz-checkbox [formControl]="enableStartTtlsAuto">
+              Enable STARTTLS Auto
+            </label>
+          </nz-form-control>
+        </nz-form-item>
 
-              <nz-form-item>
-                <nz-form-control>
-                  <label nz-checkbox [formControl]="enableStartTtlsAuto">
-                    Enable STARTTLS Auto
-                  </label>
-                </nz-form-control>
-              </nz-form-item>
-      
-              <nz-form-item>
-                <nz-form-control>
-                  <button nz-button nzType="primary"
-                    data-test-id="saveButton"
-                    [disabled]="!settingsForm.valid"
-                  >
-                  Save
-                </button>
-                </nz-form-control>
-              </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="primary"
+              data-test-id="saveButton"
+              [disabled]="!settingsForm.valid"
+            >
+            Save
+          </button>
+          </nz-form-control>
+        </nz-form-item>
 
-            </form>
-          </nz-tab>
-        </nz-tabset>
-      </nz-card-tab>
-      
-    </nz-card>
-  </nz-space-item>
-
-</nz-space>
+      </form>
+    </nz-tab>
+  </nz-tabset>
+</app-single-column-layout>
