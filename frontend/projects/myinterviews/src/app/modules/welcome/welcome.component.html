@@ -1,10 +1,4 @@
-<nz-space nzDirection="vertical">
-  <nz-space-item>
-    <nz-page-header [nzGhost]="false">
-      <nz-page-header-title>Dashboard</nz-page-header-title>
-    </nz-page-header>
-  </nz-space-item>
-
+<app-single-column-layout title="Dashboard">
   <div *ngIf="(dashboardData$ | async) as dashboardData">
     <div nz-row [nzGutter]="16">
       <div nz-col [nzSpan]="12">
@@ -85,4 +79,4 @@
       </div>
     </div>
   </div>
-</nz-space>
+</app-single-column-layout>
