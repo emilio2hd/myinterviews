@@ -5,8 +5,7 @@ import { of } from 'rxjs';
 
 import { NZ_I18N, en_US } from 'ng-zorro-antd/i18n';
 
-import { DemoNgZorroAntdModule } from '../../../ng-zorro-antd.module';
-
+import { DemoNgZorroAntdModule } from '@shared/ng-zorro-antd.module';
 import { PaginatedResult } from '@lib/pagination';
 import { CoverLetter } from '@core/models';
 

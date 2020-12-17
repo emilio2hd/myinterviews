@@ -4,10 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
+import { SharedModule } from '@shared';
 import { LayoutModule } from '@layout/layout.module';
 
 import { InterviewRoutingModule } from './interview-routing.module';
-import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 import { InterviewListComponent } from './list/list.component';
 import { InterviewDetailsComponent } from './details/details.component';
 import { InterviewApiService } from './interview.api.service';
@@ -17,12 +17,11 @@ import { ApplicationsResolver } from './applications.resolver';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     ReactiveFormsModule,
     InterviewRoutingModule,
     LayoutModule,
     CKEditorModule,
-    DemoNgZorroAntdModule,
   ],
   declarations: [InterviewListComponent, InterviewDetailsComponent, InterviewFormComponent],
   providers: [InterviewApiService, InterviewResolver, ApplicationsResolver],

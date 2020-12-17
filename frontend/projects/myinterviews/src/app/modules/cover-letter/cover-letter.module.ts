@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
-import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
+import { SharedModule } from '@shared';
 
 import { CoverLetterRoutingModule } from './cover-letter-routing.module';
 import { CoverLetterPageComponent } from './pages/cover-letter-page.component';
@@ -17,13 +15,7 @@ import {
 } from './components';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    CoverLetterRoutingModule,
-    CKEditorModule,
-    DemoNgZorroAntdModule,
-  ],
+  imports: [SharedModule, ReactiveFormsModule, CoverLetterRoutingModule, CKEditorModule],
   declarations: [
     CoverLetterPageComponent,
     FileUploadComponent,

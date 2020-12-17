@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
+import { SharedModule } from '@shared';
 import { LayoutModule } from '@layout/layout.module';
-
-import { DemoNgZorroAntdModule } from '../../ng-zorro-antd.module';
 
 import { JobApplicationRoutingModule } from './job-application-routing.module';
 import { JobApplicationListComponent } from './list/list.component';
@@ -17,9 +15,8 @@ import { JobApplicationDetailsComponent } from './details/details.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     JobApplicationRoutingModule,
-    DemoNgZorroAntdModule,
     LayoutModule,
     ReactiveFormsModule,
     CKEditorModule,

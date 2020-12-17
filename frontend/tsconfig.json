@@ -20,6 +20,8 @@
       "@core/*": ["projects/myinterviews/src/app/@core/*"],
       "@layout/*": ["projects/myinterviews/src/app/@layout/*"],
       "@lib/*": ["projects/myinterviews/src/app/@lib/*"],
+      "@shared": ["projects/myinterviews/src/app/@shared/index"],
+      "@shared/*": ["projects/myinterviews/src/app/@shared/*"],
       "@testing": ["projects/myinterviews/src/testing/index"],
       "@testing/*": ["projects/myinterviews/src/testing/*"]
     },

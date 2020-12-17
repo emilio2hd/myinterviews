@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { DemoNgZorroAntdModule } from './ng-zorro-antd.module';
+import { DemoNgZorroAntdModule } from '@shared/ng-zorro-antd.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
