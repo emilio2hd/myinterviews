@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
 import { SharedModule } from '@shared';
-import { LayoutModule } from '@layout/layout.module';
 
 import { JobApplicationRoutingModule } from './job-application-routing.module';
 import { JobApplicationListComponent } from './list/list.component';
@@ -14,13 +12,7 @@ import { JobApplicationFormComponent } from './form/form.component';
 import { JobApplicationDetailsComponent } from './details/details.component';
 
 @NgModule({
-  imports: [
-    SharedModule,
-    JobApplicationRoutingModule,
-    LayoutModule,
-    ReactiveFormsModule,
-    CKEditorModule,
-  ],
+  imports: [SharedModule, JobApplicationRoutingModule, ReactiveFormsModule, CKEditorModule],
   declarations: [
     JobApplicationListComponent,
     JobApplicationFormComponent,
