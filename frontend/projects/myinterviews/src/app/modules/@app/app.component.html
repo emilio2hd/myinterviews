@@ -1,0 +1,28 @@
+<nz-layout class="app-layout">
+  <nz-sider class="menu-sidebar"
+            nzCollapsible
+            nzWidth="256px"
+            nzBreakpoint="md"
+            [(nzCollapsed)]="isCollapsed"
+            [nzTrigger]="null">
+    <app-side-bar [isCollapsed]="isCollapsed"></app-side-bar>
+  </nz-sider>
+  <nz-layout>
+    <app-header (collapsed)="isCollapsed = $event"></app-header>
+
+    <nz-content>
+      <div class="inner-content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+
+    <nz-footer>
+      <div nz-row nzJustify="space-between">
+        <div nz-col nzFlex="auto">
+          <strong>Made by <a href="https://github.com/emilio2hd/myinterviews" target="_blank">Emilio</a>.</strong>
+        </div>
+        <div nz-col nzFlex="100px"><b>Version</b>&nbsp;2.0.0</div>
+      </div>
+    </nz-footer>
+  </nz-layout>
+</nz-layout>

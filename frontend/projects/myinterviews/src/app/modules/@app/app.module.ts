@@ -17,14 +17,16 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { IconsProviderModule } from './icons-provider.module';
-import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { IconsProviderModule } from '../../icons-provider.module';
+import { NotFoundComponent } from '../not-found/not-found.component';
 import { SettingsService } from '@core/services';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { HeaderComponent } from './header/header.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
+  declarations: [AppComponent, NotFoundComponent, SideBarComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

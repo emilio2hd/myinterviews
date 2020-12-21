@@ -1,0 +1,29 @@
+<div class="sidebar-logo">
+  <a href="/">
+    <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+    <h1>MyInterviews</h1>
+  </a>
+</div>
+
+<ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+  <li nz-menu-item nz-tooltip nzTooltipPlacement="right" nzMatchRouter>
+    <i nz-icon nzType="dashboard"></i>
+    <span><a routerLink="/welcome">Welcome</a></span>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="file-text"></i>
+    <span><a routerLink="/cover-letter">Cover Letter</a></span>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="team"></i>
+    <span><a routerLink="/interview">Interviews</a></span>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="solution"></i>
+    <span><a routerLink="/job-application">Job Applications</a></span>
+  </li>
+  <li nz-menu-item nzMatchRouter>
+    <i nz-icon nzType="setting"></i>
+    <span><a routerLink="/settings">Settings</a></span>
+  </li>
+</ul>

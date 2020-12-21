@@ -1,0 +1,17 @@
+<nz-header>
+  <div class="app-header">
+    <div nz-row nzJustify="space-between">
+      <div nz-col>
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+          <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+        </span>
+      </div>
+      <div nz-col class="button-add-interviews">
+        <a routerLink="/interview/new" nz-button nzType="primary">
+          <i nz-icon nzType="plus" nzTheme="outline"></i>
+          New Interview
+        </a>
+      </div>
+    </div>
+  </div>
+</nz-header>
