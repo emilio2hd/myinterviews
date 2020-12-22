@@ -40,9 +40,7 @@ RSpec.configure do |config|
 
   config.before do |example|
     if self.class.include?(Capybara::DSL)
-      if example.metadata[:headed_js]
-        Capybara.current_driver = :selenium_chrome
-      end
+      Capybara.current_driver = :selenium_chrome if example.metadata[:headed_js]
     end
   end
 end
