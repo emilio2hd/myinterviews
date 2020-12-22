@@ -15,6 +15,20 @@ Capybara::Screenshot.register_driver(:selenium_chrome_headless) do |driver, path
   driver.browser.save_screenshot(path)
 end
 
+Capybara.register_driver :selenium_chrome_headless do |app|
+  Capybara::Selenium::Driver.load_selenium
+
+  browser_options = ::Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+    opts.args << '--headless'
+    opts.args << '--disable-gpu' if Gem.win_platform?
+    opts.args << '--disable-site-isolation-trials'
+    opts.args << '--no-sandbox'
+    opts.args << '--window-size=1920,1080'
+  end
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
+end
+
 RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :rack_test
@@ -28,7 +42,6 @@ RSpec.configure do |config|
     if self.class.include?(Capybara::DSL)
       if example.metadata[:headed_js]
         Capybara.current_driver = :selenium_chrome
-        Capybara.page.driver.browser.manage.window.maximize
       end
     end
   end

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
+import { pluck } from 'rxjs/operators';
+
+import { NzDrawerService } from 'ng-zorro-antd/drawer';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { pipe } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 import {
@@ -11,6 +12,7 @@ import {
   JobApplicationStatusMapping,
 } from '../job-application.model';
 import { JobApplicationApiService } from '../job-application.api.service';
+import { ApplicationTimelineComponent } from '../application-timeline/application-timeline.component';
 
 @Component({
   selector: 'app-details',
@@ -18,22 +20,14 @@ import { JobApplicationApiService } from '../job-application.api.service';
   styleUrls: ['./details.component.scss'],
 })
 export class JobApplicationDetailsComponent implements OnInit {
-  private interviewTypeMap = {
-    talk: 'comment',
-    technical: 'laptop',
-  };
-  private getJobApplicationFromRouterData = pipe(
-    map((routerData: Data) => routerData.jobApplication as JobApplication)
-  );
-  jobApplication$ = this.getJobApplicationFromRouterData(this.route.data);
-
-  visible = false;
+  jobApplication$ = this.route.data.pipe(pluck<Data, JobApplication>('jobApplication'));
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private jobApplicationService: JobApplicationApiService,
-    private notificationService: NzNotificationService
+    private notificationService: NzNotificationService,
+    private drawerService: NzDrawerService
   ) {}
 
   ngOnInit(): void {}
@@ -63,20 +57,17 @@ export class JobApplicationDetailsComponent implements OnInit {
     return JobApplicationStatusMapping[status];
   }
 
-  formatDate(date: string) {
-    return moment(date, 'YYYYMMDD').format('YYYY-MM-DD');
-  }
-
-  open(): void {
-    this.visible = true;
-  }
-
-  close(): void {
-    this.visible = false;
-  }
-
-  getInterviewIcon(type: string) {
-    return this.interviewTypeMap[type];
+  openTimeline(jobApplication: JobApplication): void {
+    this.drawerService.create<
+      ApplicationTimelineComponent,
+      { jobApplication: JobApplication },
+      void
+    >({
+      nzTitle: 'Application Timeline',
+      nzWidth: 600,
+      nzContent: ApplicationTimelineComponent,
+      nzContentParams: { jobApplication },
+    });
   }
 
   getPendingStatus(jobApplication: JobApplication) {

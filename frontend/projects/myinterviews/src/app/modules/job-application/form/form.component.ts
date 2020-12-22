@@ -9,7 +9,6 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import { JobApplication, JobApplicationStatusMapping } from '../job-application.model';
 import { JobApplicationApiService } from '../job-application.api.service';
-import { Interview } from '@core/models';
 
 @Component({
   selector: 'app-form',
@@ -50,12 +49,6 @@ export class JobApplicationFormComponent implements OnInit, OnDestroy {
       coverLetter: [''],
       overallFeedback: [''],
     });
-
-    /*this.subscriptions.add(
-      this.jobApplication$.subscribe((jobApplication) =>
-        this.jobApplicationForm.patchValue(jobApplication)
-      )
-    );*/
   }
 
   ngOnDestroy(): void {

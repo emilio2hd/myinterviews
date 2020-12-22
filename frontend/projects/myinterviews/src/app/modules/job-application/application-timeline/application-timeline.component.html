@@ -1,0 +1,58 @@
+<ng-template #dotPending>
+  <i nz-icon nzType="clock-circle-o" style="font-size: 16px;"></i>
+</ng-template>
+
+<nz-timeline data-testid="timeline" [nzPending]="getPendingStatus(jobApplication)" [nzPendingDot]="dotPending">
+  <nz-timeline-item
+    class="waiting"
+    data-testid="timelineItemWaitingInterview"
+    [nzDot]="aplicationStartTemplate"
+  >
+    <nz-card [nzBordered]="false" [nzTitle]="waitingTemplate">
+      Application sent to <strong>{{jobApplication.company}}</strong>
+    </nz-card>
+    
+    <ng-template #waitingTemplate>
+      <i nz-icon nz-tooltip nzType="send"></i>
+      Start
+    </ng-template>
+
+    <ng-template #aplicationStartTemplate>
+      <div class="timeline-date">{{jobApplication.beganAt}}</div>
+    </ng-template>
+  </nz-timeline-item>
+  
+  <ng-container *ngFor="let entry of jobApplication.interviews | keyvalue">
+    <nz-timeline-item [nzDot]="formatedTimeTemplate">
+      <ng-container *ngFor="let interview of entry.value">
+        <nz-card
+          [attr.data-testid]="'timelineItemInterview-' + interview.id"
+          [nzBordered]="false"
+          [nzTitle]="interviewTypeTemplate"
+          [nzExtra]="extraTemplate"
+        >
+          <span 
+            *ngIf="interview.feedback" 
+            [innerHTML]="interview.feedback"
+          ></span>
+        </nz-card>
+        
+        <ng-template #interviewTypeTemplate>
+          <i nz-icon
+            nz-tooltip
+            [nzType]="getInterviewIcon(interview.typeOf)"
+            [nzTooltipTitle]="interview.typeOf | titlecase"
+          ></i>
+          {{interview.interviewer}}
+        </ng-template>
+        <ng-template #extraTemplate>
+          <small>{{interview.time}}</small>
+        </ng-template>
+      </ng-container>
+    </nz-timeline-item>
+
+    <ng-template #formatedTimeTemplate>
+      <div class="timeline-date">{{formatDate(entry.key)}}</div>
+    </ng-template>
+  </ng-container>
+</nz-timeline>

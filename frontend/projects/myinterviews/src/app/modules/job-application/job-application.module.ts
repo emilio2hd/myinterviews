@@ -10,6 +10,7 @@ import { JobApplicationApiService } from './job-application.api.service';
 import { JobApplicationResolver } from './job-application.resolver';
 import { JobApplicationFormComponent } from './form/form.component';
 import { JobApplicationDetailsComponent } from './details/details.component';
+import { ApplicationTimelineComponent } from './application-timeline/application-timeline.component';
 
 @NgModule({
   imports: [SharedModule, JobApplicationRoutingModule, ReactiveFormsModule, CKEditorModule],
@@ -17,6 +18,7 @@ import { JobApplicationDetailsComponent } from './details/details.component';
     JobApplicationListComponent,
     JobApplicationFormComponent,
     JobApplicationDetailsComponent,
+    ApplicationTimelineComponent,
   ],
   providers: [JobApplicationApiService, JobApplicationResolver],
 })

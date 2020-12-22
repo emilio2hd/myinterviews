@@ -81,6 +81,8 @@ feature 'View job application', js: true do
       expect(page).to have_content application.position
     end
 
+    expect(page).to have_selector('[data-testid="seeTimelineButton"]')
+
     timeline_link = find('[data-testid="seeTimelineButton"]')
     expect(timeline_link).to have_content('Sent')
     timeline_link.click
