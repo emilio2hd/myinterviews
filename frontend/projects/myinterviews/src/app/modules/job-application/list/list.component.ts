@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, pipe } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -23,16 +23,16 @@ export class JobApplicationListComponent implements OnInit {
   });
   private paginationParams$ = this.paginationParamsSubject.asObservable();
   private getAllApplications$ = pipe(
-    tap((_) => (this.loading = true)),
+    tap(() => (this.loading = true)),
     switchMap(({ pageIndex }) =>
       this.jobApplicationService
         .getPaginatedResults(pageIndex)
-        .pipe(tap(() => (this.loading = false)))
+        .pipe(finalize(() => (this.loading = false)))
     )
   );
 
   loading = true;
-  result$ = this.getAllApplications$(this.paginationParams$);
+  jobApplications$ = this.getAllApplications$(this.paginationParams$);
 
   trackById = (_: number, item: JobApplication) => item.id;
 

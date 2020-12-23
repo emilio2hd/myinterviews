@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, pipe } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
@@ -19,9 +19,11 @@ export class InterviewListComponent implements OnInit {
   });
   private paginationParams$ = this.paginationParamsSubject.asObservable();
   private getAllInterviews$ = pipe(
-    tap((_) => (this.loading = true)),
+    tap(() => (this.loading = true)),
     switchMap(({ pageIndex }) =>
-      this.interviewService.getPaginatedResults(pageIndex).pipe(tap(() => (this.loading = false)))
+      this.interviewService
+        .getPaginatedResults(pageIndex)
+        .pipe(finalize(() => (this.loading = false)))
     )
   );
 

@@ -3,7 +3,7 @@
     <a nz-button routerLink="new" data-testid="newButton" nzType="primary">New</a>
   </nz-page-header-extra>
   
-  <ng-container *ngIf="(interview$ | async) as interview; else emptyResult">
+  <ng-container *ngIf="(interview$ | async) as interview">
     <nz-table
       data-testid="interviewTable"
       [nzData]="interview.data"
@@ -51,9 +51,5 @@
       </tbody>
     </nz-table>
   </ng-container>
-  
-  <ng-template #emptyResult>
-    <nz-empty></nz-empty>
-  </ng-template>
   
 </app-single-column-layout>
