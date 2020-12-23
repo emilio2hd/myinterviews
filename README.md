@@ -4,7 +4,10 @@ myinterviews
 [![Build Status](https://circleci.com/gh/emilio2hd/myinterviews.svg?style=shield)](https://github.com/emilio2hd/myinterviews)
 [![codebeat badge](https://codebeat.co/badges/ef8d86f7-cf6c-4726-bd2d-4bac89cc62c1)](https://codebeat.co/projects/github-com-emilio2hd-myinterviews-master)
 
-The goal of this app is to manage job applications, interviews, cover letters and feedbacks.
+Hello there! Thank you for checking out this repo. :D
+
+The main goal of this app is to manage job applications, interviews, cover letters and feedbacks.  
+I hope this app may help you finding a nice place to work.
  
 ![Template](./docs/images/interviews.png)
 
