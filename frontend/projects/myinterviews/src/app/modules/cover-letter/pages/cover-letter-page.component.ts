@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BehaviorSubject, pipe } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { finalize, switchMap, tap } from 'rxjs/operators';
 
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
@@ -23,9 +23,11 @@ export class CoverLetterPageComponent implements OnInit {
   });
   private paginationParams$ = this.paginationParamsSubject.asObservable();
   private getAllCoverLetters$ = pipe(
-    tap((_) => (this.loading = true)),
+    tap(() => (this.loading = true)),
     switchMap(({ pageIndex }) =>
-      this.coverLetterService.getPaginatedResults(pageIndex).pipe(tap(() => (this.loading = false)))
+      this.coverLetterService
+        .getPaginatedResults(pageIndex)
+        .pipe(finalize(() => (this.loading = false)))
     )
   );
 
