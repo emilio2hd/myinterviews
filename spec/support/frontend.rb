@@ -9,14 +9,23 @@ require 'rake'
 # Run COMPILE_FRONTEND=true NPM_BIN=npm bundle exec rspec
 RSpec.configure do |config|
   config.before(:suite) do
-    public_folder = Rails.root.join('public').to_s
-
-    if ENV['NPM_BIN'] && (Dir.empty?(public_folder) || ENV['COMPILE_FRONTEND'])
-      Rake.application.rake_require 'tasks/compile_frontend'
-      Rake::Task.define_task(:environment)
-      Rake::Task['frontend:compile'].invoke
-    elsif !ENV['NPM_BIN']
-      puts "Npm bin not set. Skipping frontend compilation."
+    if should_compile_frontend?
+      if ENV['NPM_BIN']
+        compile_frontend
+      else
+        puts "Npm bin not set. Skipping frontend compilation."
+      end
     end
   end
+end
+
+def should_compile_frontend?
+  public_folder = Rails.root.join('public').to_s
+  (!Dir.exist?(public_folder) || Dir.empty?(public_folder) || ENV['COMPILE_FRONTEND'])
+end
+
+def compile_frontend
+  Rake.application.rake_require 'tasks/compile_frontend'
+  Rake::Task.define_task(:environment)
+  Rake::Task['frontend:compile'].invoke
 end
