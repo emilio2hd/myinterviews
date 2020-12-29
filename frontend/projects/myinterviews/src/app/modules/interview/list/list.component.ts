@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, pipe } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, pipe, Subscription } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 import { InterviewApiService } from '../interview.api.service';
 import { Interview, InterviewTypeMapping } from '../interview.model';
@@ -13,55 +12,71 @@ import { Interview, InterviewTypeMapping } from '../interview.model';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class InterviewListComponent implements OnInit {
-  private paginationParamsSubject = new BehaviorSubject<{ pageIndex: number }>({
-    pageIndex: 1,
-  });
-  private paginationParams$ = this.paginationParamsSubject.asObservable();
+export class InterviewListComponent implements OnInit, OnDestroy {
+  private subscriptions = new Subscription();
+  private paginationParams$ = new BehaviorSubject<number>(1);
   private getAllInterviews$ = pipe(
     tap(() => (this.loading = true)),
-    switchMap(({ pageIndex }) =>
-      this.interviewService
-        .getPaginatedResults(pageIndex)
-        .pipe(finalize(() => (this.loading = false)))
+    switchMap((page: number) =>
+      this.interviewService.getPaginatedResults(page).pipe(finalize(() => (this.loading = false)))
     )
   );
 
-  loading = true;
-  interview$ = this.getAllInterviews$(this.paginationParams$);
+  interview$ = this.getAllInterviews$(this.paginationParams$.asObservable());
+
+  total: number;
+  interviews: Interview[];
+  pageSize: number;
+  pageIndex: number;
+  loading: boolean;
+
+  trackById = (_: number, item: Interview) => item.id;
 
   constructor(
     private interviewService: InterviewApiService,
     private notification: NzNotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.interview$.subscribe((paginatedResult) => {
+        this.total = paginatedResult.totalCount;
+        this.pageSize = paginatedResult.pageSize;
+        this.pageIndex = paginatedResult.currentPage;
+        this.interviews = paginatedResult.data;
+      })
+    );
+  }
 
-  onQueryParamsChange(params: NzTableQueryParams): void {
-    this.paginationParamsSubject.next(params);
+  onPageIndexChange(nextPage: number) {
+    this.paginationParams$.next(nextPage);
   }
 
   onDeleteConfirm(interview: Interview) {
-    this.interviewService.delete(interview.id).subscribe({
-      next: () => {
-        const currentParams = this.paginationParamsSubject.value;
-        this.paginationParamsSubject.next({ ...currentParams });
+    this.subscriptions.add(
+      this.interviewService.delete(interview.id).subscribe({
+        next: () => {
+          this.paginationParams$.next(1);
 
-        this.notification.create(
-          'success',
-          'Applications',
-          `Interview with "${interview.interviewerName}" successfully deleted`
-        );
-      },
-      error: () =>
-        this.notification.error(
-          'Cover Letter',
-          `Uh-oh! Something wrong has happened. Unable to delete interview with "${interview.interviewerName}"`
-        ),
-    });
+          this.notification.success(
+            'Applications',
+            `Interview with "${interview.interviewerName}" successfully deleted`
+          );
+        },
+        error: () =>
+          this.notification.error(
+            'Cover Letter',
+            `Uh-oh! Something wrong has happened. Unable to delete interview with "${interview.interviewerName}"`
+          ),
+      })
+    );
   }
 
   getTypeOfText(typeOf: string) {
     return InterviewTypeMapping[typeOf];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

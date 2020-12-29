@@ -3,53 +3,52 @@
     <a nz-button routerLink="new" data-testid="newButton" nzType="primary">New</a>
   </nz-page-header-extra>
   
-  <ng-container *ngIf="(interview$ | async) as interview">
-    <nz-table
-      data-testid="interviewTable"
-      [nzData]="interview.data"
-      [nzFrontPagination]="false"
-      [nzLoading]="loading"
-      [nzTotal]="interview.totalCount"
-      [nzPageSize]="interview.pageSize"
-      [nzPageIndex]="interview.currentPage"
-      (nzQueryParams)="onQueryParamsChange($event)"
-    >
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Position</th>
-          <th>Company</th>
-          <th>Began At</th>
-          <th>Status</th>
-          <th width="15%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of interview.data">
-          <td>
-            <a [routerLink]="[data.id]">{{ data.interviewerName }}</a>
-          </td>
-          <td>{{ data.applicationPosition }}</td>
-          <td>{{ data.companyName }}</td>
-          <td>{{ data.at | date:'short' }}</td>
-          <td>{{ getTypeOfText(data.typeOf) }}</td>
-          <td>
-            <a
-              [attr.data-testid]="'editInterview-' + data.id"
-              [routerLink]="[data.id, 'edit']"
-            >Edit</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a
-              nz-popconfirm
-              [attr.data-testid]="'deleteInterview-' + data.id"
-              nzPopconfirmTitle="Are you sure delete this interview?"
-              nzPopconfirmPlacement="right"
-              (nzOnConfirm)="onDeleteConfirm(data)"
-            >Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </ng-container>
+  <nz-table
+    #interviewTable
+    data-testid="interviewTable"
+    [nzData]="interviews"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+  >
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Position</th>
+        <th>Company</th>
+        <th>Began At</th>
+        <th>Status</th>
+        <th width="15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let interview of interviewTable.data; trackBy: trackById">
+        <td>
+          <a [routerLink]="[interview.id]">{{ interview.interviewerName }}</a>
+        </td>
+        <td>{{ interview.applicationPosition }}</td>
+        <td>{{ interview.companyName }}</td>
+        <td>{{ interview.at | date:'short' }}</td>
+        <td>{{ getTypeOfText(interview.typeOf) }}</td>
+        <td>
+          <a
+            [attr.data-testid]="'editInterview-' + interview.id"
+            [routerLink]="[interview.id, 'edit']"
+          >Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a
+            nz-popconfirm
+            [attr.data-testid]="'deleteInterview-' + interview.id"
+            nzPopconfirmTitle="Are you sure delete this interview?"
+            nzPopconfirmPlacement="right"
+            (nzOnConfirm)="onDeleteConfirm(interview)"
+          >Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
   
 </app-single-column-layout>
