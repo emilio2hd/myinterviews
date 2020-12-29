@@ -59,14 +59,14 @@ export class InterviewListComponent implements OnInit, OnDestroy {
           this.paginationParams$.next(1);
 
           this.notification.success(
-            'Applications',
-            `Interview with "${interview.interviewerName}" successfully deleted`
+            'Interviews',
+            `Interview "${interview.interviewerName}" successfully deleted`
           );
         },
         error: () =>
           this.notification.error(
-            'Cover Letter',
-            `Uh-oh! Something wrong has happened. Unable to delete interview with "${interview.interviewerName}"`
+            'Interviews',
+            `Uh-oh! Something wrong has happened. Unable to delete "${interview.interviewerName}"`
           ),
       })
     );
