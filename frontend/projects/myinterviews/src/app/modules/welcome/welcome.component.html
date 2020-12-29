@@ -4,7 +4,7 @@
       <div nz-col [nzSpan]="12">
         <nz-card
           data-testid="listApplicationsCard"
-          nzTitle="Last 10 Applications"
+          nzTitle="Latest Applications"
           [nzActions]="[actionNewApplication, actionViewApplications]"
         >
           <nz-table 
@@ -19,32 +19,30 @@
                 <th>Position</th>
                 <th>Company</th>
                 <th>Status</th>
-                <th>Began at</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let data of applicationsTable.data">
                 <td>
-                  <a [routerLink]="['..', 'job-application', data.id]">{{ data.position }}</a>
+                  <a [routerLink]="['/job-application', data.id]">{{ data.position }}</a>
                 </td>
                 <td>{{ data.company }}</td>
                 <td>{{ getStatusText(data.status) }}</td>
-                <td>{{ data.beganAt }}</td>
               </tr>
             </tbody>
           </nz-table>
         </nz-card>
         <ng-template #actionNewApplication>
-          <a [routerLink]="['..', 'job-application', 'new']">New Application</a>
+          <a [routerLink]="['/job-application', 'new']">New Application</a>
         </ng-template>
         <ng-template #actionViewApplications>
-          <a [routerLink]="['..', 'job-application']">View All Applications</a>
+          <a [routerLink]="['/job-application']">View All Applications</a>
         </ng-template>
       </div>
       <div nz-col [nzSpan]="12">
         <nz-card
           data-testid="listInterviewsCard"
-          nzTitle="Last 10 Interviews"
+          nzTitle="Next Interviews"
           [nzActions]="[actionNewInterview, actionViewInterviews]"
         >
           <nz-table 
@@ -63,7 +61,7 @@
             <tbody>
               <tr *ngFor="let data of interviewsTable.data">
                 <td>
-                  <a [routerLink]="['..', 'interview', data.id]">{{ data.at }}</a>
+                  <a [routerLink]="['/interview', data.id]">{{ data.at }}</a>
                 </td>
                 <td>{{ data.interviewerName }}</td>
               </tr>
@@ -71,10 +69,10 @@
           </nz-table>
         </nz-card>
         <ng-template #actionNewInterview>
-          <a [routerLink]="['..', 'interview', 'new']">New Interview</a>
+          <a [routerLink]="['/interview', 'new']">New Interview</a>
         </ng-template>
         <ng-template #actionViewInterviews>
-          <a [routerLink]="['..', 'interview']">View All Interviews</a>
+          <a [routerLink]="['/interview']">View All Interviews</a>
         </ng-template>
       </div>
     </div>

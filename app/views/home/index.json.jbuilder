@@ -1,5 +1,5 @@
 json.applications @applications do |application|
-  json.extract! application, :id, :company, :position, :status, :began_at
+  json.extract! application, :id, :company, :position, :status
 end
 
 json.interviews @interviews do |interview|
