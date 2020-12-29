@@ -3,52 +3,51 @@
     <a nz-button routerLink="new" data-testid="newButton" nzType="primary">New</a>
   </nz-page-header-extra>
 
-  <ng-container *ngIf="(jobApplications$ | async) as jobApplications">
-    <nz-table
-      data-testid="jobApplicationTable"
-      [nzData]="jobApplications.data"
-      [nzFrontPagination]="false"
-      [nzLoading]="loading"
-      [nzTotal]="jobApplications.totalCount"
-      [nzPageSize]="jobApplications.pageSize"
-      [nzPageIndex]="jobApplications.currentPage"
-      (nzQueryParams)="onQueryParamsChange($event)"
-    >
-      <thead>
-        <tr>
-          <th>Position</th>
-          <th>Company</th>
-          <th>Location</th>
-          <th>Began At</th>
-          <th width="80">Status</th>
-          <th width="15%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let jobApplication of jobApplications.data; trackBy: trackById">
-          <td>
-            <a [routerLink]="[jobApplication.id]">{{ jobApplication.position }}</a>
-          </td>
-          <td>{{ jobApplication.company }}</td>
-          <td>{{ jobApplication.location }}</td>
-          <td>{{ jobApplication.beganAt }}</td>
-          <td>{{ getStatusText(jobApplication.status) }}</td>
-          <td>
-            <a
-              [attr.data-testid]="'editJobApplication-' + jobApplication.id"
-              [routerLink]="[jobApplication.id, 'edit']"
-            >Edit</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a
-              nz-popconfirm
-              [attr.data-testid]="'deleteJobApplication-' + jobApplication.id"
-              nzPopconfirmTitle="Are you sure delete this job application?"
-              nzPopconfirmPlacement="right"
-              (nzOnConfirm)="onDeleteConfirm(jobApplication)"
-            >Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </ng-container>
+  <nz-table
+    #jobApplicationsTable
+    data-testid="jobApplicationTable"
+    [nzData]="jobApplications"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+  >
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Began At</th>
+        <th width="80">Status</th>
+        <th width="15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jobApplication of jobApplicationsTable.data; trackBy: trackById">
+        <td>
+          <a [routerLink]="[jobApplication.id]">{{ jobApplication.position }}</a>
+        </td>
+        <td>{{ jobApplication.company }}</td>
+        <td>{{ jobApplication.location }}</td>
+        <td>{{ jobApplication.beganAt }}</td>
+        <td>{{ getStatusText(jobApplication.status) }}</td>
+        <td>
+          <a
+            [attr.data-testid]="'editJobApplication-' + jobApplication.id"
+            [routerLink]="[jobApplication.id, 'edit']"
+          >Edit</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a
+            nz-popconfirm
+            [attr.data-testid]="'deleteJobApplication-' + jobApplication.id"
+            nzPopconfirmTitle="Are you sure delete this job application?"
+            nzPopconfirmPlacement="right"
+            (nzOnConfirm)="onDeleteConfirm(jobApplication)"
+          >Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </app-single-column-layout>

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, pipe } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, pipe, Subscription } from 'rxjs';
 import { finalize, switchMap, tap } from 'rxjs/operators';
 
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { NzTableQueryParams } from 'ng-zorro-antd/table';
 
 import { JobApplicationApiService } from '../job-application.api.service';
 import {
@@ -17,22 +16,26 @@ import {
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class JobApplicationListComponent implements OnInit {
-  private paginationParamsSubject = new BehaviorSubject<{ pageIndex: number }>({
-    pageIndex: 1,
-  });
-  private paginationParams$ = this.paginationParamsSubject.asObservable();
+export class JobApplicationListComponent implements OnInit, OnDestroy {
+  private subscriptions = new Subscription();
+  private paginationParams$ = new BehaviorSubject<number>(1);
+
   private getAllApplications$ = pipe(
     tap(() => (this.loading = true)),
-    switchMap(({ pageIndex }) =>
+    switchMap((page: number) =>
       this.jobApplicationService
-        .getPaginatedResults(pageIndex)
+        .getPaginatedResults(page)
         .pipe(finalize(() => (this.loading = false)))
     )
   );
 
-  loading = true;
-  jobApplications$ = this.getAllApplications$(this.paginationParams$);
+  jobApplications$ = this.getAllApplications$(this.paginationParams$.asObservable());
+
+  total: number;
+  jobApplications: JobApplication[];
+  pageSize: number;
+  pageIndex: number;
+  loading: boolean;
 
   trackById = (_: number, item: JobApplication) => item.id;
 
@@ -41,10 +44,19 @@ export class JobApplicationListComponent implements OnInit {
     private notification: NzNotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.jobApplications$.subscribe((paginatedResult) => {
+        this.total = paginatedResult.totalCount;
+        this.pageSize = paginatedResult.pageSize;
+        this.pageIndex = paginatedResult.currentPage;
+        this.jobApplications = paginatedResult.data;
+      })
+    );
+  }
 
-  onQueryParamsChange(params: NzTableQueryParams): void {
-    this.paginationParamsSubject.next(params);
+  onPageIndexChange(nextPage: number) {
+    this.paginationParams$.next(nextPage);
   }
 
   getStatusText(status: JobApplicationStatusEnum) {
@@ -52,22 +64,26 @@ export class JobApplicationListComponent implements OnInit {
   }
 
   onDeleteConfirm(jobApplication: JobApplication) {
-    this.jobApplicationService.delete(jobApplication.id).subscribe({
-      next: () => {
-        const currentParams = this.paginationParamsSubject.value;
-        this.paginationParamsSubject.next({ ...currentParams });
+    this.subscriptions.add(
+      this.jobApplicationService.delete(jobApplication.id).subscribe({
+        next: () => {
+          this.paginationParams$.next(1);
 
-        this.notification.create(
-          'success',
-          'Job Application',
-          `"${jobApplication.position}" successfully deleted`
-        );
-      },
-      error: () =>
-        this.notification.error(
-          'Job Application',
-          `Uh-oh! Something wrong has happened. Unable to delete "${jobApplication.position}"`
-        ),
-    });
+          this.notification.success(
+            'Job Application',
+            `"${jobApplication.position}" successfully deleted`
+          );
+        },
+        error: () =>
+          this.notification.error(
+            'Job Application',
+            `Uh-oh! Something wrong has happened. Unable to delete "${jobApplication.position}"`
+          ),
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
