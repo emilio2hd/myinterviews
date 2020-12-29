@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class FileUploadComponent implements ControlValueAccessor {
   file: File | null = null;
-  onChange: Function;
+  onChange: (file: File) => void;
 
   constructor(private host: ElementRef<HTMLInputElement>) {}
 
@@ -30,9 +30,9 @@ export class FileUploadComponent implements ControlValueAccessor {
     this.file = null;
   }
 
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: (file: File) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: Function) {}
+  registerOnTouched(_: () => void) {}
 }

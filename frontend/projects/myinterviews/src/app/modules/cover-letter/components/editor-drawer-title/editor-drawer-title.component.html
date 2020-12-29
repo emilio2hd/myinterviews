@@ -9,7 +9,7 @@
             nz-button
             nzType="primary"
             data-testid="coverLetterDrawerSaveButton"
-            [disabled]="!(formValid$ | async)"
+            [disabled]="(formValid$ | async) === false"
             (click)="onSaveClick()"
           >
             Save
@@ -21,7 +21,7 @@
             nzTrigger="click"
             data-testid="coverLetterDrawerMoreSaveOptionsButton"
             [nzDropdownMenu]="saveOptions"
-            [disabled]="!(formValid$ | async)"
+            [disabled]="(formValid$ | async) === false"
           >
             <i nz-icon nzType="ellipsis"></i>
           </button>
