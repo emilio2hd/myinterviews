@@ -3,49 +3,48 @@
     <button nz-button nzType="primary" (click)="onNewClick()" data-testid="coverLetterNewButton">New</button>
   </nz-page-header-extra>
 
-  <ng-container *ngIf="(coverLetter$ | async) as coverLetter">
-    <nz-table
-      data-testid="coverLetterTable"
-      [nzData]="coverLetter.data"
-      [nzFrontPagination]="false"
-      [nzLoading]="loading"
-      [nzTotal]="coverLetter.totalCount"
-      [nzPageSize]="coverLetter.pageSize"
-      [nzPageIndex]="coverLetter.currentPage"
-      (nzQueryParams)="onQueryParamsChange($event)"
-    >
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th width="15%">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of coverLetter.data">
-          <td>
-            <a
-              [attr.data-testid]="'editCoverLetter-' + data.id"
-              (click)="onEditClick(data)"
-            >{{ data.title }}</a>
-          </td>
-          <td>
-            <a
-              [attr.data-testid]="'sendCoverLetter-' + data.id"
-              (click)="onSendClick(data)"
-            >Send</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a
-              nz-popconfirm
-              [attr.data-testid]="'deleteCoverLetter-' + data.id"
-              nzPopconfirmTitle="Are you sure delete this cover letter?"
-              nzPopconfirmPlacement="right"
-              (nzOnConfirm)="onDeleteConfirm(data)"
-            >Delete</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </ng-container>
+  <nz-table
+    #coverLetterTable
+    data-testid="coverLetterTable"
+    [nzData]="coverLetters"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzTotal]="total"
+    [nzPageSize]="pageSize"
+    [nzPageIndex]="pageIndex"
+    (nzPageIndexChange)="onPageIndexChange($event)"
+  >
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th width="15%">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of coverLetterTable.data; trackBy: trackById">
+        <td>
+          <a
+            [attr.data-testid]="'editCoverLetter-' + data.id"
+            (click)="onEditClick(data)"
+          >{{ data.title }}</a>
+        </td>
+        <td>
+          <a
+            [attr.data-testid]="'sendCoverLetter-' + data.id"
+            (click)="onSendClick(data)"
+          >Send</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a
+            nz-popconfirm
+            [attr.data-testid]="'deleteCoverLetter-' + data.id"
+            nzPopconfirmTitle="Are you sure delete this cover letter?"
+            nzPopconfirmPlacement="right"
+            (nzOnConfirm)="onDeleteConfirm(data)"
+          >Delete</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </app-single-column-layout>
 
 <ng-template #drawerTitle>
