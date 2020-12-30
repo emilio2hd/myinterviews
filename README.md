@@ -34,8 +34,8 @@ or run:
 bundle exec rake frontend:compile NPM_BIN=/path/to/npm
 ```
 
-Once frontend is compiled, it should be running when accessing http://localhost:3000
-Now, it should be able to run `bundle exec rspec`.
+Once frontend is compiled, it should be running when accessing http://localhost:3000.  
+Now, it should be fine to run `bundle exec rspec`.
 
 # Docker
 You can run the application using Docker.
