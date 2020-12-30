@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 20201116224831) do
     t.integer "my_application_id"
     t.text "notes"
     t.text "feedback"
-    t.string "time_zone", default: "Etc/UTC", null: false
     t.index ["my_application_id"], name: "index_interviews_on_my_application_id"
   end
 
