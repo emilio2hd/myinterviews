@@ -18,7 +18,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'annotate'
 gem 'acts-as-taggable-on', '5.0.0'
 gem 'rails-settings-cached', '0.6.5'
-gem 'nokogiri', '~> 1.10'
+gem 'nokogiri', '~> 1.11'
 gem 'kaminari', '1.2.1'
 
 gem 'ffi', '>= 1.9.24'
