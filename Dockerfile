@@ -10,7 +10,7 @@ COPY frontend/package.json /app/package.json
 RUN npm install && npm install -g @angular/cli@9.1.12
 
 COPY ./frontend /app
-RUN ng build --prod --sourceMap=true
+RUN ng build --prod
 
 # Build Backend
 FROM ruby:2.6.6-slim
@@ -30,7 +30,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         libpq-dev zlib1g-dev git liblzma-dev netcat build-essential \
     && gem install bundler \
-    && bundle install --without development test \
+    && bundle config set --local without 'development test' \
+    && bundle install \
     && rm -rf /var/lib/apt/lists/*
 
 CMD ["bash", "init.sh"]
