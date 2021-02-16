@@ -4,12 +4,12 @@ FactoryBot.define do
     company { FFaker::CompanyIT.name }
     location { FFaker::Address.city }
     cv_url { FFaker::Internet.http_url }
-    tech_stack_list 'ruby,rails,rspec,test'
-    status 'sent'
+    tech_stack_list { 'ruby,rails,rspec,test' }
+    status { 'sent' }
     began_at { FFaker::Time.date }
 
     factory :application_with_interviews, class: MyApplication do
-      transient { interviews_count 3 }
+      transient { interviews_count { 3 } }
 
       after(:create) do |application, evaluator|
         create_list(:talk_interview, evaluator.interviews_count, my_application: application, feedback: FFaker::HTMLIpsum.p)

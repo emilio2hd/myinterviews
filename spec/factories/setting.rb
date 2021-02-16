@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :local_email_setting, class: Setting do
-    var :email
+    var { :email }
     value do
       { from: 'me@test.com', user_name: '', password: '', domain: '', address: 'localhost',
         port: 1025, enable_starttls_auto: '', authentication: '' }
