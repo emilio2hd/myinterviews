@@ -81,13 +81,15 @@ feature 'View job application', js: true do
       expect(page).to have_content application.position
     end
 
-    expect(page).to have_selector('[data-testid="seeTimelineButton"]')
+    expect(page).to have_selector('[data-testid="applicationStatus"]')
+    application_status = find('[data-testid="applicationStatus"]')
+    expect(application_status).to have_content('Sent')
 
-    timeline_link = find('[data-testid="seeTimelineButton"]')
-    expect(timeline_link).to have_content('Sent')
+    expect(page).to have_selector('[data-testid="seeTimelineLink"]')
+    timeline_link = find('[data-testid="seeTimelineLink"]')
     timeline_link.click
 
-    expect(page).to have_content 'Application Timeline'
+    expect(page).to have_content 'Interviews Timeline'
 
     within '[data-testid="timeline"]' do
       expect(page).to have_selector('.ant-timeline-item', count: 2)
@@ -104,11 +106,15 @@ feature 'View job application', js: true do
       expect(page).to have_content application_with_interviews.position
     end
 
-    timeline_link = find('[data-testid="seeTimelineButton"]')
-    expect(timeline_link).to have_content('Sent')
+    expect(page).to have_selector('[data-testid="applicationStatus"]')
+    application_status = find('[data-testid="applicationStatus"]')
+    expect(application_status).to have_content('Sent')
+
+    expect(page).to have_selector('[data-testid="seeTimelineLink"]')
+    timeline_link = find('[data-testid="seeTimelineLink"]')
     timeline_link.click
 
-    expect(page).to have_content 'Application Timeline'
+    expect(page).to have_content 'Interviews Timeline'
 
     within '[data-testid="timeline"]' do
       expect(page).to have_selector('.ant-timeline-item', count: 4)

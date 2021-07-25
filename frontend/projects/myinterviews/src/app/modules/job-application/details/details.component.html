@@ -5,14 +5,20 @@
   [subtitle]="jobApplication.position"
 >
   <nz-page-header-tags>
-    <button nz-button nz-tooltip
-            nzType="dashed"
-            data-testid="seeTimelineButton"
-            nzTooltipTitle="Click to see the timeline"
-            [nzSize]="'small'" (click)="openTimeline(jobApplication)"
+    <nz-tag
+      data-testid="applicationStatus"
+      nzType="dashed"
     >
       {{getStatusText(jobApplication.status)}}
-    </button>
+    </nz-tag>
+    <a
+      title="Click to see the interviews timeline"
+      data-testid="seeTimelineLink"
+      (click)="openTimeline(jobApplication)"
+      href="javascript:void(0)"
+    >
+      See Interviews
+    </a>
   </nz-page-header-tags>
 
   <nz-page-header-extra>

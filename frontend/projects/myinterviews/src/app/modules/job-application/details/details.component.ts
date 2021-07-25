@@ -63,7 +63,7 @@ export class JobApplicationDetailsComponent implements OnInit {
       { jobApplication: JobApplication },
       void
     >({
-      nzTitle: 'Application Timeline',
+      nzTitle: 'Interviews Timeline',
       nzWidth: 600,
       nzContent: ApplicationTimelineComponent,
       nzContentParams: { jobApplication },
