@@ -62,47 +62,6 @@ web:
     - db
 ```
 
-# Vagrant
-If you know nothing about docker or you're not willing to install it, you can use VirtualBox + Vagrant.  
-Run: `vagrant up`
-You might wanna go get a cup of coffee or watch something, because it's gonna take a while to complete.
-
-After it's finished, you will see something like:
-```shell
-~~~ LOG ~~~
-...
-==> default: Creating myinterviews-db
-==> default: Creating myinterviews-web
-```
-Using a browser, go to **http://192.168.33.101:3000** and you'll see the dashboard (or at least you should).
-
-**Warning**: The shell script creates a docker-compose.yml at /opt/myinterviews/docker-compose.yml with
-a default `SECRET_KEY_BASE`, so please, do generate another key, replace it at docker-compose.yml and restart the web containers.  
-You can generate another key by executing:
-```
-vagrant ssh
-cd /opt/myinterviews/
-docker exec -it myinterviews-web bash -lc "rake secret"
-# Copy the generated secret
-vi docker-compose.yml
-# Replace the SECRET_KEY_BASE value and save
-docker-compose restart web
-```
- 
-In case something goes wrong, execute:
-```
-vagrant ssh
-cd /opt/myinterviews
-docker-compose logs
-```
-To see the logs of docker
-
-### Update the Application
-To update your application execute:
-```
-vagrant provision --provision-with update_app
-```
-
 # Email Configuration
 My Interviews has support to send emails by smtp only.  
 :warning: Note: As of July 15, 2014, Google increased [its security measures](https://support.google.com/accounts/answer/6010255) 
