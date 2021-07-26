@@ -1,4 +1,4 @@
-FROM ruby:2.5-slim
+FROM ruby:2.6.6-slim
 
 ENV RAILS_ROOT /myinterviews
 ENV RAILS_ENV=production
