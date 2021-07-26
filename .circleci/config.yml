@@ -1,0 +1,88 @@
+version: 2.1
+
+references:
+  workspace_path: &workspace_path
+    ~/project
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_path
+
+  checkout_code: &checkout_code
+    checkout:
+      path: *workspace_path
+
+  show_browsers_version: &show_browsers_version
+    run:
+      command: |
+        google-chrome --version
+        chromedriver --version
+
+orbs:
+  ruby: circleci/ruby@1.1.2
+  browser-tools: circleci/browser-tools@1.1.0
+
+jobs:
+  web:
+    docker:
+    - image: cimg/ruby:2.6.6-browsers
+    - image: circleci/postgres:9.6.2-alpine
+      environment:
+        POSTGRES_USER: root
+        POSTGRES_DB: myinterviews_test
+        POSTGRES_PASSWORD: ''
+
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      APP_DB_HOST: 127.0.0.1
+      APP_DB_USER: root
+      APP_DB_PASSWORD: ""
+      RAILS_ENV: test
+      COVERAGE: true
+
+    working_directory: *workspace_path
+    steps:
+    - *checkout_code
+
+    - browser-tools/install-chrome
+    - browser-tools/install-chromedriver
+
+    - *attach_workspace
+
+    - *show_browsers_version
+
+    - run: ruby --version
+
+    - ruby/install-deps
+
+    - run:
+        name: Wait for DB
+        command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+    - run:
+        name: Database setup
+        command: |
+          bundle exec rails db:schema:load --trace
+          bundle exec rails db:migrate
+
+    - run: bundle exec rspec
+
+  build_docker_image:
+    docker:
+    - image: circleci/buildpack-deps:stretch
+    steps:
+    - *checkout_code
+    - setup_remote_docker
+    - run:
+        name: Build docker image
+        command: |
+          docker build .
+
+workflows:
+  myinterviews_flow:
+    jobs:
+    - web
+    - build_docker_image:
+        requires:
+        - web
