@@ -66,6 +66,10 @@ jobs:
           bundle exec rails db:schema:load --trace
           bundle exec rails db:migrate
 
+    - run:
+        name: Check factory_bot factories
+        command: bundle exec rake factory_bot:lint
+
     - run: bundle exec rspec
 
   build_docker_image:
