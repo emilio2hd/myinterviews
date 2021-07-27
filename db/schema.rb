@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201116193059) do
+ActiveRecord::Schema.define(version: 20201116224831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20201116193059) do
     t.string "interviewer_name", limit: 255
     t.string "interviewer_email", limit: 255
     t.integer "type_of", default: 0, null: false
-    t.integer "my_application_id", null: false
+    t.integer "my_application_id"
     t.text "notes"
     t.text "feedback"
     t.string "time_zone", default: "Etc/UTC", null: false

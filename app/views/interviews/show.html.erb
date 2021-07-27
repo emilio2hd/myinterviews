@@ -16,8 +16,10 @@
       </div><!-- /.box-header -->
       <div class="box-body">
         <dl class="dl-horizontal">
+          <% if @interview.my_application %>
           <dt><%= t('activerecord.attributes.interview.my_application') %></dt>
           <dd><%= link_to @interview.application, my_application_path(@interview.my_application) %></dd>
+          <% end %>
           <dt><%= t('activerecord.attributes.interview.interviewer_name') %></dt>
           <dd><%= @interview.interviewer_name %></dd>
           <dt><%= t('activerecord.attributes.interview.interviewer_email') %></dt>

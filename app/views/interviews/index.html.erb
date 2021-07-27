@@ -23,8 +23,8 @@
           <% @interviews.each do |interview| %>
           <tr>
             <td><%= link_to localize(interview.at, format: :resumed), interview %></td>
-            <td><%= interview.interviewer_name %></td>
             <td><%= interview.application %></td>
+            <td><%= interview.interviewer_name %></td>
             <td class="text-center">
               <%= link_to edit_interview_path(interview), title: t('button.edit'), class: 'btn btn-sm btn-default',
                           data: { container: 'body', toggle: 'tooltip' } do %>

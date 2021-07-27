@@ -9,7 +9,6 @@
 #  interviewer_name  :string(255)
 #  notes             :text
 #  type_of           :integer          default("talk"), not null
-#  my_application_id :integer          not null
 #
 # Indexes
 #
@@ -23,10 +22,12 @@
 class Interview < ApplicationRecord
   enum type_of: { talk: 0, technical: 1 }
 
-  validates :at, :type_of, :my_application, presence: true
+  validates :at, :type_of, presence: true
   validates :interviewer_name, :interviewer_email, length: { maximum: 255 }
 
-  belongs_to :my_application
+  belongs_to :my_application, optional: true
+
+  delegate :position, :company, to: :my_application, prefix: true, allow_nil: true
 
   scope :ordered_by_last, -> { order(at: :desc) }
   scope :next_10, -> { ordered_by_last.limit(10) }
@@ -37,6 +38,6 @@ class Interview < ApplicationRecord
   end
 
   def application
-    "#{my_application.position} - #{my_application.company}"
+    my_application ? "#{my_application_position} - #{my_application_company}" : ''
   end
 end
