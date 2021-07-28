@@ -1,11 +1,11 @@
-<div class="box box-info">
+<div class="box box-info" data-testid="listApplicationsBox">
   <div class="box-header with-border">
     <h3 class="box-title"><%= t('home.last_applications.box_head') %></h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
     <div class="table-responsive">
-      <table class="table no-margin">
+      <table class="table no-margin" data-testid="lastApplicationsTable">
         <thead>
           <tr>
             <th><%= t('activerecord.attributes.my_application.company') %></th>

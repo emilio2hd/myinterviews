@@ -1,11 +1,11 @@
-<div class="box box-info">
+<div class="box box-info" data-testid="listInterviewsBox">
   <div class="box-header with-border">
     <h3 class="box-title"><%= t('home.last_interviews.box_head') %></h3>
   </div>
   <!-- /.box-header -->
   <div class="box-body">
     <div class="table-responsive">
-      <table class="table no-margin">
+      <table class="table no-margin" data-testid="lastInterviewTable">
         <thead>
           <tr>
             <th width="130"><%= t('activerecord.attributes.interview.at') %></th>
