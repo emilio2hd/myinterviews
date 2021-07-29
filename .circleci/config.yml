@@ -70,7 +70,10 @@ jobs:
         name: Check factory_bot factories
         command: bundle exec rake factory_bot:lint
 
-    - run: bundle exec rspec
+    - run: bundle exec rspec --format progress --format RspecJunitFormatter --out ~/test-results/junit.xml
+
+    - store_test_results:
+        path: ~/test-results
 
   build_docker_image:
     docker:

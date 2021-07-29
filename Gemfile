@@ -29,6 +29,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
   gem 'rspec-rails'
+  gem 'rspec_junit_formatter'
   gem 'rubocop', '~> 0.68', require: false
   gem 'rubocop-rails', '~> 2.3'
   gem 'rubycritic', '~> 4.0', require: false
