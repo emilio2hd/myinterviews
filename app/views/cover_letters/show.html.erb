@@ -6,19 +6,19 @@
       <div class="box-header with-border">
         <h3 class="box-title"><%= @cover_letter.title %></h3>
         <div class="box-tools">
-          <%= link_to t('button.back'), cover_letters_path, class: 'btn btn-default btn-sm' %>
-          <%= link_to t('button.edit'), edit_cover_letter_path(@cover_letter), class: 'btn btn-warning btn-sm' %>
+          <%= link_to t('button.back'), cover_letters_path, class: 'btn btn-default btn-sm', data: { testid: 'coverLetterBackButton' } %>
+          <%= link_to t('button.edit'), edit_cover_letter_path(@cover_letter), class: 'btn btn-warning btn-sm', data: { testid: 'coverLetterEditButton' } %>
           <%= link_to t('button.delete'), @cover_letter, method: :delete, class: 'btn btn-danger btn-sm',
-                      data: { confirm: t('messages.are_you_sure') } %>
+                      data: { confirm: t('messages.are_you_sure'), testid: 'coverLetterDeleteButton' } %>
           <%= link_to t('button.new', item: t('cover_letters.item')), new_cover_letter_path,
                       class: 'btn btn-default btn-sm' %>
-          <%= link_to t('button.duplicate', item: t('cover_letters.item')), duplicate_cover_letter_path(@cover_letter),
+          <%= link_to t('button.duplicate', item: t('cover_letters.item')), duplicate_cover_letter_path(@cover_letter), data: { testid: 'coverLetterDuplicateButton' },
                       class: 'btn btn-default btn-sm' %>
-          <%= link_to t('button.send_email'), new_email_cover_letter_path(@cover_letter),
+          <%= link_to t('button.send_email'), new_email_cover_letter_path(@cover_letter), data: { testid: 'coverLetterSendEmailButton' },
                       class: 'btn btn-default btn-sm' %>
         </div>
       </div><!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" data-testid="coverLetterDetails">
         <dl class="dl-horizontal">
           <dt><%= t('activerecord.attributes.cover_letter.title') %></dt>
           <dd><%= @cover_letter.title %></dd>

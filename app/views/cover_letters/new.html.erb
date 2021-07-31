@@ -11,7 +11,7 @@
       <%= form_for(@cover_letter, html: { class: 'form-horizontal' }) do |form| %>
       <%= render 'form', form: form %>
       <div class="box-footer">
-        <%= form.submit t('button.save'), class: 'btn btn-primary' %>
+        <%= form.submit t('button.save'), class: 'btn btn-primary', data: { testid: 'coverLetterSaveButton' } %>
         <%= link_to t('button.cancel'), cover_letters_path, class: 'btn btn-default' %>
       </div>
       <!-- /.box-footer -->

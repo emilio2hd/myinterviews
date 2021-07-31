@@ -13,7 +13,7 @@
                    html: { class: 'form-horizontal', multipart: true }) do |form| %>
         <%= render 'form_email', form: form %>
         <div class="box-footer">
-          <%= form.submit t('button.send'), class: 'btn btn-primary' %>
+          <%= form.submit t('button.send'), class: 'btn btn-primary', data: { testid: 'coverLetterSendButton' } %>
           <%= link_to t('button.cancel'), @cover_letter, class: 'btn btn-default' %>
         </div>
         <!-- /.box-footer -->

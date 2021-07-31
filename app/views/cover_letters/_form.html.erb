@@ -4,7 +4,7 @@
       raw("#{t('activerecord.attributes.cover_letter.title')}<span class=\"text-red\" title=\"#{t('default.hint.mandatory')}\">*</span>")
     end %>
     <div class="col-sm-10">
-      <%= form.text_field :title, class: 'form-control', autofocus: true %>
+      <%= form.text_field :title, class: 'form-control', autofocus: true, data: { testid: 'coverLetterTitle' } %>
       <%= show_validation_errors(@cover_letter.errors[:title]) %>
     </div>
   </div>
@@ -13,7 +13,7 @@
       raw("#{t('activerecord.attributes.cover_letter.content')}<span class=\"text-red\" title=\"#{t('default.hint.mandatory')}\">*</span>")
     end %>
     <div class="col-sm-10">
-      <%= form.text_area :content, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :content, class: 'tinymce', rows: 10, data: { testid: 'coverLetterContent' } %>
       <%= show_validation_errors(@cover_letter.errors[:content]) %>
     </div>
   </div>
