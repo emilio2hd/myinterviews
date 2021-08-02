@@ -11,7 +11,7 @@
       <%= form_for(@interview, html: { class: 'form-horizontal' }) do |form| %>
           <%= render 'form', form: form %>
           <div class="box-footer">
-            <%= form.submit t('button.save'), class: 'btn btn-primary' %>
+            <%= form.submit t('button.save'), class: 'btn btn-primary', data: { testid: 'interviewSaveButton' } %>
             <%= link_to t('button.cancel'), @interview, class: 'btn btn-default' %>
           </div>
           <!-- /.box-footer -->

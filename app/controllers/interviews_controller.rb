@@ -1,5 +1,5 @@
 class InterviewsController < ApplicationController
-  before_action :set_interview, only: %i[show edit update destroy]
+  before_action :set_interview, only: %i[show edit update]
   before_action :load_applications, only: %i[new edit]
 
   def index
@@ -37,7 +37,8 @@ class InterviewsController < ApplicationController
   end
 
   def destroy
-    @interview.destroy
+    Interview.destroy(params[:id])
+
     redirect_to interviews_path, notice: t('messages.successfully_destroyed', entity: t('interviews.item'))
   end
 
@@ -48,7 +49,7 @@ class InterviewsController < ApplicationController
   end
 
   def set_interview
-    @interview = Interview.includes(:my_application).find(params[:id])
+    @interview = Interview.find(params[:id])
   end
 
   def interview_params

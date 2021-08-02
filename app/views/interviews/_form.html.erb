@@ -3,49 +3,49 @@
     <%= form.label :my_application, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= form.collection_select(:my_application_id, @applications, :id, :description,
-                              { include_blank: true }, class: 'form-control') %>
+                              { include_blank: true }, class: 'form-control', data: { testid: 'interviewApplication' }) %>
       <%= show_validation_errors(@interview.errors[:my_application]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:interviewer_name].blank? %>">
     <%= form.label :interviewer_name, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_field :interviewer_name, class: 'form-control', autofocus: true %>
+      <%= form.text_field :interviewer_name, class: 'form-control', autofocus: true, data: { testid: 'interviewInterviewerName' } %>
       <%= show_validation_errors(@interview.errors[:interviewer_name]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:interviewer_email].blank? %>">
     <%= form.label :interviewer_email, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_field :interviewer_email, class: 'form-control', autofocus: true %>
+      <%= form.text_field :interviewer_email, class: 'form-control', data: { testid: 'interviewInterviewerEmail' } %>
       <%= show_validation_errors(@interview.errors[:interviewer_email]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:type_of].blank? %>">
     <%= form.label :type_of, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.select :type_of, options_for_enum(@interview, :type_of), {}, class: 'form-control' %>
+      <%= form.select :type_of, options_for_enum(@interview, :type_of), {}, class: 'form-control', data: { testid: 'interviewTypeOf' } %>
       <%= show_validation_errors(@interview.errors[:type_of]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:at].blank? %>">
     <%= form.label :at, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_field :at, class: 'form-control datepicker' %>
+      <%= form.text_field :at, class: 'form-control datepicker', data: { testid: 'interviewDate' } %>
       <%= show_validation_errors(@interview.errors[:at]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:notes].blank? %>">
     <%= form.label :notes, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_area :notes, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :notes, class: 'tinymce', rows: 10, data: { testid: 'interviewNotes' } %>
       <%= show_validation_errors(@interview.errors[:notes]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @interview.errors[:feedback].blank? %>">
     <%= form.label :feedback, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_area :feedback, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :feedback, class: 'tinymce', rows: 10, data: { testid: 'interviewFeedback' } %>
       <%= show_validation_errors(@interview.errors[:feedback]) %>
     </div>
   </div>

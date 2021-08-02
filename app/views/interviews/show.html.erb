@@ -7,14 +7,14 @@
         <h3 class="box-title"><%= @interview.application %></h3>
         <div class="box-tools">
           <%= link_to t('button.back'), interviews_path, class: 'btn btn-default btn-sm' %>
-          <%= link_to t('button.edit'), edit_interview_path(@interview), class: 'btn btn-warning btn-sm' %>
+          <%= link_to t('button.edit'), edit_interview_path(@interview), class: 'btn btn-warning btn-sm', data: { testid: 'interviewEditButton' } %>
           <%= link_to t('button.delete'), @interview, method: :delete, class: 'btn btn-danger btn-sm',
-                      data: { confirm: t('messages.are_you_sure') } %>
+                      data: { confirm: t('messages.are_you_sure'), testid: 'interviewDeleteButton' } %>
           <%= link_to t('button.new', item: t('interviews.item')), new_interview_path(my_application_id: @interview.my_application_id),
                       class: 'btn btn-default btn-sm' %>
         </div>
       </div><!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" data-testid="interviewDetails">
         <dl class="dl-horizontal">
           <% if @interview.my_application %>
           <dt><%= t('activerecord.attributes.interview.my_application') %></dt>
@@ -31,8 +31,12 @@
         </dl>
         <div class="nav-tabs-custom">
           <ul class="nav nav-tabs" id="myTabs">
-            <li class="active"><a href="#notes" data-toggle="tab"><%= t('interviews.tabs.notes') %></a></li>
-            <li><a href="#feedback" data-toggle="tab"><%= t('interviews.tabs.feedback') %></a></li>
+            <li class="active" data-testid="interviewNotesTab">
+              <a href="#notes" data-toggle="tab"><%= t('interviews.tabs.notes') %></a>
+            </li>
+            <li data-testid="interviewNotesFeedback">
+              <a href="#feedback" data-toggle="tab"><%= t('interviews.tabs.feedback') %></a>
+            </li>
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="notes"><%= raw(@interview.notes) %></div>
