@@ -7,15 +7,16 @@
         <h3 class="box-title"><%= @my_application.position %> - <%= @my_application.company %></h3>
         <div class="box-tools">
           <%= link_to t('button.back'), my_applications_path, class: 'btn btn-default btn-sm' %>
-          <%= link_to t('button.edit'), edit_my_application_path(@my_application), class: 'btn btn-warning btn-sm' %>
+          <%= link_to t('button.edit'), edit_my_application_path(@my_application), class: 'btn btn-warning btn-sm',
+                      data: { testid: 'myApplicationEditButton' } %>
           <%= link_to t('button.delete'), @my_application, method: :delete, class: 'btn btn-danger btn-sm',
-                      data: { confirm: t('messages.are_you_sure') } %>
+                      data: { confirm: t('messages.are_you_sure'), testid: 'myApplicationDeleteButton' } %>
           <%= link_to t('button.new', item: t('interviews.item')), new_interview_path(my_application_id: @my_application.id),
-                      class: 'btn btn-default btn-sm' %>
+                      class: 'btn btn-default btn-sm', data: { testid: 'myApplicationNewInterviewButton' } %>
           <%= link_to t('button.new', item: t('my_applications.item')), new_my_application_path, class: 'btn btn-default btn-sm' %>
         </div>
       </div><!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" data-testid="myApplicationDetails">
         <div class="row">
           <div class="col-md-7">
             <dl class="dl-horizontal">
@@ -37,22 +38,28 @@
 
             <div class="nav-tabs-custom">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#overall_feedback" data-toggle="tab"><%= t('my_applications.tabs.overall_feedback') %></a></li>
-                <li><a href="#job_description" data-toggle="tab"><%= t('my_applications.tabs.job_description') %></a></li>
-                <li><a href="#cover_letter" data-toggle="tab"><%= t('my_applications.tabs.cover_letter') %></a></li>
+                <li class="active" data-testid="applicationFeedback">
+                  <a href="#overall_feedback" data-toggle="tab"><%= t('my_applications.tabs.overall_feedback') %></a>
+                </li>
+                <li data-testid="applicationJobDescription">
+                  <a href="#job_description" data-toggle="tab"><%= t('my_applications.tabs.job_description') %></a>
+                </li>
+                <li data-testid="applicationCoverLetter">
+                  <a href="#cover_letter" data-toggle="tab"><%= t('my_applications.tabs.cover_letter') %></a>
+                </li>
               </ul>
               <div class="tab-content">
                 <div class="active tab-pane" id="overall_feedback">
-                  <%= @my_application.overall_feedback.empty? ? t('my_applications.messages.no_overall_feedback') :
+                  <%= @my_application.overall_feedback.blank? ? t('my_applications.messages.no_overall_feedback') :
                           raw(@my_application.overall_feedback) %>
                 </div>
                 <div class="tab-pane" id="job_description">
-                  <%= @my_application.job_description.empty? ? t('my_applications.messages.no_job_description') :
+                  <%= @my_application.job_description.blank? ? t('my_applications.messages.no_job_description') :
                           raw(@my_application.job_description) %>
                 </div>
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="cover_letter">
-                  <%= @my_application.cover_letter.empty? ? t('my_applications.messages.no_cover_letter') :
+                  <%= @my_application.cover_letter.blank? ? t('my_applications.messages.no_cover_letter') :
                           raw(@my_application.cover_letter) %>
                 </div>
                 <!-- /.tab-pane -->
@@ -61,7 +68,7 @@
             </div>
             <!-- /.nav-tabs-custom -->
           </div>
-          <div class="col-md-5">
+          <div class="col-md-5" data-testid="applicationInterviews">
             <%= @interviews.empty? ? t('my_applications.messages.no_interviews') : render('interviews') %>
           </div>
         </div>

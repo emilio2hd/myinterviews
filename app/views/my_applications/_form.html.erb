@@ -6,7 +6,7 @@
           raw("#{t('activerecord.attributes.my_application.position')}<span class=\"text-red\" title=\"#{t('default.hint.mandatory')}\">*</span>")
         end %>
         <div class="col-sm-8">
-          <%= form.text_field :position, class: 'form-control', autofocus: true %>
+          <%= form.text_field :position, class: 'form-control', autofocus: true, data: { testid: 'applicationPosition' } %>
           <%= show_validation_errors(@my_application.errors[:position]) %>
         </div>
       </div>
@@ -17,7 +17,7 @@
           raw("#{t('activerecord.attributes.my_application.company')}<span class=\"text-red\" title=\"#{t('default.hint.mandatory')}\">*</span>")
         end %>
         <div class="col-sm-10">
-          <%= form.text_field :company, class: 'form-control', autofocus: true %>
+          <%= form.text_field :company, class: 'form-control', autofocus: true, data: { testid: 'applicationCompany' } %>
           <%= show_validation_errors(@my_application.errors[:company]) %>
         </div>
       </div>
@@ -30,7 +30,7 @@
           raw("#{t('activerecord.attributes.my_application.location')}<span class=\"text-red\" title=\"#{t('default.hint.mandatory')}\">*</span>")
         end %>
         <div class="col-sm-8">
-          <%= form.text_field :location, class: 'form-control', autofocus: true %>
+          <%= form.text_field :location, class: 'form-control', autofocus: true, data: { testid: 'applicationLocation' } %>
           <%= show_validation_errors(@my_application.errors[:location]) %>
         </div>
       </div>
@@ -39,7 +39,7 @@
       <div class="form-group <%= 'has-error' unless @my_application.errors[:began_at].blank? %>">
         <%= form.label :began_at, class: 'col-sm-2 control-label' %>
         <div class="col-sm-10">
-          <%= form.text_field :began_at, class: 'form-control datepicker' %>
+          <%= form.text_field :began_at, class: 'form-control datepicker', data: { testid: 'applicationBeganAt' } %>
           <%= show_validation_errors(@my_application.errors[:began_at]) %>
         </div>
       </div>
@@ -50,7 +50,7 @@
       <div class="form-group <%= 'has-error' unless @my_application.errors[:cv_url].blank? %>">
         <%= form.label :cv_url, class: 'col-sm-4 control-label' %>
         <div class="col-md-8">
-          <%= form.text_field :cv_url, class: 'form-control', autofocus: true %>
+          <%= form.text_field :cv_url, class: 'form-control', autofocus: true, data: { testid: 'applicationCvUrl' } %>
           <%= show_validation_errors(@my_application.errors[:cv_url]) %>
         </div>
       </div>
@@ -59,7 +59,7 @@
       <div class="form-group <%= 'has-error' unless @my_application.errors[:status].blank? %>">
         <%= form.label :status, class: 'col-sm-2 control-label' %>
         <div class="col-sm-10">
-          <%= form.select :status, options_for_enum(@my_application, :status), {}, class: 'form-control' %>
+          <%= form.select :status, options_for_enum(@my_application, :status), {}, class: 'form-control', data: { testid: 'applicationStatus' } %>
           <%= show_validation_errors(@my_application.errors[:status]) %>
         </div>
       </div>
@@ -69,28 +69,28 @@
     <%= form.label :tech_stack_list, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
       <%= form.select :tech_stack_list, @my_application.tech_stack_list, {}, style: 'width: 100%',
-                   class: 'form-control select2', :multiple => true %>
+                   class: 'form-control select2', :multiple => true, data: { testid: 'applicationTechStackList' } %>
       <%= show_validation_errors(@my_application.errors[:tech_stack_list]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @my_application.errors[:job_description].blank? %>">
     <%= form.label :job_description, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_area :job_description, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :job_description, class: 'tinymce', rows: 10, data: { testid: 'applicationJobDescription' } %>
       <%= show_validation_errors(@my_application.errors[:job_description]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @my_application.errors[:cover_letter].blank? %>">
     <%= form.label :cover_letter, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_area :cover_letter, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :cover_letter, class: 'tinymce', rows: 10, data: { testid: 'applicationCoverLetter' } %>
       <%= show_validation_errors(@my_application.errors[:cover_letter]) %>
     </div>
   </div>
   <div class="form-group <%= 'has-error' unless @my_application.errors[:overall_feedback].blank? %>">
     <%= form.label :overall_feedback, class: 'col-sm-2 control-label' %>
     <div class="col-sm-10">
-      <%= form.text_area :overall_feedback, class: 'tinymce', rows: 10 %>
+      <%= form.text_area :overall_feedback, class: 'tinymce', rows: 10, data: { testid: 'applicationOverallFeedback' } %>
       <%= show_validation_errors(@my_application.errors[:overall_feedback]) %>
     </div>
   </div>
