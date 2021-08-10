@@ -72,6 +72,8 @@ jobs:
 
     - run: bundle exec rspec --format progress --format RspecJunitFormatter --out ~/test-results/junit.xml
 
+    - run: bundle exec rubocop
+
     - store_test_results:
         path: ~/test-results
 

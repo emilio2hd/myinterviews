@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MyApplicationsController < ApplicationController
   before_action :set_my_application, only: %i[show edit update destroy]
 
@@ -14,8 +16,7 @@ class MyApplicationsController < ApplicationController
     @my_application = MyApplication.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @my_application = MyApplication.new(my_application_params)

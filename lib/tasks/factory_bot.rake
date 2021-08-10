@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :factory_bot do
   desc 'Check if all factories are working'
   task lint: :environment do

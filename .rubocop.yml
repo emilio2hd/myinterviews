@@ -4,7 +4,6 @@ require: rubocop-rails
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-
   Exclude:
     - 'bin/**/*'
     - 'config/puma.rb'
@@ -18,6 +17,11 @@ AllCops:
     - 'spec/support/database_cleaner.rb'
     - 'tmp/**/*'
     - 'vendor/**/*'
+  NewCops: enable
+  TargetRubyVersion: 2.6
 
 Bundler/OrderedGems:
   Enabled: false
+
+Rails/FilePath:
+  EnforcedStyle: arguments

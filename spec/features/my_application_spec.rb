@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative 'feature_helper'
 
 feature 'Creating new job application' do
   given(:job_application) do
     {
-        position_name: FFaker::Job.title,
-        company_name: FFaker::CompanyIT.name,
-        company_location: FFaker::Address.city,
-        application_status: 'Ongoing',
-        began_at: '2020-12-10',
-        application_cv_url: FFaker::Internet.http_url,
-        tech_stack: %w[ruby rails rspec angular],
-        job_description: FFaker::Lorem.sentences.join(' '),
-        cover_letter: FFaker::Lorem.sentences.join(' '),
-        feedback: FFaker::Lorem.sentences.join(' ')
+      position_name: FFaker::Job.title,
+      company_name: FFaker::CompanyIT.name,
+      company_location: FFaker::Address.city,
+      application_status: 'Ongoing',
+      began_at: '2020-12-10',
+      application_cv_url: FFaker::Internet.http_url,
+      tech_stack: %w[ruby rails rspec angular],
+      job_description: FFaker::Lorem.sentences.join(' '),
+      cover_letter: FFaker::Lorem.sentences.join(' '),
+      feedback: FFaker::Lorem.sentences.join(' ')
     }
   end
 
@@ -21,8 +23,8 @@ feature 'Creating new job application' do
     visit new_my_application_path
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content('New')
+      .to have_content('My Applications')
+      .and have_content('New')
 
     fill_job_application(job_application)
     click_on 'myApplicationSaveButton'
@@ -30,8 +32,8 @@ feature 'Creating new job application' do
     has_message_alert_with? 'successfully created'
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content(job_application[:position_name])
+      .to have_content('My Applications')
+      .and have_content(job_application[:position_name])
   end
 end
 
@@ -39,9 +41,9 @@ feature 'Editing job application' do
   given!(:application_sent) { create(:application_sent) }
   given(:job_application_changes) do
     {
-        position_name: FFaker::Job.title,
-        company_name: FFaker::CompanyIT.name,
-        application_status: 'Ongoing'
+      position_name: FFaker::Job.title,
+      company_name: FFaker::CompanyIT.name,
+      application_status: 'Ongoing'
     }
   end
 
@@ -49,8 +51,8 @@ feature 'Editing job application' do
     visit edit_my_application_path(application_sent)
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content('Editing')
+      .to have_content('My Applications')
+      .and have_content('Editing')
 
     fill_job_application(job_application_changes)
     click_on 'myApplicationSaveButton'
@@ -58,8 +60,8 @@ feature 'Editing job application' do
     has_message_alert_with? 'successfully updated'
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content(job_application_changes[:position_name])
+      .to have_content('My Applications')
+      .and have_content(job_application_changes[:position_name])
   end
 end
 
@@ -71,8 +73,8 @@ feature 'View job application' do
     visit my_application_path(application)
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content(application.position)
+      .to have_content('My Applications')
+      .and have_content(application.position)
 
     within '[data-testid="myApplicationDetails"]' do
       expect(page).to have_content(application.status)
@@ -85,8 +87,8 @@ feature 'View job application' do
     visit my_application_path(application_with_interviews)
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content(application_with_interviews.position)
+      .to have_content('My Applications')
+      .and have_content(application_with_interviews.position)
 
     interview_count = Interview.all_from_application(application_with_interviews.id).count
     within '[data-testid="myApplicationDetails"]' do
@@ -143,7 +145,13 @@ def fill_job_application(**kargs)
     end
   end
 
-  page.execute_script("tinymce.get('my_application_job_description').setContent('#{kargs[:job_description]}')") if kargs.key? :job_description
-  page.execute_script("tinymce.get('my_application_cover_letter').setContent('#{kargs[:cover_letter]}')") if kargs.key? :cover_letter
-  page.execute_script("tinymce.get('my_application_overall_feedback').setContent('#{kargs[:feedback]}')") if kargs.key? :feedback
+  if kargs.key? :job_description
+    page.execute_script("tinymce.get('my_application_job_description').setContent('#{kargs[:job_description]}')")
+  end
+  if kargs.key? :cover_letter
+    page.execute_script("tinymce.get('my_application_cover_letter').setContent('#{kargs[:cover_letter]}')")
+  end
+  if kargs.key? :feedback
+    page.execute_script("tinymce.get('my_application_overall_feedback').setContent('#{kargs[:feedback]}')")
+  end
 end

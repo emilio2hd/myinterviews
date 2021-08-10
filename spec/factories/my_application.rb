@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :application_sent, class: MyApplication do
     position { FFaker::Job.title }

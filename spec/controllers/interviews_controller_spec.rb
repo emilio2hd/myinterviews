@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe InterviewsController, type: :controller do
@@ -60,7 +62,7 @@ RSpec.describe InterviewsController, type: :controller do
     context 'with application' do
       it 'creates a new interview with application' do
         expect { post :create, params: { interview: valid_attributes_with_interview } }
-            .to change(Interview, :count).by(1)
+          .to change(Interview, :count).by(1)
       end
 
       it 'assigns a newly created interview as @interview' do
@@ -150,5 +152,4 @@ RSpec.describe InterviewsController, type: :controller do
       expect(response).to redirect_to(interviews_url)
     end
   end
-
 end

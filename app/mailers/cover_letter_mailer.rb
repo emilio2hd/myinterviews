@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CoverLetterMailer < ApplicationMailer
   def presentation_email(email_from, email_config)
     @message = email_from.message

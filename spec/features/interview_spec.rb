@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative 'feature_helper'
 
@@ -5,12 +7,12 @@ feature 'Creating new interview' do
   given!(:application) { create(:application_sent) }
   given(:interview) do
     {
-        interviewer_name: FFaker::Name.name,
-        interviewer_email: FFaker::Internet.email,
-        interview_type: 'Technical',
-        interview_date: '2020-12-10 21:51',
-        interview_notes: FFaker::Lorem.sentences.join(' '),
-        interview_feedback: FFaker::Lorem.sentences.join(' ')
+      interviewer_name: FFaker::Name.name,
+      interviewer_email: FFaker::Internet.email,
+      interview_type: 'Technical',
+      interview_date: '2020-12-10 21:51',
+      interview_notes: FFaker::Lorem.sentences.join(' '),
+      interview_feedback: FFaker::Lorem.sentences.join(' ')
     }
   end
 
@@ -21,8 +23,8 @@ feature 'Creating new interview' do
     click_on('interviewNewButton')
 
     expect(content_header)
-        .to have_content('Interviews')
-        .and have_content('New')
+      .to have_content('Interviews')
+      .and have_content('New')
   end
 
   scenario 'With no application' do
@@ -97,8 +99,8 @@ feature 'Editing existing interview' do
   given!(:talk_interview) { create(:talk_interview, feedback: feedback, notes: notes) }
   given(:interview_changes) do
     {
-        interviewer_name: FFaker::Name.name,
-        interview_type: 'Technical'
+      interviewer_name: FFaker::Name.name,
+      interview_type: 'Technical'
     }
   end
 
@@ -106,9 +108,8 @@ feature 'Editing existing interview' do
     visit edit_interview_path(talk_interview)
 
     expect(content_header)
-        .to have_content('Interviews')
-        .and have_content('Editing')
-
+      .to have_content('Interviews')
+      .and have_content('Editing')
 
     fill_interview(interview_changes)
 
@@ -128,8 +129,8 @@ feature 'Editing existing interview' do
     visit edit_interview_path(talk_interview)
 
     expect(content_header)
-        .to have_content('Interviews')
-        .and have_content('Editing')
+      .to have_content('Interviews')
+      .and have_content('Editing')
 
     fill_interview(application_position: application.position)
 
@@ -152,8 +153,8 @@ feature 'Delete interview' do
     visit interview_path(technical_with_application)
 
     expect(content_header)
-        .to have_content('Interviews')
-        .and have_content(technical_with_application.application)
+      .to have_content('Interviews')
+      .and have_content(technical_with_application.application)
 
     within '[data-testid="interviewDetails"]' do
       expect(page).to have_content technical_with_application.interviewer_name
@@ -203,6 +204,11 @@ def fill_interview(**keyword_args)
 
   fill_in 'interviewDate', with: keyword_args[:interview_date] if keyword_args.key? :interview_date
 
-  page.execute_script("tinymce.get('interview_notes').setContent('#{keyword_args[:interview_notes]}')") if keyword_args.key? :interview_notes
-  page.execute_script("tinymce.get('interview_feedback').setContent('#{keyword_args[:interview_feedback]}')") if keyword_args.key? :interview_feedback
+  if keyword_args.key? :interview_notes
+    page.execute_script("tinymce.get('interview_notes').setContent('#{keyword_args[:interview_notes]}')")
+  end
+
+  if keyword_args.key? :interview_feedback
+    page.execute_script("tinymce.get('interview_feedback').setContent('#{keyword_args[:interview_feedback]}')")
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: settings
@@ -35,6 +37,8 @@ class Setting < RailsSettings::Base
   end
 
   def cryptography_do(method_name)
-    self.value = value.merge(password: Cryptography.public_send(method_name, value[:password])) if value[:password].present?
+    return if value[:password].blank?
+
+    self.value = value.merge(password: Cryptography.public_send(method_name, value[:password]))
   end
 end

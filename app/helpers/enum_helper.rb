@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module EnumHelper
   def options_for_enum(object, attribute)
     klass   = object.class

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative 'feature_helper'
 
@@ -14,8 +16,8 @@ feature 'Creating new cover letter' do
     click_on('coverLetterNewButton')
 
     expect(content_header)
-        .to have_content('Cover Letters')
-        .and have_content('New')
+      .to have_content('Cover Letters')
+      .and have_content('New')
 
     fill_cover_letter(title, content)
     click_on 'coverLetterSaveButton'
@@ -187,12 +189,11 @@ feature 'Send cover letter by email' do
       click_on 'coverLetterSendButton'
 
       has_message_alert_with?('successfully sent')
-
     end.to change { ActionMailer::Base.deliveries.size }.by(1)
   end
 end
 
-def fill_cover_letter(title, content, save = true)
+def fill_cover_letter(title, content)
   fill_in 'coverLetterTitle', with: ''
   fill_in 'coverLetterTitle', with: title
 

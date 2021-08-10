@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require_relative 'feature_helper'
 
@@ -42,8 +44,8 @@ feature 'Dashboard' do
     end
 
     expect(content_header)
-        .to have_content('My Applications')
-        .and have_content('New')
+      .to have_content('My Applications')
+      .and have_content('New')
   end
 
   scenario 'When user wants to create new interview' do
@@ -52,7 +54,7 @@ feature 'Dashboard' do
     end
 
     expect(content_header)
-        .to have_content('Interview')
-        .and have_content('New')
+      .to have_content('Interview')
+      .and have_content('New')
   end
 end

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe MyApplicationsController, type: :routing do
   describe 'routing' do
-
     it 'routes to #index' do
       expect(get: '/my_applications').to route_to('my_applications#index')
     end
@@ -34,6 +35,5 @@ RSpec.describe MyApplicationsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/my_applications/1').to route_to('my_applications#destroy', id: '1')
     end
-
   end
 end

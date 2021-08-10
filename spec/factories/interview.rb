@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :talk_interview, class: Interview do
     interviewer_name { FFaker::Name.name }

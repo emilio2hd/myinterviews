@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Cryptography
   KEY         = Rails.application.secrets[:secret_key_base]
-  CIPHER_NAME = 'AES-256-CBC'.freeze
+  CIPHER_NAME = 'AES-256-CBC'
 
   class << self
     def encrypt(plain_text)

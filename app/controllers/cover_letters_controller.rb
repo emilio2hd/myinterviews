@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'cryptography'
 
 class CoverLettersController < ApplicationController
@@ -7,8 +9,7 @@ class CoverLettersController < ApplicationController
     @cover_letters = CoverLetter.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @cover_letter = CoverLetter.new
@@ -47,8 +48,7 @@ class CoverLettersController < ApplicationController
     render :new_email
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @cover_letter = CoverLetter.new(cover_letter_params)
