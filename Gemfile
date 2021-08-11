@@ -47,6 +47,7 @@ end
 
 group :test do
   gem 'simplecov', '~> 0.17', require: false
+  gem 'simplecov-lcov', require: false
   gem 'database_cleaner'
   gem 'ffaker'
   gem 'shoulda-matchers', '~> 4.0', require: false

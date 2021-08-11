@@ -21,6 +21,7 @@ references:
 orbs:
   ruby: circleci/ruby@1.1.2
   browser-tools: circleci/browser-tools@1.1.0
+  coveralls: coveralls/coveralls@1.0.6
 
 jobs:
   web:
@@ -71,6 +72,9 @@ jobs:
         command: bundle exec rake factory_bot:lint
 
     - run: bundle exec rspec --format progress --format RspecJunitFormatter --out ~/test-results/junit.xml
+
+    - coveralls/upload:
+        path_to_lcov: ./coverage/lcov/project.lcov
 
     - run: bundle exec rubocop
 

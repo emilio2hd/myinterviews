@@ -3,6 +3,7 @@ myinterviews
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 [![Build Status](https://circleci.com/gh/emilio2hd/myinterviews.svg?style=shield)](https://app.circleci.com/pipelines/github/emilio2hd/myinterviews)
 [![codebeat badge](https://codebeat.co/badges/ef8d86f7-cf6c-4726-bd2d-4bac89cc62c1)](https://codebeat.co/projects/github-com-emilio2hd-myinterviews-master)
+[![Coverage Status](https://coveralls.io/repos/github/emilio2hd/myinterviews/badge.svg?branch=add-coverall)](https://coveralls.io/github/emilio2hd/myinterviews?branch=add-coverall)
 
 The goal of this app is to manage job applications, interviews, cover letters and feedbacks.
  
