@@ -32,7 +32,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
-  gem 'rubocop', '1.0.0', require: false
+  gem 'rubocop', '1.5.2', require: false
   gem 'rubocop-rails', '~> 2.3'
   gem 'rubycritic', '~> 4.0', require: false
   gem 'bullet'
