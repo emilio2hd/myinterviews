@@ -20,4 +20,4 @@ bundle exec rake db:migrate
 
 echo "Migration executed! Running server..."
 
-rails server -b 0.0.0.0
+bin/rails server -b 0.0.0.0

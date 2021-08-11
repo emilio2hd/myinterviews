@@ -9,7 +9,7 @@ end
 
 ruby '2.6.6'
 
-gem 'rails', '~> 5.1.7'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 0.21'
 gem 'puma', '~> 3.12'
 gem 'sass-rails', '~> 5.0'
@@ -20,7 +20,7 @@ gem 'tinymce-rails'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'annotate'
-gem 'acts-as-taggable-on', '5.0.0'
+gem 'acts-as-taggable-on'
 gem 'rails-settings-cached', '0.6.5'
 gem 'nokogiri', '~> 1.11'
 gem 'kaminari', '1.2.1'
