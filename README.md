@@ -50,6 +50,8 @@ web:
   container_name: myinterviews-web
   restart: always
   build: .
+#  volumes:
+#    - <your backup dir>:/var/local/myinterviews/backups
   ports:
     - "3000:3000"
   environment:
@@ -60,6 +62,34 @@ web:
     - SECRET_KEY_BASE=ef8705c8be8bc5c562fd403847e1451d8e149ba4bf88dea34c7e0c99fc55556d3ea3e0619b24ff7399f19c3c0e7798b62ffe643e8a6911cee982e7143ef0e262
   links:
     - db
+```
+
+# Database Backups
+In order to dump or restore database, there is a rake task to do this.
+```bash
+# dump the development db
+rake db:dump
+
+# dump the production db
+RAILS_ENV=production rake db:dump
+```
+The rake task will check for `BACKUP_FOLDER` environment variable. When not defined, will create in the `db` folder.
+A backup file will be created with the following pattern `AAAAMMDDHHMMSS_dbname.dump`.
+
+```bash
+# list all the dumps
+rake db:dumps
+
+# restore db based on a latest backup file matching the pattern (e.g. 20210821)
+rake db:restore pattern=20210821
+```
+
+### Docker
+In the Docker image, the backup files will be stored in `/var/local/myinterviews/backups`.
+So, if you want the file out of the container mount the volume pointing to that folder. When using docker-compose, add:
+```yml
+volumes:
+   - <a directory in the local machine>:/var/local/myinterviews/backups
 ```
 
 # Email Configuration
