@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'annotate'
 gem 'acts-as-taggable-on'
 gem 'rails-settings-cached', '0.6.5'
-gem 'nokogiri', '~> 1.11'
+gem 'nokogiri', '~> 1.12'
 gem 'kaminari', '1.2.1'
 
 gem 'ffi', '>= 1.9.24'

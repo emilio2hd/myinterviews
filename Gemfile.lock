@@ -156,7 +156,7 @@ GEM
     mini_portile2 (2.6.1)
     minitest (5.14.4)
     nio4r (2.5.8)
-    nokogiri (1.12.3)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     parallel (1.20.1)
@@ -354,7 +354,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (= 1.2.1)
   listen (>= 3.0.5, < 3.2)
-  nokogiri (~> 1.11)
+  nokogiri (~> 1.12)
   pg (~> 0.21)
   puma (~> 4.1)
   rails (~> 5.2)
