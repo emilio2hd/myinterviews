@@ -1,0 +1,24 @@
+name: Workflow for pull request
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+
+    - name: Run rubocop
+      run: bundle exec rubocop
+
+    - name: Check test factories
+      run: bundle exec rubocop
+
+    - name: Run tests
+      run: bundle exec rspec
