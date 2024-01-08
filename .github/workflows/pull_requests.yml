@@ -1,0 +1,61 @@
+name: Workflow for changes in the main branch
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:9.6.2-alpine
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myinterviews_test
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.6
+        bundler-cache: true
+
+    - name: Install PostgreSQL dev libs
+      run: sudo apt-get -yqq install libpq-dev
+
+    - name: Run rubocop
+      run: bundle exec rubocop --parallel
+
+    - name: Setup Database
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: myinterviews_test
+        POSTGRES_HOST: localhost
+        RAILS_ENV: test
+        RUBYOPT: "-W:no-deprecated -W:no-experimental" # Suppress Rails 6 deprecation warnings for ruby 2.7
+      run: bin/rails db:create db:schema:load --trace db:migrate
+
+    - name: Check test factories
+      run: bundle exec rake factory_bot:lint
+
+    - name: Run tests
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: myinterviews_test
+        POSTGRES_HOST: localhost
+        RAILS_ENV: test
+        RUBYOPT: "-W:no-deprecated -W:no-experimental" # Suppress Rails 6 deprecation warnings for ruby 2.7
+      run: bundle exec rspec
